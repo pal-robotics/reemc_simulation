@@ -1,0 +1,13 @@
+<launch>
+
+  <arg name="gzname" default="gazebo"/>
+  <arg name="gzworld" default="reemc.world"/>
+  <param name="/use_sim_time" type="bool" value="true"/>
+
+  <!-- start gazebo with the Reem-C -->
+  <node name="gazebo" pkg="atlas_utils" type="run_$(arg gzname)" args="$(find reemc_utils)/worlds/$(arg gzworld)" output="screen" />
+
+  <!-- Robot Description -->
+  <param name="robot_description" textfile="$(find reemc)/model.urdf"/>
+
+</launch>

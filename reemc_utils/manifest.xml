@@ -1,0 +1,18 @@
+<package>
+  <description brief="reemc_utils">
+
+     reemc_utils
+
+  </description>
+  <author>Luca Marchionni</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/reemc_utils</url>
+  <depend package="robot_state_publisher"/>
+  <depend package="joint_state_publisher"/>
+  <depend package="xacro"/>
+  <depend package="robot_mechanism_controllers"/>
+
+</package>
+
+

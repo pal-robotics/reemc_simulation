@@ -1,0 +1,14 @@
+<package>
+  <description brief="reemc_controller_configuration_gazebo">
+
+     reemc_controller_configuration_gazebo
+
+  </description>
+  <author>Luca Marchionni</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/reemc_controller_configuration_gazebo</url>
+
+</package>
+
+
