@@ -1,13 +1,13 @@
 <launch>
 
   <!-- Gazebo backend for PAL motors controller -->
-  <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/pal_motors_controllers.yaml" />
+  <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/reemc_action_controllers.yaml" />
 
 
   <!-- Controllers that come up started -->
   <node name="default_controllers_spawner"
         pkg="pr2_controller_manager" type="spawner" output="screen"
-        args="--wait-for=calibrated upper_body_controller lower_body_controller" />
+        args="--wait-for=calibrated whole_body_controller" />
 
 
 

@@ -1,5 +1,5 @@
-upper_body_controller:
-  type: "joint_group_position_controller/JointGroupPositionController"
+whole_body_controller:
+  type: "robot_mechanism_controllers/JointTrajectoryActionController"
   joints:
     - head_1_joint
     - head_2_joint
@@ -17,9 +17,21 @@ upper_body_controller:
     - arm_left_5_joint
     - arm_left_6_joint
     - arm_left_7_joint
-
     - torso_1_joint
     - torso_2_joint
+    - left_hip_z_joint
+    - left_hip_x_joint
+    - left_hip_y_joint
+    - left_knee_joint
+    - left_ankle_y_joint
+    - left_ankle_x_joint
+    - right_hip_z_joint
+    - right_hip_x_joint
+    - right_hip_y_joint
+    - right_knee_joint
+    - right_ankle_y_joint
+    - right_ankle_x_joint
+
   gains:
     head_1_joint:      {p: 300, d: 50, i: 1, i_clamp: 1.5}
     head_2_joint:      {p: 300, d: 50, i: 1, i_clamp: 1.5}
@@ -42,23 +54,6 @@ upper_body_controller:
     arm_left_6_joint:  *arm_6_gains
     arm_left_7_joint:  *arm_7_gains
 
-lower_body_controller:
-  type: "joint_group_position_controller/JointGroupPositionController"
-  joints:
-    - left_hip_z_joint
-    - left_hip_x_joint
-    - left_hip_y_joint
-    - left_knee_joint
-    - left_ankle_y_joint
-    - left_ankle_x_joint
-    - right_hip_z_joint
-    - right_hip_x_joint
-    - right_hip_y_joint
-    - right_knee_joint
-    - right_ankle_y_joint
-    - right_ankle_x_joint
-
-  gains:
     left_hip_z_joint:   &l_hip_z_gains   {p: 900, d: 100, i: 10, i_clamp: 8.0}
     left_hip_x_joint:   &l_hip_x_gains   {p: 900, d: 100, i: 10, i_clamp: 8.0}
     left_hip_y_joint:   &l_hip_y_gains   {p: 1200, d: 100, i: 50, i_clamp: 15.0}

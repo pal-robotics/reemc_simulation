@@ -8,6 +8,6 @@
   <node name="gazebo" pkg="atlas_utils" type="run_$(arg gzname)" args="$(find reemc_utils)/worlds/$(arg gzworld)" output="screen" />
 
   <!-- Robot Description -->
-  <param name="robot_description" textfile="$(find reemc)/model.urdf"/>
+  <param name="robot_description" textfile="$(find reemc_description)/model.urdf"/>
 
 </launch>

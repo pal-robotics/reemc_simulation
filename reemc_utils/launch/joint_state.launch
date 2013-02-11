@@ -1,0 +1,6 @@
+<launch>
+  <node name="reemc_joints_gui" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
+    <param name="use_gui" value="true"/>
+    <remap from="/joint_states" to="/joints_goal"/>
+  </node>
+</launch>

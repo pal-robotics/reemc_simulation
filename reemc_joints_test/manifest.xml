@@ -1,0 +1,19 @@
+<package>
+  <description brief="reemc_joints_test">
+
+     reemc_joints_test
+
+  </description>
+  <author>Luca Marchionni</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/reemc_joints_test</url>
+  <depend package="sensor_msgs"/>
+  <depend package="pr2_controllers_msgs"/>
+  <depend package="actionlib"/>
+  <depend package="actionlib_msgs"/>
+  <depend package="roscpp"/>
+
+</package>
+
+

@@ -29,7 +29,7 @@
     </include>
 
     <include>
-     <uri>model://reemc</uri>
+     <uri>model://reemc_description</uri>
     </include>
   </world>
 </gazebo>
