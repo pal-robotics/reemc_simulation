@@ -1,9 +1,9 @@
 <launch>
 
-  <arg name="gzworld" default="reemc.world"/>
+  <arg name="gzworld" default="empty.world"/>
   <param name="/use_sim_time" type="bool" value="true"/>
 
-  <!-- start gazebo with the Reem-C -->
+  <!-- start gazebo -->
   <node name="gazebo" pkg="atlas_utils" type="run_gazebo" args="$(find reemc_utils)/worlds/$(arg gzworld)" output="screen" />
 
 </launch>

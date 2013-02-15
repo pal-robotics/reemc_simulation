@@ -6,11 +6,11 @@
   <!-- Robot Description -->
   <param name="robot_description" textfile="$(find reemc_description)/model.urdf"/>
 
-  <!-- Controller Manager -->
-  <include file="$(find pr2_controller_manager)/controller_manager.launch" />
-
-  <!-- Fake Calibration -->
+ <!-- Fake Calibration -->
   <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
         args="pub /calibrated std_msgs/Bool true" />
+
+  <!-- Controller Manager -->
+  <include file="$(find pr2_controller_manager)/controller_manager.launch" />
 
 </launch>

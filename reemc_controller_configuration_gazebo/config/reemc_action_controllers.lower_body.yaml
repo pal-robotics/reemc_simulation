@@ -1,0 +1,32 @@
+whole_body_controller:
+  type: "robot_mechanism_controllers/JointTrajectoryActionController"
+  joints:
+    - left_hip_z_joint
+    - left_hip_x_joint
+    - left_hip_y_joint
+    - left_knee_joint
+    - left_ankle_y_joint
+    - left_ankle_x_joint
+    - right_hip_z_joint
+    - right_hip_x_joint
+    - right_hip_y_joint
+    - right_knee_joint
+    - right_ankle_y_joint
+    - right_ankle_x_joint
+
+  gains:
+
+    left_hip_z_joint:   &l_hip_z_gains   {p: 900, d: 100, i: 10, i_clamp: 8.0}
+    left_hip_x_joint:   &l_hip_x_gains   {p: 900, d: 100, i: 10, i_clamp: 8.0}
+    left_hip_y_joint:   &l_hip_y_gains   {p: 1200, d: 100, i: 50, i_clamp: 15.0}
+    left_knee_joint:    &l_knee_gains    {p: 4000, d: 100, i: 100, i_clamp: 15.0}
+    left_ankle_y_joint: &l_ankle_y_gains {p: 1200, d: 10, i: 50, i_clamp: 15.0}
+    left_ankle_x_joint: &l_ankle_x_gains {p: 800, d: 10, i: 10, i_clamp: 10.0}
+    right_hip_z_joint:   *l_hip_z_gains 
+    right_hip_x_joint:   *l_hip_x_gains 
+    right_hip_y_joint:   *l_hip_y_gains 
+    right_knee_joint:    *l_knee_gains  
+    right_ankle_y_joint: *l_ankle_y_gains 
+    right_ankle_x_joint: *l_ankle_x_gains 
+
+   
