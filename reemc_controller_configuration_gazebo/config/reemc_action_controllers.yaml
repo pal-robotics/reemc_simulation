@@ -33,11 +33,11 @@ whole_body_controller:
     - r_ankle_x_joint
 
   gains:
-    head_1_joint:      {p: 300, d: 50, i: 10, i_clamp: 1.5}
-    head_2_joint:      {p: 300, d: 50, i: 10, i_clamp: 1.5}
+    head_1_joint:      {p: 500, d: 50, i: 10, i_clamp: 1.5}
+    head_2_joint:      {p: 500, d: 50, i: 10, i_clamp: 1.5}
 
-    torso_1_joint:     {p: 1000.0, d: 20.0, i: 10, i_clamp: 6.0}
-    torso_2_joint:     {p: 1000.0, d: 20.0, i: 10, i_clamp: 6.0}
+    torso_1_joint:     {p: 1000.0, d: 20.0, i: 50, i_clamp: 6.0}
+    torso_2_joint:     {p: 1000.0, d: 20.0, i: 50, i_clamp: 6.0}
 
     arm_right_1_joint: &arm_1_gains {p: 600, d: 50, i: 20, i_clamp: 3.0}
     arm_right_2_joint: &arm_2_gains {p: 600, d: 50, i: 20, i_clamp: 3.0}
@@ -54,12 +54,12 @@ whole_body_controller:
     arm_left_6_joint:  *arm_6_gains
     arm_left_7_joint:  *arm_7_gains
 
-    l_hip_z_joint:   &l_hip_z_gains   {p: 800, d: 1, i: 10, i_clamp: 5.0}
-    l_hip_x_joint:   &l_hip_x_gains   {p: 800, d: 1, i: 10, i_clamp: 5.0}
-    l_hip_y_joint:   &l_hip_y_gains   {p: 800, d: 1, i: 10, i_clamp: 6.0}
-    l_knee_joint:    &l_knee_gains    {p: 900, d: 1, i: 10, i_clamp: 6.0}
-    l_ankle_y_joint: &l_ankle_y_gains {p: 900, d: 1, i: 10, i_clamp: 6.0}
-    l_ankle_x_joint: &l_ankle_x_gains {p: 900, d: 1, i: 10, i_clamp: 5.0}
+    l_hip_z_joint:   &l_hip_z_gains   {p: 600, d: 15, i: 10, i_clamp: 6.0}
+    l_hip_x_joint:   &l_hip_x_gains   {p: 600, d: 15, i: 10, i_clamp: 6.0}
+    l_hip_y_joint:   &l_hip_y_gains   {p: 600, d: 15, i: 10, i_clamp: 6.0}
+    l_knee_joint:    &l_knee_gains    {p: 600, d: 15, i: 10, i_clamp: 6.0}
+    l_ankle_y_joint: &l_ankle_y_gains {p: 600, d: 15, i: 10, i_clamp: 6.0}
+    l_ankle_x_joint: &l_ankle_x_gains {p: 600, d: 15, i: 10, i_clamp: 6.0}
     r_hip_z_joint:   *l_hip_z_gains 
     r_hip_x_joint:   *l_hip_x_gains 
     r_hip_y_joint:   *l_hip_y_gains 
