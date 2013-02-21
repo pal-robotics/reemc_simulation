@@ -17,9 +17,10 @@
   <depend package="dynamic_reconfigure" />
 
   <rosdep name="wxpython" /> 
-  <rosdep name="osrf-common"/>
-  <depend package="osrf_msgs"/>
 
+<!--  <rosdep name="osrf-common"/>
+  <depend package="osrf_msgs"/>
+-->
 </package>
 
 

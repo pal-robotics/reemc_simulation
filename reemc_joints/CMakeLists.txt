@@ -29,10 +29,10 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #common commands for building c++ executables and libraries
 #rosbuild_add_library(${PROJECT_NAME} src/example.cpp)
 #target_link_libraries(${PROJECT_NAME} another_library)
-rosbuild_add_boost_directories()
-rosbuild_add_executable(move_joints src/move_joints.cpp)
-rosbuild_link_boost(move_joints thread)
-rosbuild_add_executable(pid_tuner src/pid_tuner.cpp)
+#rosbuild_add_boost_directories()
+#rosbuild_add_executable(move_joints src/move_joints.cpp)
+#rosbuild_link_boost(move_joints thread)
+#rosbuild_add_executable(pid_tuner src/pid_tuner.cpp)
 
 
 #target_link_libraries(example ${PROJECT_NAME})

@@ -1,0 +1,11 @@
+<launch>
+
+  <!-- Hands -->
+  <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/reemc_hand_controllers.yaml" />
+
+  <!-- Controllers that come up started -->
+  <node name="hand_controllers_spawner"
+        pkg="pr2_controller_manager" type="spawner" output="screen"
+        args="--wait-for=calibrated right_hand_controller left_hand_controller" />
+
+</launch>
