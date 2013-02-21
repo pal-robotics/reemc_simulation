@@ -6,6 +6,7 @@
 #include <pr2_controllers_msgs/JointTrajectoryAction.h>
 #include <pr2_controllers_msgs/JointTrajectoryActionGoal.h>
 #include <pr2_controllers_msgs/JointTrajectoryControllerState.h>
+#include <osrf_msgs/JointCommands.h>
 
 class MoveJoints
 {
@@ -17,9 +18,14 @@ public:
         ros::NodeHandle nh;
         ros::Duration(1).sleep();
         _jointsRefSub = nh.subscribe("/joints_goal",1,&MoveJoints::jointsReferenceCB, this);
-        _controllerStateSub = nh.subscribe("/whole_body_controller/state",1,&MoveJoints::controllerStateCB,this);
-        _jointActionClient.reset( new JointActionClient(nh,"/whole_body_controller/joint_trajectory_action/"));
+        _controllerStateSub = nh.subscribe("/reemc/joint_states",1,&MoveJoints::jointStatesCB,this);
         _received_reference = false;
+
+        _jointActionClient.reset( new JointActionClient(nh,"/upper_body_controller/joint_trajectory_action/"));
+        if(!_jointActionClient->isServerConnected())
+            ROS_INFO("Action server for upper body is not connected");
+        _commandsPub = nh.advertise<osrf_msgs::JointCommands>("/reemc/joint_commands",1);
+
     }
 
     void jointsReferenceCB(sensor_msgs::JointState const &jointsRef)
@@ -29,14 +35,17 @@ public:
             for(unsigned int j=0; j < _jointsRef.name.size(); ++j)
             {
                 if(_jointsRef.name.at(j) == jointsRef.name.at(i))
+                {
                     _jointsRef.position.at(j) = jointsRef.position.at(i);
+                    _jointCmds.position.at(j) = jointsRef.position.at(i);
+                }
             }
         }
         if(!_jointsRef.position.empty())
             _received_reference = true;
     }
 
-    void controllerStateCB(pr2_controllers_msgs::JointTrajectoryControllerState const &controllerState)
+    void jointStatesCB(sensor_msgs::JointState const &jointStates)
     {
         if(!_jointsRef.name.empty())
         {
@@ -45,21 +54,19 @@ public:
             return;
         }
 
-        for(unsigned int i=0; i< controllerState.joint_names.size(); ++i)
+        for(unsigned int i=0; i< jointStates.name.size(); ++i)
         {
-            _jointsRef.name.push_back(controllerState.joint_names.at(i));
-            _jointsRef.position.push_back(controllerState.actual.positions.at(i));
+            _jointsRef.name.push_back(jointStates.name.at(i));
+            _jointsRef.position.push_back(jointStates.position.at(i));
+            _jointCmds.name.push_back(jointStates.name.at(i));
+            _jointCmds.position.push_back(jointStates.position.at(i));
         }
 
     }
 
     bool sendAction()
     {
-        if(!_received_reference)
-        {
-            ROS_WARN("waiting for reference positions");
-            return false;
-        }
+
         static unsigned int counter = 0;
         counter++;
         std::ostringstream istr;
@@ -76,10 +83,10 @@ public:
                 goal.trajectory.joint_names.push_back(_jointsRef.name.at(i));
                 point_position.positions.push_back(_jointsRef.position.at(i));
             }
-            point_position.time_from_start = ros::Duration(1.0);
+            point_position.time_from_start = ros::Duration(3.0);
             goal.trajectory.points.push_back(point_position);
 
-            actionlib::SimpleClientGoalState state = _jointActionClient->sendGoalAndWait(goal, ros::Duration(2,0), ros::Duration(3,0));
+            actionlib::SimpleClientGoalState state = _jointActionClient->sendGoalAndWait(goal, ros::Duration(3,0), ros::Duration(4,0));
             if(state == actionlib::SimpleClientGoalState::SUCCEEDED)
                 return true;
             else
@@ -89,11 +96,32 @@ public:
         return false;
     }
 
+    bool sendCommands()
+    {
+        _commandsPub.publish(_jointCmds);
+        return true;
+    }
+
+    void control()
+    {
+        if(!_received_reference)
+        {
+            ROS_WARN("waiting for reference positions");
+            return;
+        }
+        if(_jointActionClient->isServerConnected())
+            sendAction();
+        else
+            sendCommands();
+    }
+
 private:
     ros::Subscriber _jointsRefSub;
     ros::Subscriber _controllerStateSub;
     boost::scoped_ptr<JointActionClient> _jointActionClient;
+    ros::Publisher  _commandsPub;
     sensor_msgs::JointState _jointsRef;
+    osrf_msgs::JointCommands _jointCmds;
     bool _received_reference;
 };
 
@@ -106,7 +134,7 @@ int main(int argc, char **argv)
     while(ros::ok())
     {
         ros::spinOnce();
-        moveJoints.sendAction();
+        moveJoints.control();
         rate.sleep();
     }
 

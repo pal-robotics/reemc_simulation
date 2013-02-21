@@ -1,7 +1,7 @@
 <package>
-  <description brief="reemc_joints_test">
+  <description brief="reemc_joints">
 
-     reemc_joints_test
+     reemc_joints
 
   </description>
   <author>Luca Marchionni</author>
@@ -13,6 +13,12 @@
   <depend package="actionlib"/>
   <depend package="actionlib_msgs"/>
   <depend package="roscpp"/>
+  <depend package="rospy" />
+  <depend package="dynamic_reconfigure" />
+
+  <rosdep name="wxpython" /> 
+  <rosdep name="osrf-common"/>
+  <depend package="osrf_msgs"/>
 
 </package>
 

@@ -10,10 +10,10 @@
   <include file="$(find reemc_utils)/launch/reemc_bringup.launch"/>
 
    <!-- Default Controllers -->
-  <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_action_controllers.launch" />
+  <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_drcsim_controllers.launch" />
 
   <include file="$(find reemc_utils)/launch/joint_state.launch"/>
 
-  <node name="move_joints_node" pkg="reemc_joints_test" type="move_joints"/>
+  <node name="move_joints_node" pkg="reemc_joints" type="move_joints"/>
 
 </launch>
