@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<gazebo version="1.2">
+  <world name="default">
+    <physics type="ode">
+      <gravity>0 0 -9.81</gravity>
+      <update_rate>1000</update_rate>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <dt>0.001</dt>
+          <iters>100</iters>
+          <sor>1.0</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>100.0</contact_max_correcting_vel>
+          <contact_surface_layer>0.0</contact_surface_layer>
+        </constraints>
+      </ode>
+    </physics>
+
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- walls -->
+    <include>
+      <uri>model://reemc_walls</uri>
+      <pose>-5.909 -0.319 0 0 0 0 </pose>
+    </include>
+    
+     <include>
+      <uri>model://reemc_table</uri>
+      <pose>4 -5.0 0 0 0 0 </pose>
+    </include>
+    
+    <include>
+      <uri>model://reemc_table</uri>
+      <pose>3 6.52 0 0 0 0 </pose>
+      <name> table2 </name>
+    </include>
+
+     <include>
+      <uri>model://reemc_bookshelf</uri>
+      <pose>-6.81 7.22 0 0 0 0 </pose>
+    </include>
+
+    <include>
+      <uri>model://reemc_cabinet</uri>
+      <pose>-9 -2.73 0 0 0 -3.1415 </pose>
+    </include>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>2.516780 13.452100 16.930100 0.000000 0.939643 -2.058990</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+  </world>
+</gazebo>
+

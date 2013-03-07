@@ -21,19 +21,17 @@ upper_body_controller:
     - torso_1_joint
     - torso_2_joint
   gains:
-    head_1_joint:      {p: 300, d: 50, i: 1, i_clamp: 1.5}
-    head_2_joint:      {p: 300, d: 50, i: 1, i_clamp: 1.5}
-
-    torso_1_joint:     {p: 2000.0, d: 50.0, i: 0, i_clamp: 6.0}
-    torso_2_joint:     {p: 2000.0, d: 50.0, i: 0, i_clamp: 6.0}
-
-    arm_right_1_joint: &arm_1_gains {p: 600, d: 50, i: 20, i_clamp: 3.0}
-    arm_right_2_joint: &arm_2_gains {p: 600, d: 50, i: 20, i_clamp: 3.0}
-    arm_right_3_joint: &arm_3_gains {p: 600, d: 35, i: 15, i_clamp: 2.0}
-    arm_right_4_joint: &arm_4_gains {p: 600, d: 50, i: 20, i_clamp: 3.0}
-    arm_right_5_joint: &arm_5_gains {p: 300, d: 30, i: 10, i_clamp: 1.5}
-    arm_right_6_joint: &arm_6_gains {p: 300, d: 25, i: 10, i_clamp: 1.5}
-    arm_right_7_joint: &arm_7_gains {p: 300, d: 25, i: 10, i_clamp: 1.5}
+    torso_1_joint:                  {p:  1000.0, d:  40.0, i:  20.0, i_clamp:    0.0}    
+    torso_2_joint:                  {p:   200.0, d:  40.0, i:   1.0, i_clamp:    0.0}
+    head_1_joint:                   {p:    10.0, d:  10.0, i:   2.0, i_clamp:    0.0}
+    head_2_joint:                   {p:   100.0, d:  35.0, i:   0.5, i_clamp:    0.0}
+    arm_right_1_joint: &arm_1_gains {p:  1000.0, d: 100.0, i:  20.0, i_clamp:    3.0}
+    arm_right_2_joint: &arm_2_gains {p:   800.0, d: 100.0, i:  10.0, i_clamp:    3.0}
+    arm_right_3_joint: &arm_3_gains {p:   100.0, d: 100.0, i:  20.0, i_clamp:    2.0}
+    arm_right_4_joint: &arm_4_gains {p:   600.0, d: 100.0, i:  50.0, i_clamp:    3.0}
+    arm_right_5_joint: &arm_5_gains {p:   700.0, d: 100.0, i:  25.0, i_clamp:    1.5}
+    arm_right_6_joint: &arm_6_gains {p:   500.0, d: 100.0, i:  25.0, i_clamp:    1.5}
+    arm_right_7_joint: &arm_7_gains {p:   100.0, d: 100.0, i:  25.0, i_clamp:    1.5}
     arm_left_1_joint:  *arm_1_gains
     arm_left_2_joint:  *arm_2_gains
     arm_left_3_joint:  *arm_3_gains
@@ -45,31 +43,31 @@ upper_body_controller:
 lower_body_controller:
   type: "joint_group_position_controller/JointGroupPositionController"
   joints:
-    - left_hip_z_joint
-    - left_hip_x_joint
-    - left_hip_y_joint
-    - left_knee_joint
-    - left_ankle_y_joint
-    - left_ankle_x_joint
-    - right_hip_z_joint
-    - right_hip_x_joint
-    - right_hip_y_joint
-    - right_knee_joint
-    - right_ankle_y_joint
-    - right_ankle_x_joint
+    - l_hip_z_joint
+    - l_hip_x_joint
+    - l_hip_y_joint
+    - l_knee_joint
+    - l_ankle_y_joint
+    - l_ankle_x_joint
+    - r_hip_z_joint
+    - r_hip_x_joint
+    - r_hip_y_joint
+    - r_knee_joint
+    - r_ankle_y_joint
+    - r_ankle_x_joint
 
   gains:
-    left_hip_z_joint:   &l_hip_z_gains   {p: 900, d: 100, i: 10, i_clamp: 8.0}
-    left_hip_x_joint:   &l_hip_x_gains   {p: 900, d: 100, i: 10, i_clamp: 8.0}
-    left_hip_y_joint:   &l_hip_y_gains   {p: 1200, d: 100, i: 50, i_clamp: 15.0}
-    left_knee_joint:    &l_knee_gains    {p: 4000, d: 100, i: 100, i_clamp: 15.0}
-    left_ankle_y_joint: &l_ankle_y_gains {p: 1200, d: 10, i: 50, i_clamp: 15.0}
-    left_ankle_x_joint: &l_ankle_x_gains {p: 800, d: 10, i: 10, i_clamp: 10.0}
-    right_hip_z_joint:   *l_hip_z_gains 
-    right_hip_x_joint:   *l_hip_x_gains 
-    right_hip_y_joint:   *l_hip_y_gains 
-    right_knee_joint:    *l_knee_gains  
-    right_ankle_y_joint: *l_ankle_y_gains 
-    right_ankle_x_joint: *l_ankle_x_gains 
+    l_hip_z_joint:   &l_hip_z_gains    {p:  1000.0, d:  20.0, i:   5.0, i_clamp:   10.0}
+    l_hip_x_joint:   &l_hip_x_gains    {p:  2500.0, d: 100.0, i: 200.0, i_clamp:   10.0}
+    l_hip_y_joint:   &l_hip_y_gains    {p:  1000.0, d:  60.0, i:   1.0, i_clamp:   10.0}
+    l_knee_joint:    &l_knee_gains     {p:   300.0, d:  30.0, i:   3.0, i_clamp:   10.0}
+    l_ankle_y_joint: &l_ankle_y_gains  {p:   400.0, d:   5.0, i:   1.0, i_clamp:   10.0}
+    l_ankle_x_joint:  &l_ankle_x_gains {p:   400.0, d:   4.0, i:   1.0, i_clamp:   10.0}
+    r_hip_z_joint:   *l_hip_z_gains 
+    r_hip_x_joint:   *l_hip_x_gains 
+    r_hip_y_joint:   *l_hip_y_gains 
+    r_knee_joint:    *l_knee_gains  
+    r_ankle_y_joint: *l_ankle_y_gains 
+    r_ankle_x_joint: *l_ankle_x_gains 
 
    
