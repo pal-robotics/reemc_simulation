@@ -1,0 +1,14 @@
+<launch>
+    <!-- Robot Description -->
+  <include file="$(find reemc_description)/robots/upload_reemc.launch" />
+
+  <!-- Controller Manager -->
+  <include file="$(find pr2_controller_manager)/controller_manager.launch" />
+
+  <!-- Default Controllers -->
+  <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_default_controllers.launch" />
+
+  <!-- Fake Calibration -->
+  <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+        args="pub /calibrated std_msgs/Bool true" />
+</launch>

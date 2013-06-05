@@ -1,0 +1,9 @@
+<launch>
+  <!-- start up empty world -->
+  <include file="$(find reemc_gazebo)/launch/run_gazebo.launch">
+    <arg name="gzworld" value="$(find reemc_gazebo)/worlds/reemc.world" />
+  </include>
+
+  <!-- start REEM robot -->
+  <include file="$(find reemc_gazebo)/launch/reemc_bringup.launch"/>
+</launch>

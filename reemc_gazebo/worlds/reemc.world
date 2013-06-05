@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<gazebo version="1.4">
+<sdf version="1.3">
   <world name="default">
     <physics type="ode">
       <gravity>0 0 -9.81</gravity>
@@ -27,6 +27,11 @@
     <include>
       <uri>model://ground_plane</uri>
     </include>
-  </world>
-</gazebo>
 
+    <!-- REEM-C -->
+    <include>
+      <uri>model://reemc</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+  </world>
+</sdf>

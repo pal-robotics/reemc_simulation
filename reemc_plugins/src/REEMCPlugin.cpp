@@ -36,7 +36,7 @@ REEMCPlugin::REEMCPlugin()
 ////////////////////////////////////////////////////////////////////////////////
 REEMCPlugin::~REEMCPlugin()
 {
-    event::Events::DisconnectWorldUpdateStart(this->updateConnection);
+    event::Events::DisconnectWorldUpdateBegin(this->updateConnection);
     this->rosNode->shutdown();
     this->rosQueue.clear();
     this->rosQueue.disable();
@@ -157,7 +157,7 @@ void REEMCPlugin::SetJointCommands(
                   this->jointCommands.position.begin());
     else
         ROS_DEBUG("joint commands message contains different number of"
-                  " elements position[%d] than expected[%d]",
+                  " elements position[%zu] than expected[%zu]",
                   _msg->position.size(), this->jointCommands.position.size());
 
     if (_msg->velocity.size() == this->jointCommands.velocity.size())
@@ -165,7 +165,7 @@ void REEMCPlugin::SetJointCommands(
                   this->jointCommands.velocity.begin());
     else
         ROS_DEBUG("joint commands message contains different number of"
-                  " elements velocity[%d] than expected[%d]",
+                  " elements velocity[%zu] than expected[%zu]",
                   _msg->velocity.size(), this->jointCommands.velocity.size());
 
     if (_msg->effort.size() == this->jointCommands.effort.size())
@@ -173,7 +173,7 @@ void REEMCPlugin::SetJointCommands(
                   this->jointCommands.effort.begin());
     else
         ROS_DEBUG("joint commands message contains different number of"
-                  " elements effort[%d] than expected[%d]",
+                  " elements effort[%zu] than expected[%zu]",
                   _msg->effort.size(), this->jointCommands.effort.size());
 
     if (_msg->kp_position.size() == this->jointCommands.kp_position.size())
@@ -181,7 +181,7 @@ void REEMCPlugin::SetJointCommands(
                   this->jointCommands.kp_position.begin());
     else
         ROS_DEBUG("joint commands message contains different number of"
-                  " elements kp_position[%d] than expected[%d]",
+                  " elements kp_position[%zu] than expected[%zu]",
                   _msg->kp_position.size(), this->jointCommands.kp_position.size());
 
     if (_msg->ki_position.size() == this->jointCommands.ki_position.size())
@@ -189,7 +189,7 @@ void REEMCPlugin::SetJointCommands(
                   this->jointCommands.ki_position.begin());
     else
         ROS_DEBUG("joint commands message contains different number of"
-                  " elements ki_position[%d] than expected[%d]",
+                  " elements ki_position[%zu] than expected[%zu]",
                   _msg->ki_position.size(), this->jointCommands.ki_position.size());
 
     if (_msg->kd_position.size() == this->jointCommands.kd_position.size())
@@ -197,7 +197,7 @@ void REEMCPlugin::SetJointCommands(
                   this->jointCommands.kd_position.begin());
     else
         ROS_DEBUG("joint commands message contains different number of"
-                  " elements kd_position[%d] than expected[%d]",
+                  " elements kd_position[%zu] than expected[%zu]",
                   _msg->kd_position.size(), this->jointCommands.kd_position.size());
 
     if (_msg->kp_velocity.size() == this->jointCommands.kp_velocity.size())
@@ -205,7 +205,7 @@ void REEMCPlugin::SetJointCommands(
                   this->jointCommands.kp_velocity.begin());
     else
         ROS_DEBUG("joint commands message contains different number of"
-                  " elements kp_velocity[%d] than expected[%d]",
+                  " elements kp_velocity[%zu] than expected[%zu]",
                   _msg->kp_velocity.size(), this->jointCommands.kp_velocity.size());
 
     if (_msg->i_effort_min.size() == this->jointCommands.i_effort_min.size())
@@ -213,7 +213,7 @@ void REEMCPlugin::SetJointCommands(
                   this->jointCommands.i_effort_min.begin());
     else
         ROS_DEBUG("joint commands message contains different number of"
-                  " elements i_effort_min[%d] than expected[%d]",
+                  " elements i_effort_min[%zu] than expected[%zu]",
                   _msg->i_effort_min.size(), this->jointCommands.i_effort_min.size());
 
     if (_msg->i_effort_max.size() == this->jointCommands.i_effort_max.size())
@@ -221,7 +221,7 @@ void REEMCPlugin::SetJointCommands(
                   this->jointCommands.i_effort_max.begin());
     else
         ROS_DEBUG("joint commands message contains different number of"
-                  " elements i_effort_max[%d] than expected[%d]",
+                  " elements i_effort_max[%zu] than expected[%zu]",
                   _msg->i_effort_max.size(), this->jointCommands.i_effort_max.size());
 }
 
@@ -333,7 +333,7 @@ void REEMCPlugin::DeferredLoad()
     this->callbackQueeuThread = boost::thread(
                 boost::bind(&REEMCPlugin::RosQueueThread, this));
 
-    this->updateConnection = event::Events::ConnectWorldUpdateStart(
+    this->updateConnection = event::Events::ConnectWorldUpdateBegin(
                 boost::bind(&REEMCPlugin::UpdateStates, this));
 
 }

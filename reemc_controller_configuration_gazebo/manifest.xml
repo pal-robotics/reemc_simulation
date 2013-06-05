@@ -9,6 +9,7 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/reemc_controller_configuration_gazebo</url>
 
+  <depend package="reem_head_action"/>
 </package>
 
 

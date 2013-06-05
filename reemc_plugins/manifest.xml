@@ -8,16 +8,16 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/reemc_plugins</url>
+
+  <depend package="atlas_msgs"/>
   <depend package="actionlib"/>
   <depend package="control_msgs"/>
   <depend package="sensor_msgs"/>
   <depend package="roscpp"/>
-<!--  <rosdep name="gazebo" />
-  <rosdep name="drcsim" />
+  <rosdep name="gazebo" />
   <rosdep name="osrf-common"/>
   <depend package="osrf_msgs"/>
-  <depend package="atlas_msgs"/>
--->
+
 
 </package>
 
