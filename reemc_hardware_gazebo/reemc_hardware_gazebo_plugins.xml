@@ -1,0 +1,11 @@
+<library path="lib/libreemc_hardware_gazebo">
+
+  <class
+    name="reemc_hardware_gazebo/ReemcHardwareGazebo"
+    type="reemc_hardware_gazebo::ReemcHardwareGazebo"
+    base_class_type="ros_control_gazebo::RobotSim">
+    <description>
+      REEM-C robot simulation interface.
+    </description>
+  </class>
+</library>

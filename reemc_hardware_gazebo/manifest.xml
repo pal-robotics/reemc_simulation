@@ -1,0 +1,25 @@
+<package>
+  <description brief="reemc_hardware_gazebo"></description>
+  <author>Adolfo Rodriguez Tsouroukdissian</author>
+  <license>Modified BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/reemc_hardware_gazebo</url>
+
+  <depend package="hardware_interface"/>
+  <depend package="transmission_interface"/>
+
+  <depend package="ros_control_gazebo"/>
+  <depend package="ros_control_gazebo_plugin"/>
+
+  <depend package="effort_controllers"/>
+
+  <rosdep name="eigen" />
+
+  <export>
+    <cpp cflags="-I${prefix}/include `pkg-config --cflags eigen3`" lflags="-L${prefix}/lib -lreemc_hardware_gazebo" />
+    <ros_control_gazebo plugin="${prefix}/reemc_hardware_gazebo_plugins.xml"/>
+  </export>
+
+</package>
+
+
