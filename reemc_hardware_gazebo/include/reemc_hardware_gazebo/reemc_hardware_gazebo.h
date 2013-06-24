@@ -9,12 +9,15 @@
 #include <hardware_interface/robot_hw.h>
 #include <hardware_interface/joint_state_interface.h>
 #include <hardware_interface/joint_command_interface.h>
+#include <hardware_interface/force_torque_sensor_interface.h>
+#include <hardware_interface/imu_sensor_interface.h>
 #include <transmission_interface/transmission_interface.h>
 #include <transmission_interface/transmission.h>
 
 #include <ros_control_gazebo/robot_sim.h>
 
 #include <gazebo/physics/physics.hh>
+#include <gazebo/sensors/ImuSensor.hh>
 
 namespace transmission_interface
 {
@@ -24,12 +27,13 @@ namespace transmission_interface
 namespace reemc_hardware_gazebo
 {
 
-class ReemcHardwareGazebo : public ros_control_gazebo::RobotSim // hardware_interface::RobotHW
+class ReemcHardwareGazebo : public ros_control_gazebo::RobotSim
 {
 public:
 
   ReemcHardwareGazebo();
 
+// TODO: Incorporate automatic actuator/joint parsing
 //   bool initXml(TiXmlElement* config)
 //   {
 //     // create robot
@@ -74,9 +78,6 @@ public:
 
 //  bool reset_controllers;
 
-//   pr2_mechanism_model::Robot robot_model_;
-//   pr2_mechanism_model::RobotState* robot_state_;
-
 private:
 //   bool motors_previously_halted_;
 
@@ -94,12 +95,22 @@ private:
   std::vector<double> jnt_eff_;
 
   std::vector<double> act_pos_cmd_;
-
   std::vector<double> jnt_pos_cmd_;
+
+  double left_force_[3];
+  double left_torque_[3];
+  double right_force_[3];
+  double right_torque_[3];
+
+  double base_orientation_[4];
+  double base_ang_vel_[3];
+  double base_lin_acc_[3];
 
   // Simulation-specific
   std::vector<gazebo::physics::JointPtr> sim_joints_;
-
+  gazebo::physics::JointPtr left_ankle_;
+  gazebo::physics::JointPtr right_ankle_;
+  boost::shared_ptr<gazebo::sensors::ImuSensor> imu_sensor_;
 
   // Hardware interface: actuators
   hardware_interface::JointStateInterface    act_state_interface_;
@@ -108,6 +119,10 @@ private:
   // Hardware interface: joints
   hardware_interface::JointStateInterface    jnt_state_interface_;
   hardware_interface::PositionJointInterface jnt_pos_cmd_interface_;
+
+  // Hardware interface: sensors
+  hardware_interface::ForceTorqueSensorInterface ft_sensor_interface_;
+  hardware_interface::ImuSensorInterface         imu_sensor_interface_;
 
   // Transmission interface: actuator->joint map
   transmission_interface::ActuatorToJointStateInterface act_to_jnt_state_;

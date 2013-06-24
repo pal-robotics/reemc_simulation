@@ -2,8 +2,10 @@
 #include <cassert>
 #include <boost/foreach.hpp>
 
-#include <pluginlib/class_list_macros.h>
 
+#include <gazebo/sensors/SensorManager.hh>
+
+#include <pluginlib/class_list_macros.h>
 #include <angles/angles.h>
 
 #include <reemc_hardware_gazebo/reemc_hardware_gazebo.h>
@@ -18,6 +20,8 @@ using std::string;
 
 namespace reemc_hardware_gazebo
 {
+
+using namespace hardware_interface;
 
 ReemcHardwareGazebo::ReemcHardwareGazebo()
   : ros_control_gazebo::RobotSim() //hardware_interface::RobotHW(),
@@ -140,7 +144,7 @@ bool ReemcHardwareGazebo::initSim(ros::NodeHandle nh, gazebo::physics::ModelPtr 
   jnt_eff_.clear();
   jnt_pos_cmd_.clear();
 
-  // Simulation joints
+  // Simulation joints: All joints to control
   sim_joints_ = model->GetJoints();
   n_dof_ = sim_joints_.size();
 
@@ -157,16 +161,63 @@ bool ReemcHardwareGazebo::initSim(ros::NodeHandle nh, gazebo::physics::ModelPtr 
   jnt_eff_.resize(n_dof_);
   jnt_pos_cmd_.resize(n_dof_);
 
-  // Hardware interfaces
+  // Hardware interfaces: joints
   for (size_t i = 0; i < n_dof_; ++i)
   {
-    jnt_state_interface_.registerJoint(jnt_names[i], &jnt_pos_[i], &jnt_vel_[i], &jnt_eff_[i]);
-    jnt_pos_cmd_interface_.registerJoint(jnt_state_interface_.getJointStateHandle(jnt_names[i]), &jnt_pos_cmd_[i]);
+    jnt_state_interface_.registerHandle(JointStateHandle(jnt_names[i], &jnt_pos_[i], &jnt_vel_[i], &jnt_eff_[i]));
+    jnt_pos_cmd_interface_.registerHandle(JointHandle(jnt_state_interface_.getHandle(jnt_names[i]), &jnt_pos_cmd_[i]));
 
     ROS_DEBUG_STREAM("Registered joint '" << jnt_names[i] << "' in the PositionJointInterface.");
   }
   registerInterface(&jnt_state_interface_);
   registerInterface(&jnt_pos_cmd_interface_);
+
+  // Hardware interfaces: Ankle force-torque sensors
+  const string left_ankle_name  = "reemc::reemc::leg_left_6_joint";  // TODO: Make not hardcoded
+  const string right_ankle_name = "reemc::reemc::leg_right_6_joint";
+
+  left_ankle_  = model->GetJoint(left_ankle_name);
+  right_ankle_ = model->GetJoint(right_ankle_name);
+
+  if (!left_ankle_)
+  {
+    ROS_ERROR_STREAM("Could not find joint '" << left_ankle_name << "' to which a force-torque sensor is attached.");
+    return false;
+  }
+  if (!right_ankle_)
+  {
+    ROS_ERROR_STREAM("Could not find joint '" << left_ankle_name << "' to which a force-torque sensor is attached.");
+    return false;
+  }
+
+  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("left_ft",         // TODO: Fetch from elsewhere?
+                                                              "leg_left_6_link", // TODO: Fetch from URDF?
+                                                              &left_force_[0],
+                                                              &left_torque_[0]));
+
+  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("right_ft",         // TODO: Fetch from elsewhere?
+                                                              "leg_right_6_link", // TODO: Fetch from URDF?
+                                                              &right_force_[0],
+                                                              &right_torque_[0]));
+  registerInterface(&ft_sensor_interface_);
+  ROS_DEBUG_STREAM("Registered ankle force-torque sensors.");
+
+  // Hardware interfaces: Base IMU sensors
+  imu_sensor_ =  boost::shared_dynamic_cast<gazebo::sensors::ImuSensor>
+      (gazebo::sensors::SensorManager::Instance()->GetSensor("imu_sensor")); // TODO: Fetch from URDF? /*reemc::reemc::base_link::imu_sensor*/
+  if (!this->imu_sensor_)
+  {
+    ROS_ERROR_STREAM("Could not find base IMU sensor.");
+    return false;
+  }
+
+  ImuSensorHandle::Data data;
+  data.name = "base_imu";      // TODO: Fetch from elsewhere?
+  data.frame_id = "base_link"; // TODO: Fetch from URDF?
+  data.orientation = &base_orientation_[0];
+  imu_sensor_interface_.registerHandle(ImuSensorHandle(data));
+  registerInterface(&imu_sensor_interface_);
+  ROS_DEBUG_STREAM("Registered IMU sensor.");
 
   // PID controllers
   pids_.resize(n_dof_);
@@ -181,6 +232,7 @@ bool ReemcHardwareGazebo::initSim(ros::NodeHandle nh, gazebo::physics::ModelPtr 
 
 void ReemcHardwareGazebo::readSim(ros::Time time, ros::Duration period)
 {
+  // Read joint state
   for(unsigned int j = 0; j < n_dof_; ++j)
   {
     // Gazebo has an interesting API...
@@ -189,6 +241,40 @@ void ReemcHardwareGazebo::readSim(ros::Time time, ros::Duration period)
     jnt_vel_[j] = sim_joints_[j]->GetVelocity(0u);
     jnt_eff_[j] = sim_joints_[j]->GetForce(0u);
   }
+
+  // Read force-torque sensors
+  gazebo::physics::JointWrench left_ft = left_ankle_->GetForceTorque(0u);
+  left_force_[0] =  left_ft.body1Force.y;
+  left_force_[1] = -left_ft.body1Force.z;  // TODO: How to automate these sign flips?
+  left_force_[2] =  left_ft.body1Force.x;
+  left_force_[0] = -left_ft.body1Torque.x; // TODO: How to automate these sign flips?
+  left_force_[1] =  left_ft.body1Torque.z;
+  left_force_[2] =  left_ft.body1Torque.y;
+
+  gazebo::physics::JointWrench right_ft = right_ankle_->GetForceTorque(0u);
+  right_force_[0] =  right_ft.body1Force.y;
+  right_force_[1] = -right_ft.body1Force.z;  // TODO: How to automate these sign flips?
+  right_force_[2] =  right_ft.body1Force.x;
+  right_force_[0] = -right_ft.body1Torque.x; // TODO: How to automate these sign flips?
+  right_force_[1] =  right_ft.body1Torque.z;
+  right_force_[2] =  right_ft.body1Torque.y;
+
+  // Read IMU sensor
+  gazebo::math::Quaternion imu_quat = imu_sensor_->GetOrientation();
+  base_orientation_[0] = imu_quat.x;
+  base_orientation_[1] = imu_quat.y;
+  base_orientation_[2] = imu_quat.z;
+  base_orientation_[3] = imu_quat.w;
+
+  gazebo::math::Vector3 imu_ang_vel = imu_sensor_->GetAngularVelocity();
+  base_ang_vel_[0] = imu_ang_vel.x;
+  base_ang_vel_[1] = imu_ang_vel.y;
+  base_ang_vel_[2] = imu_ang_vel.z;
+
+  gazebo::math::Vector3 imu_lin_acc = imu_sensor_->GetLinearAcceleration();
+  base_lin_acc_[0] =  imu_lin_acc.x;
+  base_lin_acc_[1] =  imu_lin_acc.y;
+  base_lin_acc_[2] =  imu_lin_acc.z;
 }
 
 void ReemcHardwareGazebo::writeSim(ros::Time time, ros::Duration period)
