@@ -7,16 +7,17 @@
 
   <depend package="hardware_interface"/>
   <depend package="transmission_interface"/>
+  <depend package="joint_limits_interface"/>
 
   <depend package="ros_control_gazebo"/>
   <depend package="ros_control_gazebo_plugin"/>
 
   <depend package="effort_controllers"/>
 
-  <rosdep name="eigen" />
+  <depend package="urdf_parser"/>
 
   <export>
-    <cpp cflags="-I${prefix}/include `pkg-config --cflags eigen3`" lflags="-L${prefix}/lib -lreemc_hardware_gazebo" />
+    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -lreemc_hardware_gazebo" />
     <ros_control_gazebo plugin="${prefix}/reemc_hardware_gazebo_plugins.xml"/>
   </export>
 

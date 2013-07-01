@@ -13,6 +13,7 @@
 #include <hardware_interface/imu_sensor_interface.h>
 #include <transmission_interface/transmission_interface.h>
 #include <transmission_interface/transmission.h>
+#include <joint_limits_interface/joint_limits_interface.h>
 
 #include <ros_control_gazebo/robot_sim.h>
 
@@ -123,6 +124,9 @@ private:
   // Hardware interface: sensors
   hardware_interface::ForceTorqueSensorInterface ft_sensor_interface_;
   hardware_interface::ImuSensorInterface         imu_sensor_interface_;
+
+  // Joint limits interface
+  joint_limits_interface::PositionJointSoftLimitsInterface jnt_limits_interface_;
 
   // Transmission interface: actuator->joint map
   transmission_interface::ActuatorToJointStateInterface act_to_jnt_state_;

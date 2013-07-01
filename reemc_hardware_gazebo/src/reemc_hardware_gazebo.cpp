@@ -2,11 +2,13 @@
 #include <cassert>
 #include <boost/foreach.hpp>
 
-
 #include <gazebo/sensors/SensorManager.hh>
 
+#include <urdf_parser/urdf_parser.h>
 #include <pluginlib/class_list_macros.h>
 #include <angles/angles.h>
+
+#include <joint_limits_interface/joint_limits_urdf.h>
 
 #include <reemc_hardware_gazebo/reemc_hardware_gazebo.h>
 
@@ -24,7 +26,7 @@ namespace reemc_hardware_gazebo
 using namespace hardware_interface;
 
 ReemcHardwareGazebo::ReemcHardwareGazebo()
-  : ros_control_gazebo::RobotSim() //hardware_interface::RobotHW(),
+  : ros_control_gazebo::RobotSim()
 {
 //  // Transmissions
 //  using namespace transmission_interface;
@@ -137,6 +139,23 @@ bool ReemcHardwareGazebo::initSim(ros::NodeHandle nh, gazebo::physics::ModelPtr 
 {
   using gazebo::physics::JointPtr;
 
+  // Wait for robot model to become available
+  const string robot_description_name = "robot_description";
+  string robot_description;
+  while (ros::ok() && !nh.getParam(robot_description_name, robot_description))
+  {
+    ROS_WARN_STREAM_ONCE("Waiting for robot description: parameter '" << robot_description_name << "' on namespace '" << nh.getNamespace() << "'.");
+    ros::Duration(1.0).sleep();
+  }
+  ROS_INFO("Found robot description");
+
+  boost::shared_ptr<urdf::ModelInterface> urdf = urdf::parseURDF(robot_description);
+  if (!urdf)
+  {
+    throw std::runtime_error("Could not load robot description.");
+  }
+  ROS_DEBUG("Parsed robot description");
+
   // Cleanup
   sim_joints_.clear();
   jnt_pos_.clear();
@@ -171,6 +190,27 @@ bool ReemcHardwareGazebo::initSim(ros::NodeHandle nh, gazebo::physics::ModelPtr 
   }
   registerInterface(&jnt_state_interface_);
   registerInterface(&jnt_pos_cmd_interface_);
+
+  // Joint limits interface
+  vector<string> cmd_handle_names = jnt_pos_cmd_interface_.getNames();
+  for (unsigned int i = 0; i < cmd_handle_names.size(); ++i)
+  {
+    JointHandle cmd_handle = jnt_pos_cmd_interface_.getHandle(cmd_handle_names[i]);
+    const string name = cmd_handle.getName();
+
+    using namespace joint_limits_interface;
+    boost::shared_ptr<const urdf::Joint> urdf_joint = urdf->getJoint(name);
+    JointLimits limits;
+    SoftJointLimits soft_limits;
+    if (!getJointLimits(urdf_joint, limits) || !getSoftJointLimits(urdf_joint, soft_limits))
+    {
+      ROS_WARN_STREAM("Joint limits won't be enforced for joint '" << name << "'.");
+      continue;
+    }
+    jnt_limits_interface_.registerHandle(PositionJointSoftLimitsHandle(cmd_handle, limits, soft_limits));
+
+    ROS_DEBUG_STREAM("Joint limits will be enforced for joint '" << name << "'.");
+  }
 
   // Hardware interfaces: Ankle force-torque sensors
   const string left_ankle_name  = "reemc::reemc::leg_left_6_joint";  // TODO: Make not hardcoded
@@ -279,6 +319,10 @@ void ReemcHardwareGazebo::readSim(ros::Time time, ros::Duration period)
 
 void ReemcHardwareGazebo::writeSim(ros::Time time, ros::Duration period)
 {
+  // Enforce joint limits
+//   jnt_limits_interface_.enforceLimits(period); // TODO: Tune controllers to make this work?
+
+  // Compute and send effort command
   for(unsigned int j = 0; j < n_dof_; ++j)
   {
     const double error = jnt_pos_cmd_[j] - jnt_pos_[j]; // NOTE: Assumes jnt_pos_ contains most recent value
