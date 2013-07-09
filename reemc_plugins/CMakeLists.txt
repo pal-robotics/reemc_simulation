@@ -25,3 +25,9 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 rosbuild_add_library(REEMCPlugin  src/REEMCPlugin.cpp)
 target_link_libraries(REEMCPlugin ${GAZEBO_LIBRARIES})
+
+rosbuild_add_library(FootContactModelPlugin  src/FootContactModelPlugin.cpp)
+target_link_libraries(FootContactModelPlugin ${GAZEBO_LIBRARIES})
+
+rosbuild_add_library(gazebo_ros_force_plugin  src/gazebo_ros_force.cpp)
+target_link_libraries(gazebo_ros_force_plugin ${GAZEBO_LIBRARIES})

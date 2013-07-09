@@ -1,0 +1,11 @@
+<launch>
+  <arg name="gzpose"  default="-x 0 -y 0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
+  <arg name="gzmodel" default="reemc_description_lower_body/reemc_lower_body.sdf"/>
+
+  <!-- Spawn REEM without starting up any defaut controllers -->
+  <include file="$(find reemc_gazebo)/launch/reemc_lower_body_no_controllers.launch">
+    <arg name="gzpose" value="$(arg gzpose)"/>
+    <arg name="gzmodel" value="$(arg gzmodel)"/>
+  </include>
+
+</launch>

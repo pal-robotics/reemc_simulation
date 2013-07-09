@@ -8,8 +8,8 @@
         <solver>
           <type>quick</type>
           <dt>0.001</dt>
-          <iters>100</iters>
-          <sor>1.0</sor>
+          <iters>50</iters>
+          <sor>1.4</sor>
         </solver>
         <constraints>
           <cfm>0.0</cfm>
@@ -28,10 +28,10 @@
       <uri>model://ground_plane</uri>
     </include>
 
-    <!-- REEM-C -->
+    <!-- REEM-C 
     <include>
-      <uri>model://reemc</uri>
+      <uri>model://reemc_description_lower_body</uri>
       <pose>0 0 0 0 0 0</pose>
-    </include>
-  </world>
+    </include> -->
+  </world> 
 </sdf>

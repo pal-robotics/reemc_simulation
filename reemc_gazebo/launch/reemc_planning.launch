@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Only runs the footstep_planner from /initialpose to /goal, not connected to
+the /amcl_pose (although it is shown).
+This is only to see that the footstep planner actually works.
+Use reemc_navigation.launch to use /amcl_pose and actually see the robot move.
+
+Usage:
+roslaunch reemc_gazebo reemc_planning.launch
+Rotate the robot manually in gazebo and walk with (set the desired #steps):
+roslaunch walking walk.launch nsteps:=4
+-->
+<launch>
+  <!-- Simulation time -->
+  <param name="/use_sim_time" type="bool" value="true"/>
+
+  <include file="$(find reemc_gazebo)/launch/reemc_small_office_world_lower_body.launch"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo)/config/reemc.vcg"/>
+
+  <!-- Filter foot scans and provide /scan -->
+  <node name="foot_laser_filter" pkg="walking" type="foot_laser_filter"/>
+
+  <!-- Map -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find reemc_gazebo)/maps/map.yaml"/>
+
+  <!-- Localization -->
+  <include file="$(find reemc_gazebo)/launch/reemc_localization.launch"/>
+
+  <!-- Footstep planner (in place of the move_base) -->
+  <include file="$(find footstep_planner)/launch/footstep_planner.launch">
+    <arg name="robot" value="reemc"/>
+  </include>
+</launch>

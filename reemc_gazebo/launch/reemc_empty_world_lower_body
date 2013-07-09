@@ -1,0 +1,7 @@
+<launch>
+  <!-- start up empty world -->
+  <include file="$(find reemc_gazebo)/launch/empty_world.launch"/>
+
+  <!-- start REEM robot -->
+  <include file="$(find reemc_gazebo)/launch/reemc_lower_body.launch"/>
+</launch>
