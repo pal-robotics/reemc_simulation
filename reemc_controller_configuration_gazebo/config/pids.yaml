@@ -51,3 +51,5 @@ gains:
   # TODO: Remove!
   left_laser_joint: {p: 0, d: 0}
   right_laser_joint: {p: 0, d: 0}
+  left_sole_joint  : {p: 0, d: 0}
+  right_sole_joint  : {p: 0, d: 0}
