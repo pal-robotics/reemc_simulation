@@ -3,14 +3,14 @@
  <rosparam param="/walking/z_lipm">0.4</rosparam>
 
   <include file="$(find reemc_gazebo)/launch/run_gazebo.launch">
-    <arg name="gzworld" value="$(find reemc_gazebo)/worlds/reemc.world" />
+    <arg name="gzworld" value="$(find reemc_gazebo)/worlds/empty.world" />
   </include>
 
-  <!-- start REEM robot -->
+  <!-- load REEM-C robot in simulation -->
   <include file="$(find reemc_gazebo)/launch/reemc_lower_body.launch"/>
-  
-  <!--robot state publisher -->
-  <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" />
+
+  <!-- start REEM robot -->
+  <include file="$(find reemc_gazebo)/launch/reemc_bringup.launch"/>
   
   <!--start joystick-->
   <include file="$(find walking)/launch/joystick.launch" /> 
