@@ -47,3 +47,7 @@ gains:
   hand_left_middle_1_joint:  *finger_1_gains
   hand_left_middle_2_joint:  *finger_1_gains
   hand_left_middle_3_joint:  *finger_1_gains
+
+  # TODO: Remove!
+  left_laser_joint: {p: 0, d: 0}
+  right_laser_joint: {p: 0, d: 0}
