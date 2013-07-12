@@ -288,7 +288,7 @@ void ReemcHardwareGazebo::readSim(ros::Time time, ros::Duration period)
   left_force_[1] = -left_ft.body1Force.z;  // TODO: How to automate these sign flips?
   left_force_[2] =  left_ft.body1Force.x;
   left_torque_[0] = -left_ft.body1Torque.x; // TODO: How to automate these sign flips?
-  left_torque_[1] =  left_ft.body1Torque.z;
+  left_torque_[1] = -left_ft.body1Torque.z;
   left_torque_[2] =  left_ft.body1Torque.y;
 
   gazebo::physics::JointWrench right_ft = right_ankle_->GetForceTorque(0u);
@@ -296,7 +296,7 @@ void ReemcHardwareGazebo::readSim(ros::Time time, ros::Duration period)
   right_force_[1] = -right_ft.body1Force.z;  // TODO: How to automate these sign flips?
   right_force_[2] =  right_ft.body1Force.x;
   right_torque_[0] = -right_ft.body1Torque.x; // TODO: How to automate these sign flips?
-  right_torque_[1] =  right_ft.body1Torque.z;
+  right_torque_[1] = -right_ft.body1Torque.z;
   right_torque_[2] =  right_ft.body1Torque.y;
 
   // Read IMU sensor
