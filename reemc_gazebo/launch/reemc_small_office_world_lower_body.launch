@@ -2,7 +2,7 @@
 
 <launch>
   <!-- start up empty world -->
- <rosparam param="/walking/z_lipm">0.4</rosparam>
+ <rosparam param="walking/z_lipm">0.4</rosparam>
 
   <include file="$(find reemc_gazebo)/launch/run_gazebo.launch">
     <arg name="gzworld" value="$(find reemc_gazebo)/worlds/small_office.world" />
@@ -12,11 +12,11 @@
   <include file="$(find reemc_gazebo)/launch/reemc_lower_body.launch">
     <arg name="gzpose" value="-x 0.0 -y 8.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
   </include>
-  
+
   <!--robot state publisher -->
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" />
-  
+
   <!--start joystick-->
-  <include file="$(find walking)/launch/joystick.launch" /> 
+  <include file="$(find reemc_gazebo)/launch/reemc_joystick_teleop.launch" />
 
 </launch>

@@ -16,7 +16,7 @@ roslaunch walking walk.launch nsteps:=4
   <param name="/use_sim_time" type="bool" value="true"/>
 
   <include file="$(find reemc_gazebo)/launch/reemc_small_office_world_lower_body.launch"/>
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo)/config/reemc.vcg"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo)/config/reemc_planning.vcg"/>
 
   <!-- Filter foot scans and provide /scan -->
   <node name="foot_laser_filter" pkg="walking" type="foot_laser_filter"/>

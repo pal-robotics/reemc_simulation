@@ -11,8 +11,6 @@ namespace gazebo
 // Constructor
 GazeboRosForce::GazeboRosForce()
 {
-  ROS_ERROR("force plugin constructor");
-
   this->wrenchMsg.force.x = 0;
   this->wrenchMsg.force.y = 0;
   this->wrenchMsg.force.z = 0;
@@ -87,10 +85,6 @@ void GazeboRosForce::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     boost::bind( &GazeboRosForce::UpdateObjectForce,this,_1),
     ros::VoidPtr(), &this->queue);
   this->sub = this->rosNode->subscribe(so);
-
-
-  ROS_ERROR("force plugin <bodyName> %s", this->linkName.c_str());
-  ROS_ERROR("force plugin <topicName> %s", this->topicName.c_str());
 
   // Custom Callback Queue
   this->callbackQueueThread = boost::thread( boost::bind( &GazeboRosForce::QueueThread,this ) );

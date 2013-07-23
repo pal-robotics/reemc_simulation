@@ -1,6 +1,6 @@
 <launch>
   <!-- start up empty world -->
- <rosparam param="/walking/z_lipm">0.4</rosparam>
+ <rosparam param="/walking/z_lipm">0.7</rosparam>
 
   <include file="$(find reemc_gazebo)/launch/run_gazebo.launch">
     <arg name="gzworld" value="$(find reemc_gazebo)/worlds/empty.world" />
@@ -11,8 +11,8 @@
 
   <!-- start REEM robot -->
   <include file="$(find reemc_gazebo)/launch/reemc_bringup.launch"/>
-  
+
   <!--start joystick-->
-  <include file="$(find walking)/launch/joystick.launch" /> 
+  <include file="$(find walking)/launch/joystick_teleop.launch" />
 
 </launch>

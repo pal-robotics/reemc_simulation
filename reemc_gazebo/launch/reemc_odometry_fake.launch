@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <node pkg="walking" type="fake_odometry" name="fake_odometry" output="screen" />
+</launch>
+

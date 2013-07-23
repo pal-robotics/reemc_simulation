@@ -1,0 +1,15 @@
+<launch>
+
+  <!--- Teleop Joystick -->
+  <node pkg="walking" type="joy_teleop" name="joy_teleop">
+    <remap from="cmd_vel" to="input_joy/cmd_vel" />
+    <!--
+    <param name="scale_angular" value="1.5"/>
+    <param name="scale_x_linear" value="0.5"/>
+    <param name="scale_y_linear" value="0.2"/>
+    -->
+  </node>
+
+  <node pkg="joy" type="joy_node" name="joystick"/>
+
+</launch>
