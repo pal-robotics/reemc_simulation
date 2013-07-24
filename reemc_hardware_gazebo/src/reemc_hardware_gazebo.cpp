@@ -283,19 +283,20 @@ void ReemcHardwareGazebo::readSim(ros::Time time, ros::Duration period)
   }
 
   // Read force-torque sensors
+  // Signs are coherent with FT sensor readings got from REEM-B
   gazebo::physics::JointWrench left_ft = left_ankle_->GetForceTorque(0u);
-  left_force_[0] =  left_ft.body1Force.y;
-  left_force_[1] = -left_ft.body1Force.z;  // TODO: How to automate these sign flips?
-  left_force_[2] =  left_ft.body1Force.x;
-  left_torque_[0] = -left_ft.body1Torque.x; // TODO: How to automate these sign flips?
+  left_force_[0]  = -left_ft.body1Force.y;
+  left_force_[1]  = -left_ft.body1Force.z;
+  left_force_[2]  =  left_ft.body1Force.x;
+  left_torque_[0] = -left_ft.body1Torque.x;
   left_torque_[1] = -left_ft.body1Torque.z;
   left_torque_[2] =  left_ft.body1Torque.y;
 
   gazebo::physics::JointWrench right_ft = right_ankle_->GetForceTorque(0u);
-  right_force_[0] =  right_ft.body1Force.y;
-  right_force_[1] = -right_ft.body1Force.z;  // TODO: How to automate these sign flips?
-  right_force_[2] =  right_ft.body1Force.x;
-  right_torque_[0] = -right_ft.body1Torque.x; // TODO: How to automate these sign flips?
+  right_force_[0]  = -right_ft.body1Force.y;
+  right_force_[1]  = -right_ft.body1Force.z;
+  right_force_[2]  =  right_ft.body1Force.x;
+  right_torque_[0] = -right_ft.body1Torque.x;
   right_torque_[1] = -right_ft.body1Torque.z;
   right_torque_[2] =  right_ft.body1Torque.y;
 
