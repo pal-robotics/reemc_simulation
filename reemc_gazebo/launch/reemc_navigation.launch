@@ -36,6 +36,9 @@ roslaunch walking walk.launch nsteps:=4
     </include>
   </group>
 
+  <include file="$(find reemc_macro_states)/launch/mode_switch.launch" />
+  <include file="$(find reemc_macro_states)/launch/control_source_switch.launch" />
+
   <!-- Footstep planner (in place of the move_base) -->
   <!--
   <include file="$(find footstep_planner)/launch/footstep_navigation.launch">
