@@ -1,8 +1,9 @@
 <launch>
 
+  <arg name="cmd_vel" default="input_joy/cmd_vel" />
   <!--- Teleop Joystick -->
   <node pkg="walking" type="joy_teleop" name="joy_teleop">
-    <remap from="cmd_vel" to="input_joy/cmd_vel" />
+    <remap from="cmd_vel" to="$(arg cmd_vel)" />
     <!--
     <param name="scale_angular" value="1.5"/>
     <param name="scale_x_linear" value="0.5"/>

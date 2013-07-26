@@ -10,10 +10,9 @@ where localization can be:
 -->
 <launch>
   <arg name="localization" default="amcl"/>
-  <arg name="robot" default="reemc"/>
 
   <include file="$(find reemc_gazebo)/launch/reemc_localization_$(arg localization).launch">
-    <arg name="robot" value="$(arg robot)"/>
+    <arg name="robot" value="reemc"/>
   </include>
 </launch>
 

@@ -1,36 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-Usage:
-roslaunch reemc_gazebo reemc_navigation.launch
-Rotate the robot manually in gazebo and walk with (set the desired #steps):
-roslaunch walking walk.launch nsteps:=4
--->
 <launch>
-  <!-- Arguments -->
-  <arg name="robot" default="reemc"/>
-  <arg name="localization" default="amcl"/>
-  <arg name="odometry" default="controller"/>
 
-  <include file="$(find reemc_gazebo)/launch/reemc_small_office_world_lower_body.launch"/>
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo)/config/reemc_navigation_base.vcg"/>
-
-  <!-- Provide odometry from walking controller -->
-  <include file="$(find reemc_gazebo)/launch/reemc_odometry.launch">
-    <arg name="odometry" value="$(arg odometry)"/>
+  <!-- 2d nav -->
+  <include file="$(find reemc_2dnav)/launch/planning_and_control.launch">
+    <arg name="cmd_topic" value="walking_controller/cmd_vel" />
   </include>
-  <!-- Filter foot scans and provide /scan -->
-  <node name="foot_laser_filter" pkg="walking" type="foot_laser_filter"/>
-
-  <!-- Map -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find reemc_gazebo)/maps/map.yaml"/>
-
-  <!-- Localization -->
-  <include file="$(find reemc_gazebo)/launch/reemc_localization.launch">
-    <arg name="robot" value="$(arg robot)"/>
-    <arg name="localization" value="$(arg localization)"/>
-  </include>
-
-  <!-- Navigation -->
-  <include file="$(find reemc_2dnav)/launch/planning_and_control.launch" />
 </launch>

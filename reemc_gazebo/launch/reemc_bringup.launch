@@ -2,8 +2,10 @@
   <!-- PID gains -->
   <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/pids.yaml" />
 
-  <!-- Robot model -->
-  <include file="$(find reemc_description)/robots/upload_reemc.launch" />
+  <group ns="walking_controller">
+    <param name="loop_counter_factor" value="10" />
+    <param name="z_lipm" value="0.7" />
+  </group>
 
   <!-- Controller configuration -->
   <include file="$(find reemc_controller_configuration)/launch/default_controllers.launch" />

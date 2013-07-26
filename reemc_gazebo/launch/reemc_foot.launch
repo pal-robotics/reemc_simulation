@@ -1,5 +1,5 @@
 <launch>
-
+<this file is intentionnaly broken. if you need it, remove this tag and tell the navigation guys />
  <!-- Robot Description -->
   <include file="$(find reemc_description)/robots/upload_reemc_foot.launch" />
 
