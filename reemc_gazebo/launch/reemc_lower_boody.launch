@@ -1,5 +1,0 @@
-<launch>
-  <!-- Spawn REEM without starting up any defaut controllers -->
-  <include file="$(find reemc_gazebo)/launch/reemc_lower_body_no_controllers.launch"/>
-
-</launch>
