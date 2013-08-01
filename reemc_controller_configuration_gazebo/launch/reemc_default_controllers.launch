@@ -5,6 +5,10 @@
   <!-- Controllers -->
   <include file="$(find reemc_controller_configuration)/launch/default_controllers.launch" />
 
+  <!-- Walking controller -->
+  <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_walking_controller.launch"/>
+
+
   <!-- Legs -->
 <!--   <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/reemc_lower_body_controllers.yaml" /> -->
 
