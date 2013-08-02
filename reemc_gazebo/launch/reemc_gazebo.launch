@@ -2,11 +2,13 @@
 
 <launch>
   <arg name="world" default="small_office" />
-  <arg name="robot" default="lower_body" />
+  <arg name="robot" default="full" />
+  <arg name="gzname" default="gazebo" />
 
   <!-- start up empty world -->
   <include file="$(find reemc_gazebo)/launch/run_gazebo.launch">
     <arg name="gzworld" value="$(find reemc_gazebo)/worlds/$(arg world).world" />
+    <arg name="gzname" value="$(arg gzname)" />
   </include>
 
   <!-- load REEM-C robot in simulation -->

@@ -7,12 +7,14 @@
   <arg name="localization" default="amcl"/>
   <arg name="odometry" default="controller"/>
   <arg name="world" default="small_office"/>
-  <arg name="robot" default="lower_body"/>
+  <arg name="robot" default="full"/>
+  <arg name="gzname" default="gazebo"/>
 
   <group ns="reemc">
       <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
       <arg name="world" value="$(arg world)" />
       <arg name="robot" value="$(arg robot)" />
+      <arg name="gzname" value="$(arg gzname)" />
     </include>
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo)/config/reemc_navigation_base.vcg"/>
