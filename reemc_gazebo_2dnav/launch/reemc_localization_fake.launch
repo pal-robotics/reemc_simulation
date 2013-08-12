@@ -1,22 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <launch>
   <arg name="robot"/>
+  <!--
+    ground_truth can be, for example:
+    - ground_truth_odom : from gazebo simulator
+    - odom              : from robot odometry
+  -->
+  <arg name="ground_truth" default="ground_truth_odom"/>
 
-  <include file="$(find footstep_planner)/launch/initialpose_corrector.launch">
-    <arg name="robot" value="$(arg robot)"/>
-  </include>
+  <include file="$(find reemc_2dnav)/launch/footstep/initialpose_corrector.launch"/>
 
   <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen">
-    <remap from="base_pose_ground_truth" to="ground_truth_odom"/>
+    <remap from="base_pose_ground_truth" to="$(arg ground_truth)"/>
     <remap from="initialpose" to="initialpose_corrected"/>
+
     <param name="odom_frame_id" value="/odom"/>
-    <param name="delta_x" value="0.0"/>
-    <param name="delta_y" value="0.0"/>
-    <param name="delta_yaw" value="0.0"/>
     <param name="global_frame_id" value="/map"/>
     <param name="base_frame_id" value="/base_link"/>
     <!--param name="base_frame_id" value="/left_sole_link"/-->
+
+    <param name="delta_x" value="0.0"/>
+    <param name="delta_y" value="0.0"/>
+    <param name="delta_yaw" value="0.0"/>
   </node>
 </launch>
 

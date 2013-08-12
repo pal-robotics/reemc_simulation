@@ -17,7 +17,7 @@
       <arg name="gzname" value="$(arg gzname)" />
     </include>
 
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_base.vcg"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_$(arg planner).vcg"/>
 
     <!-- Provide odometry from walking controller -->
     <include file="$(find reemc_gazebo_2dnav)/launch/reemc_odometry.launch">
