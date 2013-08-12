@@ -1,0 +1,44 @@
+<launch>
+
+  <!-- Simulation time -->
+  <param name="/use_sim_time" type="bool" value="true"/>
+
+  <arg name="planner" default="base"/>
+  <arg name="localization" default="amcl"/>
+  <arg name="odometry" default="controller"/>
+  <arg name="world" default="small_office"/>
+  <arg name="robot" default="full"/>
+  <arg name="gzname" default="gazebo"/>
+
+  <group ns="reemc">
+      <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
+      <arg name="world" value="$(arg world)" />
+      <arg name="robot" value="$(arg robot)" />
+      <arg name="gzname" value="$(arg gzname)" />
+    </include>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_base.vcg"/>
+
+    <!-- Provide odometry from walking controller -->
+    <include file="$(find reemc_gazebo_2dnav)/launch/reemc_odometry.launch">
+      <arg name="odometry" value="$(arg odometry)"/>
+    </include>
+
+    <!-- Filter foot scans and provide /scan -->
+    <node name="foot_laser_filter" pkg="walking" type="foot_laser_filter"/>
+
+    <!-- Map -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find reemc_gazebo_2dnav)/maps/map.yaml"/>
+
+    <!-- Localization -->
+    <include file="$(find reemc_gazebo_2dnav)/launch/reemc_localization.launch">
+      <arg name="localization" value="$(arg localization)"/>
+    </include>
+
+    <include file="$(find reemc_gazebo_2dnav)/launch/reemc_navigation_$(arg planner).launch" />
+
+    <!-- mode switch madness -->
+    <include file="$(find reemc_macro_states)/launch/mode_switch.launch" />
+    <include file="$(find reemc_macro_states)/launch/control_source_switch.launch" />
+  </group>
+</launch>

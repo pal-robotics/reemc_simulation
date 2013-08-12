@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Usage:
+roslaunch reemc_gazebo_2dnav reemc_localization localization:=amcl robot:=reemc
+where localization can be:
+- fake:     Fake localization using /ground_truth_odom from /gazebo
+- amcl:     Adaptive Monte Carlo Localization (for diff or omni wheel driven robots)
+- humanoid: Humanoid localization from Freiburg's humanoid stacks.
+-->
+<launch>
+  <arg name="localization" default="amcl"/>
+
+  <include file="$(find reemc_gazebo_2dnav)/launch/reemc_localization_$(arg localization).launch">
+    <arg name="robot" value="reemc"/>
+  </include>
+</launch>
+

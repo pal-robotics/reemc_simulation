@@ -1,0 +1,21 @@
+<package>
+  <description brief="reemc_gazebo_2dnav">
+
+     reemc_gazebo_2dnav
+
+  </description>
+  <author>Paul Mathieu</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/reemc_gazebo_2dnav</url>
+
+  <depend package="amcl"/>
+  <depend package="pal_gmapping"/>
+  <depend package="pal_sensor_to_cloud"/>
+  <depend package="topic_tools"/>
+  <depend package="move_base"/>
+  <depend package="reemc_gazebo"/>
+  <depend package="pal_local_planner"/>
+</package>
+
+
