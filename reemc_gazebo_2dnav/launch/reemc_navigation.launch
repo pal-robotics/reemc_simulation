@@ -11,7 +11,7 @@
   <arg name="gzname" default="gazebo"/>
 
   <group ns="reemc">
-      <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
+    <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
       <arg name="world" value="$(arg world)" />
       <arg name="robot" value="$(arg robot)" />
       <arg name="gzname" value="$(arg gzname)" />
