@@ -1,15 +1,13 @@
 delta_T: 0.01
 loop_counter_factor: 10.0
-  
-wait_x_p: 0.8
-wait_y_p: 0.6
+ft_sensor_z: 0.1
 
-step_ds_x_p: 1.0
-step_ds_y_p: 1.0
+com_stabilizer:  
+   ds_x_p: 0.7
+   ds_y_p: 0.7
+   ss_x_p: 1.0
+   ss_y_p: 1.0
 
-step_ss_x_p: 1.0
-step_ss_y_p: 1.0
-
-z_lipm: 0.7
-ft_sensor_z: 0.11
+zmp_solver:
+   z_lipm: 0.72
 
