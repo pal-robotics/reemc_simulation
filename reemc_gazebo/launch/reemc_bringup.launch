@@ -2,11 +2,6 @@
   <!-- PID gains -->
   <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/pids.yaml" />
 
-  <group ns="walking_controller">
-    <param name="loop_counter_factor" value="10" />
-    <param name="z_lipm" value="0.7" />
-  </group>
-
   <!-- Controller configuration -->
   <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_default_controllers.launch" />
 
