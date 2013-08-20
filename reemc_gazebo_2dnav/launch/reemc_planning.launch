@@ -15,6 +15,7 @@ roslaunch walking walk.launch nsteps:=4
   <!-- Simulation time -->
   <param name="/use_sim_time" type="bool" value="true"/>
 
+  <arg name="planner" default="footstep"/>
   <arg name="localization" default="fake"/>
   <arg name="odometry" default="controller"/>
   <arg name="world" default="small_office"/>
@@ -28,7 +29,7 @@ roslaunch walking walk.launch nsteps:=4
       <arg name="gzname" value="$(arg gzname)"/>
     </include>
 
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_planning.vcg"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_planning_$(arg planner).vcg"/>
 
     <!-- Provide odometry from walking controller -->
     <include file="$(find reemc_gazebo_2dnav)/launch/reemc_odometry.launch">
@@ -46,9 +47,7 @@ roslaunch walking walk.launch nsteps:=4
       <arg name="localization" value="$(arg localization)"/>
     </include>
 
-    <!-- Footstep planner (in place of the move_base) -->
-    <include file="$(find footstep_planner)/launch/footstep_planner.launch">
-      <arg name="robot" value="reemc"/>
-    </include>
+    <!-- Planning -->
+    <include file="$(find reemc_gazebo_2dnav)/launch/reemc_planning_$(arg planner).launch"/>
   </group>
 </launch>
