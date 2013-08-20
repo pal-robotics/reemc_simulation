@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <launch>
-  <arg name="world" default="small_office" />
-  <arg name="robot" default="full" />
-  <arg name="gzname" default="gazebo" />
+  <arg name="world" default="small_office" />  <!-- small_office, empty -->
+  <arg name="robot" default="full" />  <!-- full, lower_body -->
+  <arg name="gzname" default="gazebo" />  <!-- gazebo, gzserver-->
 
-  <!-- start up empty world -->
+  <!-- start up world -->
   <include file="$(find reemc_gazebo)/launch/run_gazebo.launch">
     <arg name="gzworld" value="$(find reemc_gazebo)/worlds/$(arg world).world" />
     <arg name="gzname" value="$(arg gzname)" />
@@ -16,12 +16,13 @@
     <arg name="gzpose" value="-x 0.0 -y 8.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
   </include>
 
-  <!-- start REEM robot -->
+  <!-- start REEM-C robot -->
   <include file="$(find reemc_gazebo)/launch/reemc_bringup.launch"/>
 
   <!--start joystick-->
   <include file="$(find reemc_gazebo)/launch/joystick_teleop.launch">
     <arg name="cmd_vel" value="walking_controller/cmd_vel" />
+    <arg name="teleop_config" value="$(find reemc_gazebo)/config/joy_teleop.yaml" />
   </include>
 
 </launch>
