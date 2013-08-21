@@ -9,12 +9,14 @@
   <arg name="world" default="small_office"/>
   <arg name="robot" default="full"/>
   <arg name="gzname" default="gazebo"/>
+  <arg name="gzpose" default="-x 0.0 -y 8.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
   <group ns="reemc">
     <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
       <arg name="world" value="$(arg world)" />
       <arg name="robot" value="$(arg robot)" />
       <arg name="gzname" value="$(arg gzname)" />
+      <arg name="gzpose" value="$(arg gzpose)" />
     </include>
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_$(arg planner).vcg"/>

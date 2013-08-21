@@ -4,6 +4,7 @@
   <arg name="world" default="small_office" />  <!-- small_office, empty -->
   <arg name="robot" default="full" />  <!-- full, lower_body -->
   <arg name="gzname" default="gazebo" />  <!-- gazebo, gzserver-->
+  <arg name="gzpose" default="-x 0.0 -y 8.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
   <!-- start up world -->
   <include file="$(find reemc_gazebo)/launch/run_gazebo.launch">
@@ -13,7 +14,7 @@
 
   <!-- load REEM-C robot in simulation -->
   <include file="$(find reemc_gazebo)/launch/reemc_spawn_$(arg robot).launch">
-    <arg name="gzpose" value="-x 0.0 -y 8.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
+    <arg name="gzpose" value="$(arg gzpose)"/>
   </include>
 
   <!-- start REEM-C robot -->
