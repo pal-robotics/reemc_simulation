@@ -20,6 +20,12 @@
   <!-- start REEM-C robot -->
   <include file="$(find reemc_gazebo)/launch/reemc_bringup.launch"/>
 
+  <!-- execute pre-recorded motions -->
+  <rosparam file="$(find reemc_gazebo)/config/reemc_motions.yaml" command="load" />
+  <node pkg="play_motion" type="play_motion" name="play_motion">
+    <remap from="play_motion/joint_states" to="joint_states" />
+  </node>
+
   <!--start joystick-->
   <include file="$(find reemc_gazebo)/launch/joystick_teleop.launch">
     <arg name="cmd_vel" value="walking_controller/cmd_vel" />
