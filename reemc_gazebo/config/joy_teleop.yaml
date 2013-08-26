@@ -50,3 +50,12 @@ teleop:
       duration:
         secs: 3
     buttons: [8, 0]
+
+  small_squat:
+    type: action
+    action_name: play_motion
+    action_goal:
+      motion_name: small_squat
+      duration:
+        secs: 3
+    buttons: [8, 2]
