@@ -18,7 +18,9 @@
   </include>
 
   <!-- start REEM-C robot -->
-  <include file="$(find reemc_gazebo)/launch/reemc_bringup.launch"/>
+  <include file="$(find reemc_gazebo)/launch/reemc_bringup.launch">
+    <arg name="robot" value="$(arg robot)"/>
+  </include>
 
   <!-- execute pre-recorded motions -->
   <rosparam file="$(find reemc_gazebo)/config/reemc_motions.yaml" command="load" />

@@ -3,7 +3,10 @@
   <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/pids.yaml" />
 
   <!-- Controller configuration -->
-  <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_default_controllers.launch" />
+  <arg name="robot" default="full"/>
+  <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_default_controllers.launch">
+    <arg name="robot" value="$(arg robot)"/>
+  </include>
 
   <!-- Robot state publisher -->
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
