@@ -1,4 +1,6 @@
 <launch>
+
+  
   <!-- PID gains -->
   <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/pids.yaml" />
 
@@ -6,7 +8,10 @@
   <include file="$(find reemc_controller_configuration)/launch/default_controllers.launch" />
 
   <!-- Walking controller -->
-  <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_walking_controller.launch"/>
+  <arg name="robot" default="full" /> <!-- full, lower_body -->
+  <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_walking_controller.launch">
+    <arg name="robot" value="$(arg robot)"/>
+  </include>
 
 
   <!-- Legs -->

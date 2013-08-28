@@ -1,7 +1,13 @@
 <launch>
   <!-- Walking controller -->
+  <arg name="robot" default="full" /> <!-- full, lower_body -->
   <rosparam file="$(find reemc_controller_configuration_gazebo)/config/walking_params.yaml" command="load" ns="walking_controller" />
 
-  <include file="$(find reemc_controller_configuration)/launch/walking_controller.launch" /> 
+  <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/walking_controller_$(arg robot).yaml" />
+
+  <!-- Controllers that come up started -->
+  <node name="walking_controllers_spawner"
+        pkg="controller_manager" type="spawner" output="screen"
+        args="walking_controller" />
 
 </launch>
