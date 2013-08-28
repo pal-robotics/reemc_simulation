@@ -7,7 +7,7 @@
   -->
   <arg name="ground_truth" default="ground_truth_odom"/>
 
-  <include file="$(find reemc_2dnav)/launch/footstep/initialpose_corrector.launch"/>
+  <include file="$(find reemc_2dnav)/launch/initialpose_corrector.launch"/>
 
   <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen">
     <remap from="base_pose_ground_truth" to="$(arg ground_truth)"/>

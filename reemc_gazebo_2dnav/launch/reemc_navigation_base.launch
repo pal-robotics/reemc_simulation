@@ -3,7 +3,7 @@
 <launch>
 
   <!-- 2d nav -->
-  <include file="$(find reemc_2dnav)/launch/planning_and_control.launch">
+  <include file="$(find reemc_2dnav)/launch/planning_and_control_base.launch">
     <arg name="cmd_topic" value="walking_controller/cmd_vel" />
   </include>
 </launch>

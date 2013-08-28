@@ -1,3 +1,3 @@
 <launch>
-  <include file="$(find reemc_2dnav)/launch/footstep/planning_and_control.launch"/>
+  <include file="$(find reemc_2dnav)/launch/planning_and_control_footstep.launch"/>
 </launch>
