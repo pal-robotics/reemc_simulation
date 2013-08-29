@@ -9,7 +9,7 @@
   <arg name="world" default="small_office"/>
   <arg name="robot" default="full"/>
   <arg name="gzname" default="gazebo"/>
-  <arg name="gzpose" default="-x 0.0 -y 8.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
+  <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
   <arg name="fuerte" default="true"/>
 

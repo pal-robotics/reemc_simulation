@@ -4,7 +4,8 @@
   <arg name="world" default="small_office" />  <!-- small_office, empty -->
   <arg name="robot" default="full" />  <!-- full, lower_body -->
   <arg name="gzname" default="gazebo" />  <!-- gazebo, gzserver-->
-  <arg name="gzpose" default="-x 0.0 -y 8.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
+  <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
+
 
   <!-- start up world -->
   <include file="$(find reemc_gazebo)/launch/run_gazebo.launch">
