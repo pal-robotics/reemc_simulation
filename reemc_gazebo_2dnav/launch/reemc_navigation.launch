@@ -13,7 +13,14 @@
 
   <arg name="fuerte" default="true"/>
 
-  <group ns="reemc">
+  <group ns="reemc_sim">
+
+    <include file="$(find reemc_2dnav)/launch/navigation.launch">
+      <arg name="planner" value="$(arg planner)" />
+      <arg name="localization" value="$(arg localization)" />
+      <arg name="odometry" value="$(arg odometry)" />
+    </include>
+
     <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
       <arg name="world" value="$(arg world)" />
       <arg name="robot" value="$(arg robot)" />
@@ -24,24 +31,6 @@
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_$(arg planner).vcg" if="$(arg fuerte)"/>
     <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_$(arg planner).rviz" unless="$(arg fuerte)"/-->
     <node name="rviz" pkg="rviz" type="rviz" unless="$(arg fuerte)"/>
-
-    <!-- Provide odometry from walking controller -->
-    <include file="$(find reemc_gazebo_2dnav)/launch/reemc_odometry.launch">
-      <arg name="odometry" value="$(arg odometry)"/>
-    </include>
-
-    <!-- Filter foot scans and provide /scan -->
-    <node name="foot_laser_filter" pkg="walking" type="foot_laser_filter"/>
-
-    <!-- Map -->
-    <node name="map_server" pkg="map_server" type="map_server" args="$(find reemc_gazebo_2dnav)/maps/map.yaml"/>
-
-    <!-- Localization -->
-    <include file="$(find reemc_gazebo_2dnav)/launch/reemc_localization.launch">
-      <arg name="localization" value="$(arg localization)"/>
-    </include>
-
-    <include file="$(find reemc_gazebo_2dnav)/launch/reemc_navigation_$(arg planner).launch" />
 
     <!-- mode switch madness -->
     <include file="$(find reemc_macro_states)/launch/mode_switch.launch" />

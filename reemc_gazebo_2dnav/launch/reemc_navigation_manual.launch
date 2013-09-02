@@ -1,3 +1,0 @@
-<launch>
-  <include file="$(find reemc_2dnav)/launch/move_manual.launch"/>
-</launch>

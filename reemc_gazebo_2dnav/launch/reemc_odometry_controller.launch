@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<launch>
- <node name="odom_publisher" pkg="walking" type="odom_publisher">
-   <remap from="walking_controller_data" to="walking_controller/data" />
-   <remap from="imu" to="base_imu" />
- </node>
-</launch>
-
