@@ -48,5 +48,9 @@
       <uri>model://goetz_sofa</uri>
       <pose>-0.4 -2.5 0 0 0 0</pose>
     </include>
+    <include>
+      <uri>model://ikea_urban_chair</uri>
+      <pose>-0.4 2.7 0 0 0 0</pose>
+    </include>
   </world>
 </sdf>
