@@ -4,7 +4,7 @@
 
   <!-- Controller configuration -->
   <arg name="robot" default="full"/>
-  <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_default_controllers.launch">
+  <include file="$(find reemc_controller_configuration_gazebo)/launch/default_controllers.launch">
     <arg name="robot" value="$(arg robot)"/>
   </include>
 
