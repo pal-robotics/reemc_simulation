@@ -17,6 +17,7 @@
   <depend package="reemc_description"/>
   <depend package="reemc_hardware_gazebo"/>
   <depend package="gazebo_plugins"/>
+  <depend package="play_motion"/>
 
 </package>
 
