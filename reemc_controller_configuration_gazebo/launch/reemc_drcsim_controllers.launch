@@ -1,7 +1,0 @@
-<launch>
-
-  <!-- Joint params for PAL-DRCSIM motors controller -->
-  <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/reemc_drcsim_controllers.yaml" />
-
-
-</launch>

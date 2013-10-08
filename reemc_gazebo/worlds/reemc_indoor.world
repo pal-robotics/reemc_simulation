@@ -8,7 +8,7 @@
         <solver>
           <type>quick</type>
           <dt>0.001</dt>
-          <iters>100</iters>
+          <iters>50</iters>
           <sor>1.0</sor>
         </solver>
         <constraints>
@@ -28,12 +28,6 @@
     <!-- A ground plane -->
     <include>
       <uri>model://ground_plane</uri>
-    </include>
-
-    <!-- REEM-C -->
-    <include>
-      <uri>model://reemc</uri>
-      <pose>0 0 0 0 0 0</pose>
     </include>
 
     <!-- walls -->

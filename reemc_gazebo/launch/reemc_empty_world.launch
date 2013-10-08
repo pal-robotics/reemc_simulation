@@ -4,6 +4,4 @@
   <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
     <arg name="world" value="empty" />
   </include>
-
-  <!-- TODO: add a parameter to start the robot in manipulation mode -->
 </launch>

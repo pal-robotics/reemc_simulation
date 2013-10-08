@@ -5,15 +5,12 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/reemc_hardware_gazebo</url>
 
+  <depend package="angles"/>
+  <depend package="control_toolbox"/>
   <depend package="hardware_interface"/>
-  <depend package="transmission_interface"/>
   <depend package="joint_limits_interface"/>
-
   <depend package="ros_control_gazebo"/>
   <depend package="ros_control_gazebo_plugin"/>
-
-  <depend package="effort_controllers"/>
-
   <depend package="urdfdom"/>
 
   <export>

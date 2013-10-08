@@ -1,52 +1,9 @@
 Background\ ColorB=0
 Background\ ColorG=0
 Background\ ColorR=0
-Camera\ Config=0.362792 0.0858311 14.2804 2.28626 0.40855 -0.000125379
+Camera\ Config=0.354797 1.07213 16.941 3.02529 -1.88478 -0.0109535
 Camera\ Type=rviz::XYOrbitViewController
-Expanded\ States..AxisColorAutocompute\ Value\ Bounds=1
-Expanded\ States..AxisColorAxis=2
-Expanded\ States..AxisColorMax\ Value=10
-Expanded\ States..AxisColorMin\ Value=-10
-Expanded\ States..AxisColorUse\ Fixed\ Frame=1
-Expanded\ States..FlatColorColorB=1
-Expanded\ States..FlatColorColorG=0
-Expanded\ States..FlatColorColorR=0
-Expanded\ States..IntensityAutocompute\ Intensity\ Bounds=1
-Expanded\ States..IntensityChannel\ Name=intensity
-Expanded\ States..IntensityMax\ ColorB=1
-Expanded\ States..IntensityMax\ ColorG=1
-Expanded\ States..IntensityMax\ ColorR=1
-Expanded\ States..IntensityMax\ Intensity=4096
-Expanded\ States..IntensityMin\ ColorB=0
-Expanded\ States..IntensityMin\ ColorG=0
-Expanded\ States..IntensityMin\ ColorR=0
-Expanded\ States..IntensityMin\ Intensity=0
-Expanded\ States..IntensityUse\ full\ RGB\ spectrum=0
-Expanded\ States.Alpha=0.2
-Expanded\ States.Billboard\ Size=0.01
-Expanded\ States.Color\ Transformer=FlatColor
-Expanded\ States.Decay\ Time=0
-Expanded\ States.Enabled=1
-Expanded\ States.Position\ Transformer=XYZ
-Expanded\ States.Queue\ Size=10
-Expanded\ States.Selectable=1
-Expanded\ States.Style=3
-Expanded\ States.Topic=expanded_states
 Fixed\ Frame=/map
-Footsteps.Enabled=1
-Footsteps.Marker\ Array\ Topic=footsteps_array
-Footsteps.Queue\ Size=100
-Goal.Alpha=1
-Goal.ColorB=0
-Goal.ColorG=0.1
-Goal.ColorR=1
-Goal.Enabled=1
-Goal.Head\ Length=0.3
-Goal.Head\ Radius=0.2
-Goal.Shaft\ Length=1
-Goal.Shaft\ Radius=0.1
-Goal.Shape=0
-Goal.Topic=goal
 Grid.Alpha=0.5
 Grid.Cell\ Size=1
 Grid.ColorB=0.5
@@ -62,12 +19,18 @@ Grid.OffsetZ=0
 Grid.Plane=0
 Grid.Plane\ Cell\ Count=10
 Grid.Reference\ Frame=<Fixed Frame>
-Heuristic\ Path.Alpha=1
-Heuristic\ Path.ColorB=1
-Heuristic\ Path.ColorG=0
-Heuristic\ Path.ColorR=0.666667
-Heuristic\ Path.Enabled=1
-Heuristic\ Path.Topic=heuristic_path
+GridCells.Alpha=1
+GridCells.ColorB=0
+GridCells.ColorG=1
+GridCells.ColorR=0.1
+GridCells.Enabled=1
+GridCells.Topic=move_by/local_costmap/obstacles
+GridCells2.Alpha=1
+GridCells2.ColorB=0
+GridCells2.ColorG=0.666667
+GridCells2.ColorR=1
+GridCells2.Enabled=1
+GridCells2.Topic=move_by/local_costmap/inflated_obstacles
 LaserScan..AxisColorAutocompute\ Value\ Bounds=1
 LaserScan..AxisColorAxis=2
 LaserScan..AxisColorMax\ Value=10
@@ -97,29 +60,48 @@ LaserScan.Queue\ Size=10
 LaserScan.Selectable=1
 LaserScan.Style=1
 LaserScan.Topic=scan
-Map\ Inflated.Alpha=0.7
-Map\ Inflated.Draw\ Behind=1
-Map\ Inflated.Enabled=1
-Map\ Inflated.Topic=map_inflated
 Map.Alpha=0.7
 Map.Draw\ Behind=1
 Map.Enabled=1
 Map.Topic=map
 Path.Alpha=1
-Path.ColorB=0
-Path.ColorG=0
-Path.ColorR=1
+Path.ColorB=1
+Path.ColorG=0.666667
+Path.ColorR=0.333333
 Path.Enabled=1
-Path.Topic=path
+Path.Topic=move_by/NavfnROS/plan
+Path2.Alpha=1
+Path2.ColorB=0
+Path2.ColorG=1
+Path2.ColorR=0.1
+Path2.Enabled=1
+Path2.Topic=move_by/PalLocalPlanner/local_plan
+Polygon.Alpha=1
+Polygon.ColorB=0
+Polygon.ColorG=1
+Polygon.ColorR=0.1
+Polygon.Enabled=1
+Polygon.Topic=move_by/local_costmap/robot_footprint
+Pose.Alpha=1
+Pose.ColorB=0
+Pose.ColorG=0.1
+Pose.ColorR=1
+Pose.Enabled=1
+Pose.Head\ Length=0.3
+Pose.Head\ Radius=0.2
+Pose.Shaft\ Length=1
+Pose.Shaft\ Radius=0.1
+Pose.Shape=0
+Pose.Topic=move_by/current_goal
 PoseArray.Arrow\ Length=0.3
 PoseArray.ColorB=0
 PoseArray.ColorG=0.1
 PoseArray.ColorR=1
 PoseArray.Enabled=1
 PoseArray.Topic=particlecloud
-Property\ Grid\ Splitter=740,78
-Property\ Grid\ State=expanded=.Global Options;splitterratio=0.5
-QMainWindow=000000ff00000000fd00000003000000000000015900000384fc0200000001fb000000100044006900730070006c006100790073010000001d00000384000000ee00ffffff000000010000013100000384fc0200000003fb0000001e0054006f006f006c002000500072006f0070006500720074006900650073000000001d000003840000006700fffffffb0000000a00560069006500770073000000001d00000247000000bb00fffffffb0000001200530065006c0065006300740069006f006e000000001d000003840000006700ffffff00000003000004340000003efc0100000001fb0000000800540069006d0065010000000000000434000002bf00ffffff000002d50000038400000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+Property\ Grid\ Splitter=808,78
+Property\ Grid\ State=expanded=.Global Options,Map.Enabled,RobotModel.Enabled,LaserScan.Enabled,Grid.Enabled,PoseArray.Enabled,TF.Enabled,Path2.Enabled,Polygon.Enabled,Pose.Enabled,Pose.Shape Properties,GridCells.Enabled,GridCells2.Enabled,Path.Enabled;splitterratio=0.586498
+QMainWindow=000000ff00000000fd00000003000000000000011d000003c8fc0200000001fb000000100044006900730070006c006100790073010000001d000003c8000000ee00ffffff0000000100000131000003c8fc0200000003fb0000001e0054006f006f006c002000500072006f0070006500720074006900650073000000001d000003c80000006700fffffffb0000000a00560069006500770073000000002b00000261000000bb00fffffffb0000001200530065006c0065006300740069006f006e000000002b000003f60000006700ffffff00000003000003bc0000003efc0100000001fb0000000800540069006d00650000000000000003bc000002bf00ffffff000002a1000003c800000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
 Robot\:\ RobotModel\ Link\ arm_left_1_linkAlpha=1
 Robot\:\ RobotModel\ Link\ arm_left_1_linkEnabled=1
 Robot\:\ RobotModel\ Link\ arm_left_1_linkShow\ Axes=0
@@ -356,46 +338,46 @@ TF.Show\ Axes=1
 TF.Show\ Names=1
 TF.Update\ Interval=0
 Target\ Frame=<Fixed Frame>
-Tool\ 2D\ Nav\ GoalTopic=goal
+Tool\ 2D\ Nav\ GoalTopic=move_base_simple/goal
 Tool\ 2D\ Pose\ EstimateTopic=initialpose
 [Display0]
 ClassName=rviz::MapDisplay
 Name=Map
 [Display1]
-ClassName=rviz::MapDisplay
-Name=Map Inflated
-[Display10]
-ClassName=rviz::PoseDisplay
-Name=Goal
-[Display11]
-ClassName=rviz::TFDisplay
-Name=TF
-[Display2]
 ClassName=rviz::RobotModelDisplay
 Name=RobotModel
-[Display3]
-ClassName=rviz::LaserScanDisplay
-Name=LaserScan
-[Display4]
-ClassName=rviz::GridDisplay
-Name=Grid
-[Display5]
-ClassName=rviz::PoseArrayDisplay
-Name=PoseArray
-[Display6]
-ClassName=rviz::MarkerArrayDisplay
-Name=Footsteps
-[Display7]
+[Display10]
+ClassName=rviz::GridCellsDisplay
+Name=GridCells2
+[Display11]
 ClassName=rviz::PathDisplay
 Name=Path
-[Display8]
+[Display2]
+ClassName=rviz::LaserScanDisplay
+Name=LaserScan
+[Display3]
+ClassName=rviz::GridDisplay
+Name=Grid
+[Display4]
+ClassName=rviz::PoseArrayDisplay
+Name=PoseArray
+[Display5]
+ClassName=rviz::TFDisplay
+Name=TF
+[Display6]
 ClassName=rviz::PathDisplay
-Name=Heuristic Path
+Name=Path2
+[Display7]
+ClassName=rviz::PolygonDisplay
+Name=Polygon
+[Display8]
+ClassName=rviz::PoseDisplay
+Name=Pose
 [Display9]
-ClassName=rviz::PointCloudDisplay
-Name=Expanded States
+ClassName=rviz::GridCellsDisplay
+Name=GridCells
 [Window]
 Height=1026
-Width=1078
-X=-5
-Y=-57
+Width=966
+X=-3
+Y=-65

@@ -11,10 +11,10 @@
     </asset>
     <library_images>
         <image id="texture0" name="texture0">
-            <init_from>CARPTGRY.JPG</init_from>
+            <init_from>body.png</init_from>
         </image>
         <image id="texture1" name="texture1">
-            <init_from>OAK2.JPG</init_from>
+            <init_from>legs.png</init_from>
         </image>
     </library_images>
     <library_materials>
@@ -59,10 +59,10 @@
                             <float>0.3</float>
                         </shininess>
                         <reflective>
-                            <color>0 0 0 1</color>
+                            <color>1 1 1 1</color>
                         </reflective>
                         <reflectivity>
-                            <float>0.5</float>
+                            <float>1.0</float>
                         </reflectivity>
                         <transparent>
                             <color>0 0 0 1</color>
@@ -110,10 +110,10 @@
                             <float>0.3</float>
                         </shininess>
                         <reflective>
-                            <color>0 0 0 1</color>
+                            <color>1 1 1 1</color>
                         </reflective>
                         <reflectivity>
-                            <float>0.5</float>
+                            <float>1.0</float>
                         </reflectivity>
                         <transparent>
                             <color>0 0 0 1</color>

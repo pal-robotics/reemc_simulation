@@ -27,12 +27,5 @@
     <include>
       <uri>model://ground_plane</uri>
     </include>
-    <!--  REEM-C -->
-    <!-- 
-    <include>
-      <uri>model://reemc</uri>
-      <pose>0 0 0 0 0 0</pose>
-    </include>
-   -->
   </world>
 </sdf>

@@ -1,0 +1,15 @@
+teleop:
+  force_push:
+    type: topic
+    message_type: geometry_msgs/Wrench
+    topic_name: base_link_wrench
+    deadman_buttons: [5, 7]
+    axis_mappings:
+      -
+        axis: 3
+        target: force.x
+        scale: 40
+      -
+        axis: 2
+        target: force.y
+        scale: 40

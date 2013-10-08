@@ -1,3 +1,29 @@
+///////////////////////////////////////////////////////////////////////////////
+// Copyright (C) 2013, PAL Robotics S.L.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//   * Redistributions of source code must retain the above copyright notice,
+//     this list of conditions and the following disclaimer.
+//   * Redistributions in binary form must reproduce the above copyright
+//     notice, this list of conditions and the following disclaimer in the
+//     documentation and/or other materials provided with the distribution.
+//   * Neither the name of PAL Robotics S.L. nor the names of its
+//     contributors may be used to endorse or promote products derived from
+//     this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+//////////////////////////////////////////////////////////////////////////////
 
 #include <cassert>
 #include <boost/foreach.hpp>
@@ -12,11 +38,6 @@
 
 #include <reemc_hardware_gazebo/reemc_hardware_gazebo.h>
 
-// TODO: Remove!
-//#include <transmission_interface/simple_transmission.h>
-//#include <transmission_interface/differential_transmission.h>
-//#include <transmission_interface/four_bar_linkage_transmission.h>
-
 using std::vector;
 using std::string;
 
@@ -27,113 +48,7 @@ using namespace hardware_interface;
 
 ReemcHardwareGazebo::ReemcHardwareGazebo()
   : ros_control_gazebo::RobotSim()
-{
-//  // Transmissions
-//  using namespace transmission_interface;
-//  TransmissionPtr wheel_1_trans(new SimpleTransmission(100.0));
-//  TransmissionPtr wheel_2_trans(new SimpleTransmission(100.0));
-//  TransmissionPtr torso_1_trans(new SimpleTransmission(100.0));
-//  TransmissionPtr torso_2_trans(new SimpleTransmission(100.0));
-
-//  transmissions_.push_back(wheel_1_trans);
-//  transmissions_.push_back(wheel_2_trans);
-//  transmissions_.push_back(torso_1_trans);
-//  transmissions_.push_back(torso_2_trans);
-
-//  // Transmission interface: actuator->joint state map
-//  {
-//    ActuatorData act_data;
-//    act_data.position.push_back(&act_pos_[0]);
-//    act_data.velocity.push_back(&act_vel_[0]);
-//    act_data.effort.push_back(&act_eff_[0]);
-
-//    JointData jnt_data;
-//    jnt_data.position.push_back(&jnt_pos_[0]);
-//    jnt_data.velocity.push_back(&jnt_vel_[0]);
-//    jnt_data.effort.push_back(&jnt_eff_[0]);
-
-//    act_to_jnt_state_.registerTransmission(transmission_names_[0], wheel_1_trans.get(), act_data, jnt_data);
-//  }
-//  {
-//    ActuatorData act_data;
-//    act_data.position.push_back(&act_pos_[1]);
-//    act_data.velocity.push_back(&act_vel_[1]);
-//    act_data.effort.push_back(&act_eff_[1]);
-
-//    JointData jnt_data;
-//    jnt_data.position.push_back(&jnt_pos_[1]);
-//    jnt_data.velocity.push_back(&jnt_vel_[1]);
-//    jnt_data.effort.push_back(&jnt_eff_[1]);
-
-//    act_to_jnt_state_.registerTransmission(transmission_names_[1], wheel_2_trans.get(), act_data, jnt_data);
-//  }
-//  {
-//    ActuatorData act_data;
-//    act_data.position.push_back(&act_pos_[2]);
-//    act_data.velocity.push_back(&act_vel_[2]);
-//    act_data.effort.push_back(&act_eff_[2]);
-
-//    JointData jnt_data;
-//    jnt_data.position.push_back(&jnt_pos_[2]);
-//    jnt_data.velocity.push_back(&jnt_vel_[2]);
-//    jnt_data.effort.push_back(&jnt_eff_[2]);
-
-//    act_to_jnt_state_.registerTransmission(transmission_names_[2], torso_1_trans.get(), act_data, jnt_data);
-//  }
-//  {
-//    ActuatorData act_data;
-//    act_data.position.push_back(&act_pos_[3]);
-//    act_data.velocity.push_back(&act_vel_[3]);
-//    act_data.effort.push_back(&act_eff_[3]);
-
-//    JointData jnt_data;
-//    jnt_data.position.push_back(&jnt_pos_[3]);
-//    jnt_data.velocity.push_back(&jnt_vel_[3]);
-//    jnt_data.effort.push_back(&jnt_eff_[3]);
-
-//    act_to_jnt_state_.registerTransmission(transmission_names_[3], torso_2_trans.get(), act_data, jnt_data);
-//  }
-
-//  // Transmission interface: joint->actuator map of position commands
-//  {
-//    ActuatorData act_data;
-//    act_data.position.push_back(&act_pos_cmd_[0]); // Velocity and effort vectors are unused
-
-//    JointData jnt_data;
-//    jnt_data.position.push_back(&jnt_pos_cmd_[0]); // Velocity and effort vectors are unused
-
-//    jnt_to_act_pos_cmd_.registerTransmission(transmission_names_[2], torso_1_trans.get(), act_data, jnt_data);
-//  }
-//  {
-//    ActuatorData act_data;
-//    act_data.position.push_back(&act_pos_cmd_[1]); // Velocity and effort vectors are unused
-
-//    JointData jnt_data;
-//    jnt_data.position.push_back(&jnt_pos_cmd_[1]); // Velocity and effort vectors are unused
-
-//    jnt_to_act_pos_cmd_.registerTransmission(transmission_names_[3], torso_2_trans.get(), act_data, jnt_data);
-//  }
-}
-
-void ReemcHardwareGazebo::read()
-{
-//  act_to_jnt_state_.propagate();
-
-//     robot_state_->zeroCommands();
-//
-//     // Restart all running controllers if motors are re-enabled
-//     reset_controllers = !robot_state_->isHalted() && motors_previously_halted_;
-//     motors_previously_halted_ = robot_state_->isHalted();
-}
-
-
-void ReemcHardwareGazebo::write()
-{
-//  jnt_to_act_pos_cmd_.propagate();
-
-//     robot_state_->enforceSafety();
-//     robot_state_->propagateJointEffortToActuatorEffort();
-}
+{}
 
 bool ReemcHardwareGazebo::initSim(ros::NodeHandle nh, gazebo::physics::ModelPtr model)
 {

@@ -11,7 +11,6 @@
   <depend package="robot_state_publisher"/>
   <depend package="joint_state_publisher"/>
   <depend package="xacro"/>
-  <depend package="robot_mechanism_controllers"/>
   <depend package="pal_gazebo_plugins"/>
   <depend package="reemc_controller_configuration_gazebo"/>
   <depend package="reemc_description"/>
