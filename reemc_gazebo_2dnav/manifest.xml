@@ -10,7 +10,7 @@
   <url>http://ros.org/wiki/reemc_gazebo_2dnav</url>
 
   <depend package="amcl"/>
-  <depend package="pal_gmapping"/>
+  <depend package="gmapping"/>
   <depend package="topic_tools"/>
   <depend package="move_base"/>
   <depend package="reemc_gazebo"/>
