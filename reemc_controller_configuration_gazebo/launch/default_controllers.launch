@@ -9,7 +9,9 @@
 
   <!-- Walking controller -->
   <arg name="robot" default="full" /> <!-- full, lower_body -->
+  <!--
   <include file="$(find reemc_controller_configuration_gazebo)/launch/reemc_walking_controller.launch">
     <arg name="robot" value="$(arg robot)"/>
   </include>
+  -->
 </launch>
