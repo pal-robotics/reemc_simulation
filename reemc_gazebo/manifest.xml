@@ -16,7 +16,7 @@
   <depend package="reemc_controller_configuration_gazebo"/>
   <depend package="reemc_description"/>
   <depend package="reemc_hardware_gazebo"/>
-  <depend package="atlas_msgs"/>
+  <depend package="gazebo_plugins"/>
 
 </package>
 

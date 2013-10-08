@@ -14,7 +14,7 @@
 
   <depend package="effort_controllers"/>
 
-  <depend package="urdf_parser"/>
+  <depend package="urdfdom"/>
 
   <export>
     <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -lreemc_hardware_gazebo" />
