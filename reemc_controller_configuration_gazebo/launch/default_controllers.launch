@@ -8,8 +8,6 @@
   <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/walking_controller_$(arg robot).yaml" />
 
   <!-- Joint state controller -->
-  <include file="$(find reemc_description)/robots/upload_reemc.launch" />
-
   <rosparam command="load" file="$(find joint_state_controller)/joint_state_controller.yaml" />
 
   <!-- Force-torque sensors controller -->

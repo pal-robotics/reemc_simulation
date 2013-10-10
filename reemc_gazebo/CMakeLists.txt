@@ -43,35 +43,7 @@ add_custom_target(generate_reemc_foot ALL DEPENDS ${OUTPUT_URDF_FILE})
 
 # Create symlink to robot model resources (meshes, images)
 set(INPUT_MESHES_DIR ../../../../reemc_common/reemc_description/meshes)
-set(OUTPUT_MESHES_SYMLINK ${CMAKE_CURRENT_SOURCE_DIR}/models/reemc_full/meshes)
-
-# NOTE: Because of a cmake bug [1], we cannot add a custom command/target pair here, otherwise calling 'make clean'
-# deletes the pointed-to folder contents!. This is fixed in CMake 2.8.11
-# [1] http://public.kitware.com/Bug/view.php?id=10538
-execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${INPUT_MESHES_DIR} ${OUTPUT_MESHES_SYMLINK})
-
-# add_custom_command(OUTPUT ${OUTPUT_MESHES_SYMLINK}
-#                    COMMAND ${CMAKE_COMMAND} -E create_symlink ${INPUT_MESHES_DIR} ${OUTPUT_MESHES_SYMLINK})
-#
-# add_custom_target(generate_meshes_link ALL DEPENDS ${OUTPUT_MESHES_SYMLINK})
-
-# Create symlink to robot model resources (meshes, images)
-set(INPUT_MESHES_DIR ${reemc_description_PACKAGE_PATH}/meshes)
-set(OUTPUT_MESHES_SYMLINK ${CMAKE_CURRENT_SOURCE_DIR}/models/reemc_lower_body/meshes)
-
-# NOTE: Because of a cmake bug [1], we cannot add a custom command/target pair here, otherwise calling 'make clean'
-# deletes the pointed-to folder contents!. This is fixed in CMake 2.8.11
-# [1] http://public.kitware.com/Bug/view.php?id=10538
-execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${INPUT_MESHES_DIR} ${OUTPUT_MESHES_SYMLINK})
-
-# add_custom_command(OUTPUT ${OUTPUT_MESHES_SYMLINK}
-#                    COMMAND ${CMAKE_COMMAND} -E create_symlink ${INPUT_MESHES_DIR} ${OUTPUT_MESHES_SYMLINK})
-#
-# add_custom_target(generate_meshes_link ALL DEPENDS ${OUTPUT_MESHES_SYMLINK})
-
-# Create symlink to robot model resources (meshes, images)
-set(INPUT_MESHES_DIR ${reemc_description_PACKAGE_PATH}/meshes)
-set(OUTPUT_MESHES_SYMLINK ${CMAKE_CURRENT_SOURCE_DIR}/models/reemc_foot/meshes)
+set(OUTPUT_MESHES_SYMLINK ${CMAKE_CURRENT_SOURCE_DIR}/models/reemc_description/meshes)
 
 # NOTE: Because of a cmake bug [1], we cannot add a custom command/target pair here, otherwise calling 'make clean'
 # deletes the pointed-to folder contents!. This is fixed in CMake 2.8.11

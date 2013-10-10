@@ -16,18 +16,20 @@
   <group ns="reemc_sim">
 
     <include file="$(find reemc_2dnav)/launch/navigation.launch">
-      <arg name="planner" value="$(arg planner)" />
-      <arg name="localization" value="$(arg localization)" />
-      <arg name="odometry" value="$(arg odometry)" />
-      <arg name="map" value="$(find reemc_gazebo_2dnav)/maps/map.yaml" />
+      <arg name="planner" value="$(arg planner)"/>
+      <arg name="localization" value="$(arg localization)"/>
+      <arg name="odometry" value="$(arg odometry)"/>
+      <arg name="map" value="$(find reemc_gazebo_2dnav)/maps/map.yaml"/>
     </include>
 
     <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
-      <arg name="world" value="$(arg world)" />
-      <arg name="robot" value="$(arg robot)" />
-      <arg name="gzname" value="$(arg gzname)" />
-      <arg name="gzpose" value="$(arg gzpose)" />
+      <arg name="world" value="$(arg world)"/>
+      <arg name="robot" value="$(arg robot)"/>
+      <arg name="gzname" value="$(arg gzname)"/>
+      <arg name="gzpose" value="$(arg gzpose)"/>
     </include>
+
+    <include file="$(find reemc_controller_configuration)/launch/walking_controller.launch"/>
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_$(arg planner).vcg" if="$(arg fuerte)"/>
     <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_$(arg planner).rviz" unless="$(arg fuerte)"/-->
