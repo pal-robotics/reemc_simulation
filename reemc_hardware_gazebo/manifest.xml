@@ -10,7 +10,6 @@
   <depend package="hardware_interface"/>
   <depend package="joint_limits_interface"/>
   <depend package="gazebo_ros_control"/>
-  <depend package="urdfdom"/>
 
   <export>
     <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -lreemc_hardware_gazebo" />
