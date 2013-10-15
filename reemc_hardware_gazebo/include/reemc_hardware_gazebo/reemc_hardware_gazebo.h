@@ -40,7 +40,7 @@
 #include <hardware_interface/imu_sensor_interface.h>
 #include <joint_limits_interface/joint_limits_interface.h>
 
-#include <ros_control_gazebo/robot_sim.h>
+#include <gazebo_ros_control/robot_hw_sim.h>
 
 #include <gazebo/physics/physics.hh>
 #include <gazebo/sensors/ImuSensor.hh>
@@ -48,14 +48,18 @@
 namespace reemc_hardware_gazebo
 {
 
-class ReemcHardwareGazebo : public ros_control_gazebo::RobotSim
+class ReemcHardwareGazebo : public gazebo_ros_control::RobotHWSim
 {
 public:
 
   ReemcHardwareGazebo();
 
   // Simulation-specific
-  bool initSim(ros::NodeHandle nh, gazebo::physics::ModelPtr model);
+  bool initSim(const std::string& robot_ns,
+               ros::NodeHandle nh,
+               gazebo::physics::ModelPtr model,
+               const urdf::Model* const urdf_model,
+               std::vector<transmission_interface::TransmissionInfo> transmissions);
   void readSim(ros::Time time, ros::Duration period);
   void writeSim(ros::Time time, ros::Duration period);
 

@@ -47,10 +47,13 @@ namespace reemc_hardware_gazebo
 using namespace hardware_interface;
 
 ReemcHardwareGazebo::ReemcHardwareGazebo()
-  : ros_control_gazebo::RobotSim()
+  : gazebo_ros_control::RobotHWSim()
 {}
 
-bool ReemcHardwareGazebo::initSim(ros::NodeHandle nh, gazebo::physics::ModelPtr model)
+bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
+    ros::NodeHandle nh, gazebo::physics::ModelPtr model,
+    const urdf::Model* const urdf_model,
+    std::vector<transmission_interface::TransmissionInfo> transmissions)
 {
   using gazebo::physics::JointPtr;
 
@@ -128,8 +131,8 @@ bool ReemcHardwareGazebo::initSim(ros::NodeHandle nh, gazebo::physics::ModelPtr 
   }
 
   // Hardware interfaces: Ankle force-torque sensors
-  const string left_ankle_name  = "reemc::reemc::leg_left_6_joint";  // TODO: Make not hardcoded
-  const string right_ankle_name = "reemc::reemc::leg_right_6_joint";
+  const string left_ankle_name  = "reemc::leg_left_6_joint";  // TODO: Make not hardcoded
+  const string right_ankle_name = "reemc::leg_right_6_joint";
 
   left_ankle_  = model->GetJoint(left_ankle_name);
   right_ankle_ = model->GetJoint(right_ankle_name);
@@ -251,4 +254,4 @@ void ReemcHardwareGazebo::writeSim(ros::Time time, ros::Duration period)
 
 } // reemc_hardware_gazebo
 
-PLUGINLIB_DECLARE_CLASS(reemc_hardware_gazebo, ReemcHardwareGazebo, reemc_hardware_gazebo::ReemcHardwareGazebo, ros_control_gazebo::RobotSim)
+PLUGINLIB_EXPORT_CLASS( reemc_hardware_gazebo::ReemcHardwareGazebo, gazebo_ros_control::RobotHWSim)
