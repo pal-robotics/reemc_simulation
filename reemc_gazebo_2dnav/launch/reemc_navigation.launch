@@ -4,6 +4,7 @@
   <param name="/use_sim_time" type="bool" value="true"/>
 
   <arg name="planner" default="base"/>
+  <arg name="local_planner" default="pal"/>
   <arg name="localization" default="amcl"/>
   <arg name="odometry" default="controller"/>
   <arg name="world" default="small_office"/>
@@ -11,12 +12,11 @@
   <arg name="gzname" default="gazebo"/>
   <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
-  <arg name="fuerte" default="true"/>
-
   <group ns="reemc_sim">
 
     <include file="$(find reemc_2dnav)/launch/navigation.launch">
       <arg name="planner" value="$(arg planner)"/>
+      <arg name="local_planner" value="$(arg local_planner)"/>
       <arg name="localization" value="$(arg localization)"/>
       <arg name="odometry" value="$(arg odometry)"/>
       <arg name="map" value="$(find reemc_gazebo_2dnav)/maps/map.yaml"/>
@@ -31,9 +31,10 @@
 
     <include file="$(find reemc_controller_configuration)/launch/walking_controller.launch"/>
 
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_$(arg planner).vcg" if="$(arg fuerte)"/>
-    <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_navigation_$(arg planner).rviz" unless="$(arg fuerte)"/-->
-    <node name="rviz" pkg="rviz" type="rviz" unless="$(arg fuerte)"/>
+    <include file="$(find reemc_2dnav)/launch/rviz_navigation.launch">
+      <arg name="planner" value="$(arg planner)"/>
+      <arg name="local_planner" value="$(arg local_planner)"/>
+    </include>
 
     <!-- mode switch madness -->
     <include file="$(find reemc_macro_states)/launch/mode_switch.launch" />
