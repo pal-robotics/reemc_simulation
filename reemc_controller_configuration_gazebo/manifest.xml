@@ -1,15 +1,14 @@
 <package>
   <description brief="reemc_controller_configuration_gazebo">
-
-     reemc_controller_configuration_gazebo
-
+    Launch files and parameters to launch REEM-C controllers on a Gazebo simulation
   </description>
+
   <author>Luca Marchionni</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/reemc_controller_configuration_gazebo</url>
 
-  <depend package="reemc_controller_configuration"/>
+  <depend package="controller_manager"/>
+  <depend package="walking"/>
+
+ <url>http://ros.org/wiki/reemc_controller_configuration_gazebo</url>
 </package>
-
-
