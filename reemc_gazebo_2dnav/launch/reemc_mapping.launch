@@ -10,16 +10,19 @@ roslaunch walking walk.launch nsteps:=4
   <!-- Simulation time -->
   <param name="/use_sim_time" type="bool" value="true"/>
 
-  <arg name="mapping" default="gmapping"/>
+  <arg name="namespace" default="reemc_sim"/>
+
+  <arg name="mapping"  default="gmapping"/>
   <arg name="odometry" default="controller"/>
-  <arg name="world" default="small_office"/>
-  <arg name="robot" default="full"/>
+
+  <arg name="world"  default="small_office"/>
+  <arg name="robot"  default="full"/>
   <arg name="gzname" default="gazebo"/>
   <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
   <arg name="fuerte" default="true"/>
 
-  <group ns="reemc_sim">
+  <group ns="$(arg namespace)">
 
     <include file="$(find reemc_2dnav)/launch/mapping.launch">
       <arg name="mapping" value="$(arg mapping)"/>
