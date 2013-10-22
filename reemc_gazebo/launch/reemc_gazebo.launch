@@ -5,6 +5,8 @@
   <arg name="robot"  default="full"/>          <!-- full, lower_body, foot -->
   <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
+  <arg name="gzname" default="gazebo"/>
+
   <env name="GAZEBO_MODEL_PATH" value="$(find reemc_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" />
 
   <!-- start up world -->
