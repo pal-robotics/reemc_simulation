@@ -1,11 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-Usage:
-roslaunch reemc_gazebo_2dnav reemc_mapping.launch
-Rotate the robot manually in gazebo and walk with (set the desired #steps):
-roslaunch walking walk.launch nsteps:=4
--->
 <launch>
   <!-- Simulation time -->
   <param name="/use_sim_time" type="bool" value="true"/>
@@ -41,6 +33,12 @@ roslaunch walking walk.launch nsteps:=4
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_mapping.vcg" if="$(arg fuerte)"/>
     <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_mapping.rviz" unless="$(arg fuerte)"/-->
     <node name="rviz" pkg="rviz" type="rviz" unless="$(arg fuerte)"/>
+
+    <!-- mode switch madness -->
+    <include file="$(find reemc_macro_states)/launch/mode_switch.launch"/>
+    <include file="$(find reemc_macro_states)/launch/control_source_switch.launch">
+      <arg name="joy_out" value="walking_controller/cmd_vel"/>
+    </include>
 
   </group>
 </launch>

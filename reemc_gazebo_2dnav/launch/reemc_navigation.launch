@@ -1,5 +1,4 @@
 <launch>
-
   <!-- Simulation time -->
   <param name="/use_sim_time" type="bool" value="true"/>
 
@@ -41,6 +40,9 @@
 
     <!-- mode switch madness -->
     <include file="$(find reemc_macro_states)/launch/mode_switch.launch" />
-    <include file="$(find reemc_macro_states)/launch/control_source_switch.launch" />
+    <include file="$(find reemc_macro_states)/launch/control_source_switch.launch">
+      <arg name="joy_out" value="walking_controller/cmd_vel"/>
+    </include>
+
   </group>
 </launch>
