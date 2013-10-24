@@ -12,8 +12,6 @@
   <arg name="gzname" default="gazebo"/>
   <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
-  <arg name="fuerte" default="true"/>
-
   <group ns="$(arg namespace)">
 
     <include file="$(find reemc_2dnav)/launch/mapping.launch">
@@ -30,9 +28,7 @@
 
     <include file="$(find reemc_controller_configuration)/launch/walking_controller.launch"/>
 
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_mapping.vcg" if="$(arg fuerte)"/>
-    <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find reemc_gazebo_2dnav)/config/reemc_mapping.rviz" unless="$(arg fuerte)"/-->
-    <node name="rviz" pkg="rviz" type="rviz" unless="$(arg fuerte)"/>
+    <include file="$(find reemc_2dnav)/launch/rviz_mapping.launch"/>
 
     <!-- mode switch madness -->
     <include file="$(find reemc_macro_states)/launch/mode_switch.launch"/>
