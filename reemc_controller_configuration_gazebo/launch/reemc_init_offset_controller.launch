@@ -1,4 +1,5 @@
 <launch>
+  <rosparam command="delete"  param="/init_offset_controller/offsets" />
   <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/init_offset_controller.yaml" />
 
   <!-- Controllers that come up started -->

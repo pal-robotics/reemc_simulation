@@ -32,15 +32,6 @@ add_custom_command(OUTPUT ${OUTPUT_URDF_FILE}
 
 add_custom_target(generate_reemc_lower_body ALL DEPENDS ${OUTPUT_URDF_FILE})
 
-# Generate an up-to-date URDF robot description of REEMC lower body
-set(INPUT_XACRO_FILE ${reemc_description_PACKAGE_PATH}/robots/reemc_foot.urdf.xacro)
-set(OUTPUT_URDF_FILE ${CMAKE_CURRENT_SOURCE_DIR}/models/reemc_foot/model.urdf)
-
-add_custom_command(OUTPUT ${OUTPUT_URDF_FILE}
-                   COMMAND ${xacro_PACKAGE_PATH}/xacro.py ${INPUT_XACRO_FILE} -o ${OUTPUT_URDF_FILE})
-
-add_custom_target(generate_reemc_foot ALL DEPENDS ${OUTPUT_URDF_FILE})
-
 # Create symlink to robot model resources (meshes, images)
 set(INPUT_MESHES_DIR ../../../../reemc_common/reemc_description/meshes)
 set(OUTPUT_MESHES_SYMLINK ${CMAKE_CURRENT_SOURCE_DIR}/models/reemc_description/meshes)
