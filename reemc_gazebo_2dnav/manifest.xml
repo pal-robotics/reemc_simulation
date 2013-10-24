@@ -14,6 +14,7 @@
   <depend package="topic_tools"/>
   <depend package="move_base"/>
   <depend package="reemc_gazebo"/>
+  <depend package="reemc_macro_states"/>
   <depend package="pal_local_planner"/>
 </package>
 
