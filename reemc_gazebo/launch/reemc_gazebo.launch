@@ -4,14 +4,16 @@
   <arg name="world"  default="small_office"/>  <!-- empty, small_office, ... (see ../worlds) -->
   <arg name="robot"  default="full"/>          <!-- full, lower_body, foot -->
   <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
+  <arg name="gui" default="true"/>
+  <arg name="debug" default="false"/>
 
-  <arg name="gzname" default="gazebo"/>
-
-  <env name="GAZEBO_MODEL_PATH" value="$(find reemc_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" />
+  <env name="GAZEBO_MODEL_PATH" value="$(find reemc_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/>
 
   <!-- start up world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find reemc_gazebo)/worlds/$(arg world).world" />
+    <arg name="world_name" value="$(find reemc_gazebo)/worlds/$(arg world).world"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="debug" value="$(arg debug)"/>
   </include>
 
   <!-- load REEM-C robot in simulation -->

@@ -1,6 +1,4 @@
 <launch>
-  <!-- Simulation time -->
-  <param name="/use_sim_time" type="bool" value="true"/>
 
   <!-- XXX: there is a problem in gazebo (??) where one (or more) of the services looks
        for something in the root of the tree. Namespacing does not work... -->
@@ -12,10 +10,10 @@
 
   <arg name="world"  default="small_office"/>
   <arg name="robot"  default="full"/>
-  <arg name="gzname" default="gazebo"/>
   <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
-  <arg name="open_rviz" default="false"/>
+  <arg name="rviz" default="false"/>
+  <arg name="gzclient" default="true"/>
 
   <group ns="$(arg namespace)">
 
@@ -27,14 +25,14 @@
     <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
       <arg name="world" value="$(arg world)"/>
       <arg name="robot" value="$(arg robot)"/>
-      <arg name="gzname" value="$(arg gzname)"/>
+      <arg name="gui" value="$(arg gzclient)"/>
       <arg name="gzpose" value="$(arg gzpose)"/>
     </include>
 
     <include file="$(find reemc_controller_configuration)/launch/walking_controller.launch"/>
 
     <!-- open rviz -->
-    <include if="$(arg open_rviz)" file="$(find reemc_2dnav)/launch/rviz_mapping.launch"/>
+    <include if="$(arg rviz)" file="$(find reemc_2dnav)/launch/rviz_mapping.launch"/>
 
     <!-- mode switch madness -->
     <include file="$(find reemc_macro_states)/launch/mode_switch.launch"/>
