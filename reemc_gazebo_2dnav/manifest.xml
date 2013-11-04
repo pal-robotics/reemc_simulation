@@ -8,7 +8,6 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/reemc_gazebo_2dnav</url>
-
   <depend package="amcl"/>
   <depend package="gmapping"/>
   <depend package="topic_tools"/>
@@ -17,5 +16,3 @@
   <depend package="reemc_macro_states"/>
   <depend package="pal_local_planner"/>
 </package>
-
-

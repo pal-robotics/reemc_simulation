@@ -1,21 +1,16 @@
 <package>
-  <description brief="reemc_hardware_gazebo"></description>
+  <description brief="reemc_hardware_gazebo"/>
   <author>Adolfo Rodriguez Tsouroukdissian</author>
   <license>Modified BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/reemc_hardware_gazebo</url>
-
   <depend package="angles"/>
   <depend package="control_toolbox"/>
   <depend package="hardware_interface"/>
   <depend package="joint_limits_interface"/>
   <depend package="gazebo_ros_control"/>
-
   <export>
-    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -lreemc_hardware_gazebo" />
+    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -lreemc_hardware_gazebo"/>
     <gazebo_ros_control plugin="${prefix}/reemc_hardware_gazebo_plugins.xml"/>
   </export>
-
 </package>
-
-

@@ -4,7 +4,7 @@
      reemc_gazebo
 
   </description>
-  <author>Luca Marchionni, Adolfo Rodriguez Tsouroukdissian</author>
+  <author>Luca Marchionni</author>
   <license>Modified BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/reemc_gazebo</url>
@@ -19,7 +19,4 @@
   <depend package="gazebo_plugins"/>
   <depend package="play_motion"/>
   <depend package="reemc_bringup"/>
-
 </package>
-
-
