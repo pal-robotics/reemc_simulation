@@ -1,0 +1,60 @@
+gains:
+  leg_left_1_joint:  &leg_1_gains {p:  3000, d: 10, i:  1, i_clamp:   10, torque_clamp: 50}
+  leg_left_2_joint:  &leg_2_gains {p:  3000, d: 10, i:  1, i_clamp:   10, torque_clamp: 60}
+  leg_left_3_joint:  &leg_3_gains {p:  3000, d: 10, i:  1, i_clamp:   10, torque_clamp: 80}
+  leg_left_4_joint:  &leg_4_gains {p:  3000, d: 10, i:  1, i_clamp:   10, torque_clamp: 120}
+  leg_left_5_joint:  &leg_5_gains {p:  3000, d: 10, i:  1, i_clamp:   10, torque_clamp: 80}
+  leg_left_6_joint:  &leg_6_gains {p:  3000, d: 10, i:  1, i_clamp:   10, torque_clamp: 60}
+  leg_right_1_joint: *leg_1_gains
+  leg_right_2_joint: *leg_2_gains
+  leg_right_3_joint: *leg_3_gains
+  leg_right_4_joint: *leg_4_gains
+  leg_right_5_joint: *leg_5_gains
+  leg_right_6_joint: *leg_6_gains
+
+  head_1_joint:                   {p: 300,  d: 250, i: 1, i_clamp: 1.5}
+  head_2_joint:                   {p: 300,  d: 250, i: 1, i_clamp: 1.5}
+
+  torso_1_joint:                  {p: 10000, d: 10, i: 1, i_clamp: 10, torque_clamp: 100}
+  torso_2_joint:                  {p: 10000, d: 10, i: 1, i_clamp: 10, torque_clamp: 100}
+
+  arm_right_1_joint: &arm_1_gains {p: 3000, d: 5, i: 1, i_clamp: 3.0, torque_clamp: 60}
+  arm_right_2_joint: &arm_2_gains {p: 3000,  d: 5, i: 1, i_clamp: 3.0, torque_clamp: 50}
+  arm_right_3_joint: &arm_3_gains {p: 3000,  d: 5, i: 1, i_clamp: 3.0, torque_clamp: 50}
+  arm_right_4_joint: &arm_4_gains {p: 3000,  d: 5, i: 1, i_clamp: 3.0, torque_clamp: 50}
+  arm_right_5_joint: &arm_5_gains {p: 500,  d: 1,  i: 0.1, i_clamp: 3.0, torque_clamp: 50}
+  arm_right_6_joint: &arm_6_gains {p: 500,  d: 1,  i: 0.1, i_clamp: 3.0, torque_clamp: 50}
+  arm_right_7_joint: &arm_7_gains {p: 500,  d: 1,  i: 0.1, i_clamp: 3.0, torque_clamp: 50}
+  arm_left_1_joint:  *arm_1_gains
+  arm_left_2_joint:  *arm_2_gains
+  arm_left_3_joint:  *arm_3_gains
+  arm_left_4_joint:  *arm_4_gains
+  arm_left_5_joint:  *arm_5_gains
+  arm_left_6_joint:  *arm_6_gains
+  arm_left_7_joint:  *arm_7_gains
+
+  hand_right_thumb_joint:    &thumb_gains    {p: 200, d: 120, i: 50, i_clamp: 1}
+  hand_right_index_1_joint:  &finger_1_gains {p: 200, d: 120, i: 50, i_clamp: 1}
+  hand_right_index_2_joint:  *finger_1_gains
+  hand_right_index_3_joint:  *finger_1_gains
+  hand_right_middle_1_joint: *finger_1_gains
+  hand_right_middle_2_joint: *finger_1_gains
+  hand_right_middle_3_joint: *finger_1_gains
+  hand_left_thumb_joint:     *thumb_gains
+  hand_left_index_1_joint:   *finger_1_gains
+  hand_left_index_2_joint:   *finger_1_gains
+  hand_left_index_3_joint:   *finger_1_gains
+  hand_left_middle_1_joint:  *finger_1_gains
+  hand_left_middle_2_joint:  *finger_1_gains
+  hand_left_middle_3_joint:  *finger_1_gains
+
+  # TODO: Remove!
+  hand_right_index_joint:  *finger_1_gains
+  hand_right_middle_joint: *finger_1_gains
+  hand_left_index_joint:   *finger_1_gains
+  hand_left_middle_joint:  *finger_1_gains
+
+  left_laser_joint: {p: 0, d: 0}
+  right_laser_joint: {p: 0, d: 0}
+  left_sole_joint  : {p: 0, d: 0}
+  right_sole_joint  : {p: 0, d: 0}

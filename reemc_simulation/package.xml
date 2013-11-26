@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>reemc_simulation</name>
+  <version>0.9.0</version>
+  <description>REEM-C-specific simulation components. These include plugins
+               and launch scripts necessary for running REEM-C in simulation.</description>
+  <maintainer email="luca.marchionni@pal-robotics.com">Luca Marchionni</maintainer>
+  <maintainer email="paul.mathieu@pal-robotics.com">Paul Mathieu</maintainer>
+  <license>BSD</license>
+  <author email="luca.marchionni@pal-robotics.com">Luca Marchionni</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>reemc_controller_configuration_gazebo</run_depend>
+  <run_depend>reemc_gazebo</run_depend>
+  <run_depend>reemc_hardware_gazebo</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>
