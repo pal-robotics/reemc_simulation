@@ -88,8 +88,7 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   vector<string> jnt_names;
   for (size_t i = 0; i < n_dof_; ++i)
   {
-    const string unscoped_name = sim_joints_[i]->GetName().substr(7); // NOTE: Removing extra scoping, TODO: Fix!
-    jnt_names.push_back(unscoped_name);
+    jnt_names.push_back(sim_joints_[i]->GetName());
   }
 
   // Raw data
@@ -131,8 +130,8 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   }
 
   // Hardware interfaces: Ankle force-torque sensors
-  const string left_ankle_name  = "reemc::leg_left_6_joint";  // TODO: Make not hardcoded
-  const string right_ankle_name = "reemc::leg_right_6_joint";
+  const string left_ankle_name  = "leg_left_6_joint";  // TODO: Make not hardcoded
+  const string right_ankle_name = "leg_right_6_joint";
 
   left_ankle_  = model->GetJoint(left_ankle_name);
   right_ankle_ = model->GetJoint(right_ankle_name);
