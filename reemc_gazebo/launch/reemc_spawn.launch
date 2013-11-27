@@ -8,6 +8,6 @@
 
   <!-- Spawn robot in Gazebo -->
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_model"
-    args="-sdf -file $(arg gzmodel) $(arg gzpose) -model reemc_$(arg robot)" />
+    args="-urdf -param robot_description $(arg gzpose) -model reemc_$(arg robot)" />
 
 </launch>
