@@ -10,18 +10,23 @@ find_package(catkin REQUIRED
       control_toolbox
     )
 
+find_package(gazebo REQUIRED)
+
 catkin_package(
     INCLUDE_DIRS include
     CATKIN_DEPENDS
       control_toolbox
-      urdf
+      gazebo_ros_control
+      joint_limits_interface
+      hardware_interface
     LIBRARIES ${PROJECT_NAME}
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS})
+link_directories(${GAZEBO_LIBRARY_DIRS})
 
 add_library(${PROJECT_NAME} src/reemc_hardware_gazebo.cpp)
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
@@ -29,5 +34,9 @@ install(TARGETS ${PROJECT_NAME}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
 
+install(DIRECTORY include/
+   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+   FILES_MATCHING PATTERN "*.h"
+)
 install (FILES reemc_hardware_gazebo_plugins.xml
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
