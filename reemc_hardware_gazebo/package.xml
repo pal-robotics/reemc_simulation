@@ -24,4 +24,8 @@
   <run_depend>joint_limits_interface</run_depend>
   <run_depend>gazebo_ros_control</run_depend>
 
+  <export>
+    <gazebo_ros_control plugin="${prefix}/reemc_hardware_gazebo_plugins.xml"/>
+  </export>
+
 </package>
