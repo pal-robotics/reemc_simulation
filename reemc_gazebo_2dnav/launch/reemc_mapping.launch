@@ -10,7 +10,6 @@
 
   <arg name="world"  default="small_office"/>
   <arg name="robot"  default="full"/>
-  <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
   <arg name="rviz" default="false"/>
   <arg name="gzclient" default="true"/>
@@ -26,7 +25,6 @@
       <arg name="world" value="$(arg world)"/>
       <arg name="robot" value="$(arg robot)"/>
       <arg name="gui" value="$(arg gzclient)"/>
-      <arg name="gzpose" value="$(arg gzpose)"/>
     </include>
 
     <include file="$(find reemc_controller_configuration)/launch/walking_controller.launch"/>
