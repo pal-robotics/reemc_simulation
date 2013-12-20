@@ -1,0 +1,9 @@
+<launch>
+
+  <!-- Walking controller configuration -->
+  <arg name="robot" default="full" /> <!-- full, lower_body -->
+  <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/walking_params.yaml" ns="walking_controller" />
+  <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/offsets.yaml"        ns="walking_controller/offsets" />
+  <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/walking_controller_$(arg robot).yaml" />
+
+</launch>
