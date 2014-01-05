@@ -15,6 +15,9 @@
     <param name="tf_prefix" type="string" value="" />
   </node>
 
+  <!-- TF lookup -->
+  <node pkg="tf_lookup" type="tf_lookup" name="tf_lookup" output="screen"/>
+
   <!-- Joystick controller -->
   <rosparam file="$(find reemc_gazebo)/config/joy_teleop_sim.yaml" command="load" />
   <include file="$(find reemc_bringup)/launch/joystick_teleop.launch" />
