@@ -5,36 +5,40 @@
   <arg name="namespace" default="/"/>
   <!--arg name="namespace" default="reemc_sim"/-->
 
+  <arg name="world"  default="small_office"/>
+  <arg name="robot"  default="full"/>
+  <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
+
   <arg name="planner"       default="base"/>
   <arg name="local_planner" default="pal"/>
   <arg name="localization"  default="amcl"/>
+  <arg name="map"           default="$(find reemc_maps)/configurations/$(arg world)"/>
   <arg name="odometry"      default="controller"/>
-
-  <arg name="world"  default="small_office"/>
-  <arg name="robot"  default="full"/>
 
   <arg name="rviz"     default="false"/>
   <arg name="gzclient" default="true"/>
 
   <group ns="$(arg namespace)">
 
+    <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
+      <arg name="world"  value="$(arg world)"/>
+      <arg name="robot"  value="$(arg robot)"/>
+      <arg name="gzpose" value="$(arg gzpose)"/>
+      <arg name="gui"    value="$(arg gzclient)"/>
+    </include>
+
     <include file="$(find reemc_2dnav)/launch/navigation.launch">
       <arg name="planner"       value="$(arg planner)"/>
       <arg name="local_planner" value="$(arg local_planner)"/>
       <arg name="localization"  value="$(arg localization)"/>
+      <arg name="map"           value="$(arg map)"/>
       <arg name="odometry"      value="$(arg odometry)"/>
     </include>
 
-    <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
-      <arg name="world" value="$(arg world)"/>
-      <arg name="robot" value="$(arg robot)"/>
-      <arg name="gui"   value="$(arg gzclient)"/>
-    </include>
-
-    <include file="$(find reemc_controller_configuration)/launch/walking_controller.launch"/>
-
     <node name="rviz" pkg="rviz" type="rviz" if="$(arg rviz)"
           args="-d $(find reemc_2dnav)/config/$(arg planner)/navigation.rviz"/>
+
+    <include file="$(find reemc_controller_configuration)/launch/walking_controller.launch"/>
 
     <!-- mode switch madness -->
     <include file="$(find reemc_macro_states)/launch/mode_switch.launch"/>
