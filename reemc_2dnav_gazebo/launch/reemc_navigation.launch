@@ -13,7 +13,6 @@
   <arg name="local_planner" default="pal"/>
   <arg name="localization"  default="amcl"/>
   <arg name="map"           default="$(find reemc_maps)/configurations/$(arg world)"/>
-  <arg name="odometry"      default="controller"/>
 
   <arg name="rviz"     default="false"/>
   <arg name="gzclient" default="true"/>
@@ -28,11 +27,11 @@
     </include>
 
     <include file="$(find reemc_2dnav)/launch/navigation.launch">
+      <arg name="state"         value="localization"/>
       <arg name="planner"       value="$(arg planner)"/>
       <arg name="local_planner" value="$(arg local_planner)"/>
       <arg name="localization"  value="$(arg localization)"/>
       <arg name="map"           value="$(arg map)"/>
-      <arg name="odometry"      value="$(arg odometry)"/>
     </include>
 
     <node name="rviz" pkg="rviz" type="rviz" if="$(arg rviz)"
@@ -44,6 +43,7 @@
     <include file="$(find reemc_macro_states)/launch/mode_switch.launch"/>
     <include file="$(find reemc_macro_states)/launch/control_source_switch.launch">
       <arg name="joy_out" value="walking_controller/cmd_vel"/>
+      <!-- @todo -->
     </include>
 
   </group>
