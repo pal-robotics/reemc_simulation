@@ -33,8 +33,8 @@ gains:
   arm_left_6_joint:  *arm_6_gains
   arm_left_7_joint:  *arm_7_gains
 
-  hand_right_thumb_joint:    &thumb_gains    {p: 200, d: 120, i: 50, i_clamp: 1}
-  hand_right_index_1_joint:  &finger_1_gains {p: 200, d: 120, i: 50, i_clamp: 1}
+  hand_right_thumb_joint:    &thumb_gains    {p: 50, d: 0.1, i: 0.1, i_clamp: 1}
+  hand_right_index_1_joint:  &finger_1_gains {p: 0, d: 0, i: 0, i_clamp: 0}
   hand_right_index_2_joint:  *finger_1_gains
   hand_right_index_3_joint:  *finger_1_gains
   hand_right_middle_1_joint: *finger_1_gains
@@ -48,13 +48,8 @@ gains:
   hand_left_middle_2_joint:  *finger_1_gains
   hand_left_middle_3_joint:  *finger_1_gains
 
-  # TODO: Remove!
-  hand_right_index_joint:  *finger_1_gains
-  hand_right_middle_joint: *finger_1_gains
-  hand_left_index_joint:   *finger_1_gains
-  hand_left_middle_joint:  *finger_1_gains
-
-  left_laser_joint: {p: 0, d: 0}
-  right_laser_joint: {p: 0, d: 0}
-  left_sole_joint  : {p: 0, d: 0}
-  right_sole_joint  : {p: 0, d: 0}
+  
+  hand_right_index_joint:  &finger_gains {p: 50, d: 0.1, i: 0.1, i_clamp: 1}
+  hand_right_middle_joint: *finger_gains
+  hand_left_index_joint:   *finger_gains
+  hand_left_middle_joint:  *finger_gains
