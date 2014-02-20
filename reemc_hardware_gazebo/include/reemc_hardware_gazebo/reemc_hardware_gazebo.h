@@ -39,7 +39,7 @@
 #include <hardware_interface/force_torque_sensor_interface.h>
 #include <hardware_interface/imu_sensor_interface.h>
 #include <joint_limits_interface/joint_limits_interface.h>
-
+#include <pal_ros_control/pal_actuator_command_interface.h>
 #include <gazebo_ros_control/robot_hw_sim.h>
 
 #include <gazebo/physics/physics.hh>
@@ -73,6 +73,8 @@ private:
   std::vector<double> jnt_eff_;
 
   std::vector<double> jnt_pos_cmd_;
+  std::vector<double> jnt_curr_limit_cmd_;
+  std::vector<double> jnt_max_effort_;
 
   double left_force_[3];
   double left_torque_[3];
@@ -92,6 +94,8 @@ private:
   // Hardware interface: joints
   hardware_interface::JointStateInterface    jnt_state_interface_;
   hardware_interface::PositionJointInterface jnt_pos_cmd_interface_;
+  hardware_interface::ActuatorStateInterface    act_state_interface_;
+  hardware_interface::CurrentLimitActuatorInterface jnt_curr_limit_cmd_interface_;
 
   // Hardware interface: sensors
   hardware_interface::ForceTorqueSensorInterface ft_sensor_interface_;

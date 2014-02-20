@@ -80,6 +80,7 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   jnt_vel_.clear();
   jnt_eff_.clear();
   jnt_pos_cmd_.clear();
+  jnt_curr_limit_cmd_.clear();
 
   // Simulation joints: All joints to control
   sim_joints_ = model->GetJoints();
@@ -96,17 +97,25 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   jnt_vel_.resize(n_dof_);
   jnt_eff_.resize(n_dof_);
   jnt_pos_cmd_.resize(n_dof_);
+  jnt_curr_limit_cmd_.resize(n_dof_, 1.0);
+  /// Retrieving max joint effort from urdf because values are not set in sim_joints_
+  jnt_max_effort_.resize(n_dof_);
+  for(size_t j=0; j< n_dof_; ++j)
+    jnt_max_effort_[j] = urdf->getJoint(sim_joints_[j]->GetName())->limits->effort;
 
   // Hardware interfaces: joints
   for (size_t i = 0; i < n_dof_; ++i)
   {
     jnt_state_interface_.registerHandle(JointStateHandle(jnt_names[i], &jnt_pos_[i], &jnt_vel_[i], &jnt_eff_[i]));
     jnt_pos_cmd_interface_.registerHandle(JointHandle(jnt_state_interface_.getHandle(jnt_names[i]), &jnt_pos_cmd_[i]));
-
     ROS_DEBUG_STREAM("Registered joint '" << jnt_names[i] << "' in the PositionJointInterface.");
+
+    act_state_interface_.registerHandle(ActuatorStateHandle(jnt_names[i], &jnt_pos_[i], &jnt_vel_[i], &jnt_eff_[i]));
+    jnt_curr_limit_cmd_interface_.registerHandle(ActuatorHandle(act_state_interface_.getHandle(jnt_names[i]), &jnt_curr_limit_cmd_[i]));
   }
   registerInterface(&jnt_state_interface_);
   registerInterface(&jnt_pos_cmd_interface_);
+  registerInterface(&jnt_curr_limit_cmd_interface_);
 
   // Joint limits interface
   vector<string> cmd_handle_names = jnt_pos_cmd_interface_.getNames();
@@ -246,9 +255,15 @@ void ReemcHardwareGazebo::writeSim(ros::Time time, ros::Duration period)
     const double error = jnt_pos_cmd_[j] - jnt_pos_[j]; // NOTE: Assumes jnt_pos_ contains most recent value
     const double effort = pids_[j].computeCommand(error, period);
 
+    const double max_effort = jnt_curr_limit_cmd_[j]*jnt_max_effort_[j];
+    const double min_effort = -max_effort;
+    double effort_modified = (effort - max_effort) > 1e-4  ? max_effort : effort;
+    effort_modified = effort_modified - min_effort < -1e-4 ? min_effort : effort_modified;
+
     // Gazebo has an interesting API...
-    sim_joints_[j]->SetForce(0u, effort);
+      sim_joints_[j]->SetForce(0u, effort_modified);
   }
+
 }
 
 } // reemc_hardware_gazebo
