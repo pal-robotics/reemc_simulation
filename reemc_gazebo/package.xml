@@ -11,7 +11,6 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <run_depend>reemc_controller_configuration_gazebo</run_depend>
-  <run_depend>reemc_controller_configuration</run_depend>
   <run_depend>reemc_description</run_depend>
   <run_depend>reemc_hardware_gazebo</run_depend>
   <run_depend>reemc_bringup</run_depend>
