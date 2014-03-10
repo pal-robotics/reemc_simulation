@@ -14,6 +14,5 @@
   <run_depend>reemc_2dnav</run_depend>
   <run_depend>reemc_controller_configuration</run_depend>
   <run_depend>reemc_gazebo</run_depend>
-  <run_depend>reemc_macro_states</run_depend>
 
 </package>
