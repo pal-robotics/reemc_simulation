@@ -36,7 +36,6 @@
           args="-d $(find reemc_2dnav)/config/rviz/navigation.rviz"/>
 
     <include file="$(find reemc_controller_configuration)/launch/half_walking_half_jtc.launch"/>
-    <node pkg="walking_utils" type="walk_pose" name="walk_pose"/>
 
   </group>
 </launch>
