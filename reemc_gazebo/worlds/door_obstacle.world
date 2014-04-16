@@ -29,28 +29,8 @@
     </include>
     <!-- A bunch of chairs -->
     <include>
-      <uri>model://ikea_harry_chair</uri>
-      <pose>-0.4 -1 0 0 0 0</pose>
-    </include>
-    <include>
-      <uri>model://ikea_ektorp_chair</uri>
-      <pose>-0.4 3 0 0 0 0</pose>
-    </include>
-    <include>
-      <uri>model://ikea_folke_chair</uri>
-      <pose>-0.35 0 0 0 0 0</pose>
-    </include>
-    <include>
-      <uri>model://ikea_stefan_chair</uri>
-      <pose>-0.35 1 0 0 0 0</pose>
-    </include>
-    <include>
-      <uri>model://goetz_sofa</uri>
-      <pose>-0.35 -2.5 0 0 0 0</pose>
-    </include>
-    <include>
-      <uri>model://ikea_urban_chair</uri>
-      <pose>-0.35 2 0 0 0 0</pose>
+      <uri>model://door_obstacle</uri>
+      <pose>0.18 0 0 0 0 1.57</pose>
     </include>
   </world>
 </sdf>
