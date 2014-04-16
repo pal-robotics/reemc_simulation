@@ -11,7 +11,7 @@ biped_controller:
    delta_T: 0.005
    ft_sensor_z: 0.1
 
-com_stabilizer:  
+com_stabilizer:
    ds_x_p: 0.7
    ds_y_p: 0.7
    ss_x_p: 1.0
