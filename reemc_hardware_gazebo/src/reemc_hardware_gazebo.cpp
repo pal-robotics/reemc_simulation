@@ -41,6 +41,13 @@
 using std::vector;
 using std::string;
 
+#define ROS_GREEN_STREAM(x) ROS_INFO_STREAM("\033[1;32m" << x << "\033[0m")
+#define ROS_RED_STREAM(x) ROS_INFO_STREAM("\033[1;31m" << x << "\033[0m")
+#define ROS_BLUE_STREAM(x) ROS_INFO_STREAM("\033[1;34m" << x << "\033[0m")
+#define ROS_YELLOW_STREAM(x) ROS_INFO_STREAM("\033[1;33m" << x << "\033[0m")
+#define ROS_PINK_STREAM(x) ROS_INFO_STREAM("\033[1;35m" << x << "\033[0m")
+#define ROS_CYAN_STREAM(x) ROS_INFO_STREAM("\033[1;36m" << x << "\033[0m")
+
 namespace reemc_hardware_gazebo
 {
 
@@ -81,6 +88,7 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   jnt_eff_.clear();
   jnt_pos_cmd_.clear();
   jnt_curr_limit_cmd_.clear();
+  joint_modes_.clear();
 
   // Simulation joints: All joints to control
   sim_joints_ = model->GetJoints();
@@ -97,11 +105,32 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   jnt_vel_.resize(n_dof_);
   jnt_eff_.resize(n_dof_);
   jnt_pos_cmd_.resize(n_dof_);
+  jnt_eff_cmd_.resize(n_dof_);
+  jnt_mode_cmd_.resize(n_dof_, -1);
   jnt_curr_limit_cmd_.resize(n_dof_, 1.0);
   /// Retrieving max joint effort from urdf because values are not set in sim_joints_
   jnt_max_effort_.resize(n_dof_);
   for(size_t j=0; j< n_dof_; ++j)
     jnt_max_effort_[j] = urdf->getJoint(sim_joints_[j]->GetName())->limits->effort;
+
+  // Parse transmissions looking for JointModeInterface,
+  // the mode of these joints will be tracked
+  for(unsigned int i=0; i<transmissions.size(); ++i)
+  {
+    for(unsigned int j=0; j<transmissions[i].joints_[0].hardware_interfaces_.size(); ++j)
+    {
+      //TODO: now if there's a mode interface, we default to position mode
+      // this could be a policy represented somehow or
+      // the first non-mode joint interface could be loaded
+      if(transmissions[i].joints_[0].hardware_interfaces_[j]
+         == "hardware_interface/JointModeInterface")
+      {
+        joint_modes_[transmissions[i].joints_[0].name_] = hardware_interface::MODE_POSITION;
+        ROS_CYAN_STREAM(transmissions[i].joints_[0].name_ << " has joint mode interface.");
+        break;
+      }
+    }
+  }
 
   // Hardware interfaces: joints
   for (size_t i = 0; i < n_dof_; ++i)
@@ -112,9 +141,17 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
 
     act_state_interface_.registerHandle(ActuatorStateHandle(jnt_names[i], &jnt_pos_[i], &jnt_vel_[i], &jnt_eff_[i]));
     jnt_curr_limit_cmd_interface_.registerHandle(ActuatorHandle(act_state_interface_.getHandle(jnt_names[i]), &jnt_curr_limit_cmd_[i]));
+    if(joint_modes_.count(jnt_names[i]) > 0)
+    {
+      //jnt_eff_cmd_interface_.registerHandle(JointHandle(jnt_state_interface_.getHandle(jnt_names[i]), &jnt_eff_cmd_[i]));
+      jnt_mode_cmd_interface_.registerHandle(JointModeHandle(jnt_names[i], &jnt_mode_cmd_[i]));
+      ROS_GREEN_STREAM("Registered joint '" << jnt_names[i] << "' in JointModeInterface.");
+    }
   }
   registerInterface(&jnt_state_interface_);
   registerInterface(&jnt_pos_cmd_interface_);
+  registerInterface(&jnt_eff_cmd_interface_);
+  registerInterface(&jnt_mode_cmd_interface_);
   registerInterface(&jnt_curr_limit_cmd_interface_);
 
   // Joint limits interface
@@ -252,18 +289,55 @@ void ReemcHardwareGazebo::writeSim(ros::Time time, ros::Duration period)
   // Compute and send effort command
   for(unsigned int j = 0; j < n_dof_; ++j)
   {
-    const double error = jnt_pos_cmd_[j] - jnt_pos_[j]; // NOTE: Assumes jnt_pos_ contains most recent value
-    const double effort = pids_[j].computeCommand(error, period);
-
-    const double max_effort = jnt_curr_limit_cmd_[j]*jnt_max_effort_[j];
-    const double min_effort = -max_effort;
-    double effort_modified = (effort - max_effort) > 1e-4  ? max_effort : effort;
-    effort_modified = effort_modified - min_effort < -1e-4 ? min_effort : effort_modified;
-
-    // Gazebo has an interesting API...
-      sim_joints_[j]->SetForce(0u, effort_modified);
+    // if the mode is switchable, we handle it here
+    //TODO: this should by more dynamic depending on the available modes for the joint
+    if(joint_modes_.count(sim_joints_[j]->GetName()) > 0)
+    {
+      // if the mode needs to be switched, we switch but skip a control iteration
+      if(jnt_mode_cmd_[j] != -1 && joint_modes_[sim_joints_[j]->GetName()] != jnt_mode_cmd_[j])
+      {
+        ROS_GREEN_STREAM("Switch mode of " << sim_joints_[j]->GetName()
+                         << " from " << joint_modes_[sim_joints_[j]->GetName()]
+                         << " to " << jnt_mode_cmd_[j]);
+        joint_modes_[sim_joints_[j]->GetName()] = static_cast<JointCommandModes>(jnt_mode_cmd_[j]);
+        //TODO: set command to current state to prevent jumps
+      }
+      else
+      {
+        switch(joint_modes_[sim_joints_[j]->GetName()])
+        {
+          case MODE_POSITION:
+            sendPosition(j, period);
+            break;
+          case MODE_VELOCITY:
+            ROS_WARN("No velocity mode on this robot!");
+            //sim_joints_[j]->SetVelocity(0u, jnt_vel_cmd_[j]);
+            break;
+          case MODE_EFFORT:
+            sim_joints_[j]->SetForce(0u, jnt_eff_cmd_[j]);
+            break;
+        }
+      }
+    }
+    else
+    {
+      sendPosition(j, period);
+    }
   }
+}
 
+void ReemcHardwareGazebo::sendPosition(unsigned int j, ros::Duration period)
+{
+  const double error = jnt_pos_cmd_[j] - jnt_pos_[j]; // NOTE: Assumes jnt_pos_ contains most recent value
+  const double effort = pids_[j].computeCommand(error, period);
+
+  const double max_effort = jnt_curr_limit_cmd_[j]*jnt_max_effort_[j];
+  const double min_effort = -max_effort;
+  double effort_modified = (effort - max_effort) > 1e-4  ? max_effort : effort;
+  effort_modified = effort_modified - min_effort < -1e-4 ? min_effort : effort_modified;
+
+  // Gazebo has an interesting API...
+    sim_joints_[j]->SetForce(0u, effort_modified);
 }
 
 } // reemc_hardware_gazebo

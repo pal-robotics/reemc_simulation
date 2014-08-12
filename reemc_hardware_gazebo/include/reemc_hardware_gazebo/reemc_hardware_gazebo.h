@@ -38,6 +38,7 @@
 #include <hardware_interface/joint_command_interface.h>
 #include <hardware_interface/force_torque_sensor_interface.h>
 #include <hardware_interface/imu_sensor_interface.h>
+#include <hardware_interface/joint_mode_interface.h>
 #include <joint_limits_interface/joint_limits_interface.h>
 #include <pal_ros_control/pal_actuator_command_interface.h>
 #include <gazebo_ros_control/robot_hw_sim.h>
@@ -73,6 +74,8 @@ private:
   std::vector<double> jnt_eff_;
 
   std::vector<double> jnt_pos_cmd_;
+  std::vector<double> jnt_eff_cmd_;
+  std::vector<int> jnt_mode_cmd_;
   std::vector<double> jnt_curr_limit_cmd_;
   std::vector<double> jnt_max_effort_;
 
@@ -94,6 +97,8 @@ private:
   // Hardware interface: joints
   hardware_interface::JointStateInterface    jnt_state_interface_;
   hardware_interface::PositionJointInterface jnt_pos_cmd_interface_;
+  hardware_interface::EffortJointInterface   jnt_eff_cmd_interface_;
+  hardware_interface::JointModeInterface     jnt_mode_cmd_interface_;
   hardware_interface::ActuatorStateInterface    act_state_interface_;
   hardware_interface::CurrentLimitActuatorInterface jnt_curr_limit_cmd_interface_;
 
@@ -104,8 +109,13 @@ private:
   // Joint limits interface
   joint_limits_interface::PositionJointSoftLimitsInterface jnt_limits_interface_;
 
+  // Guess what
+  std::map<std::string, hardware_interface::JointCommandModes> joint_modes_;
+
   // PID controllers
   std::vector<control_toolbox::Pid> pids_;
+
+  void sendPosition(unsigned int j, ros::Duration period);
 };
 
 }
