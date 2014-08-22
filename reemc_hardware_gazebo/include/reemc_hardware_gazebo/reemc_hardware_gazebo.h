@@ -75,7 +75,7 @@ private:
 
   std::vector<double> jnt_pos_cmd_;
   std::vector<double> jnt_eff_cmd_;
-  std::vector<int> jnt_mode_cmd_;
+  std::vector<int>    jnt_mode_cmd_;
   std::vector<double> jnt_curr_limit_cmd_;
   std::vector<double> jnt_max_effort_;
 

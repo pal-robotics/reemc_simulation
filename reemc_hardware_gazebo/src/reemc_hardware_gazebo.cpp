@@ -106,7 +106,7 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   jnt_eff_.resize(n_dof_);
   jnt_pos_cmd_.resize(n_dof_);
   jnt_eff_cmd_.resize(n_dof_);
-  jnt_mode_cmd_.resize(n_dof_, -1);
+  jnt_mode_cmd_.resize(n_dof_);
   jnt_curr_limit_cmd_.resize(n_dof_, 1.0);
   /// Retrieving max joint effort from urdf because values are not set in sim_joints_
   jnt_max_effort_.resize(n_dof_);
@@ -126,6 +126,7 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
          == "hardware_interface/JointModeInterface")
       {
         joint_modes_[transmissions[i].joints_[0].name_] = hardware_interface::MODE_POSITION;
+        jnt_mode_cmd_[i] = hardware_interface::MODE_POSITION; // initialize mode cmd to prevent jumps
         ROS_CYAN_STREAM(transmissions[i].joints_[0].name_ << " has joint mode interface.");
         break;
       }
@@ -143,7 +144,8 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
     jnt_curr_limit_cmd_interface_.registerHandle(ActuatorHandle(act_state_interface_.getHandle(jnt_names[i]), &jnt_curr_limit_cmd_[i]));
     if(joint_modes_.count(jnt_names[i]) > 0)
     {
-      //jnt_eff_cmd_interface_.registerHandle(JointHandle(jnt_state_interface_.getHandle(jnt_names[i]), &jnt_eff_cmd_[i]));
+      //TODO: make registration of interface depend on urdf
+      jnt_eff_cmd_interface_.registerHandle(JointHandle(jnt_state_interface_.getHandle(jnt_names[i]), &jnt_eff_cmd_[i]));
       jnt_mode_cmd_interface_.registerHandle(JointModeHandle(jnt_names[i], &jnt_mode_cmd_[i]));
       ROS_GREEN_STREAM("Registered joint '" << jnt_names[i] << "' in JointModeInterface.");
     }
@@ -290,11 +292,11 @@ void ReemcHardwareGazebo::writeSim(ros::Time time, ros::Duration period)
   for(unsigned int j = 0; j < n_dof_; ++j)
   {
     // if the mode is switchable, we handle it here
-    //TODO: this should by more dynamic depending on the available modes for the joint
+    //TODO: this should be more dynamic depending on the available modes for the joint
     if(joint_modes_.count(sim_joints_[j]->GetName()) > 0)
     {
       // if the mode needs to be switched, we switch but skip a control iteration
-      if(jnt_mode_cmd_[j] != -1 && joint_modes_[sim_joints_[j]->GetName()] != jnt_mode_cmd_[j])
+      if(joint_modes_[sim_joints_[j]->GetName()] != jnt_mode_cmd_[j])
       {
         ROS_GREEN_STREAM("Switch mode of " << sim_joints_[j]->GetName()
                          << " from " << joint_modes_[sim_joints_[j]->GetName()]
