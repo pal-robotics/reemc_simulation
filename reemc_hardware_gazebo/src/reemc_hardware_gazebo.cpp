@@ -37,6 +37,7 @@
 #include <joint_limits_interface/joint_limits_urdf.h>
 
 #include <reemc_hardware_gazebo/reemc_hardware_gazebo.h>
+#include <reemc_hardware_gazebo/mode_manager.h>
 
 using std::vector;
 using std::string;
@@ -69,7 +70,8 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   string robot_description;
   while (ros::ok() && !nh.getParam(robot_description_name, robot_description))
   {
-    ROS_WARN_STREAM_ONCE("Waiting for robot description: parameter '" << robot_description_name << "' on namespace '" << nh.getNamespace() << "'.");
+    ROS_WARN_STREAM_ONCE("Waiting for robot description: parameter '"
+                         << robot_description_name << "' on namespace '" << nh.getNamespace() << "'.");
     ros::Duration(1.0).sleep();
   }
   ROS_INFO("Found robot description");
@@ -98,6 +100,7 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   for (size_t i = 0; i < n_dof_; ++i)
   {
     jnt_names.push_back(sim_joints_[i]->GetName());
+    joint_index_lut_[sim_joints_[i]->GetName()] = i;
   }
 
   // Raw data
@@ -113,43 +116,73 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   for(size_t j=0; j< n_dof_; ++j)
     jnt_max_effort_[j] = urdf->getJoint(sim_joints_[j]->GetName())->limits->effort;
 
-  // Parse transmissions looking for JointModeInterface,
-  // the mode of these joints will be tracked
-  for(unsigned int i=0; i<transmissions.size(); ++i)
+  // Default hardware interfaces for all joints
+  for (size_t i = 0; i < n_dof_; ++i)
   {
-    for(unsigned int j=0; j<transmissions[i].joints_[0].hardware_interfaces_.size(); ++j)
+    jnt_state_interface_.registerHandle(
+          JointStateHandle(jnt_names[i], &jnt_pos_[i], &jnt_vel_[i], &jnt_eff_[i]));
+    act_state_interface_.registerHandle(
+          ActuatorStateHandle(jnt_names[i], &jnt_pos_[i], &jnt_vel_[i], &jnt_eff_[i]));
+    jnt_curr_limit_cmd_interface_.registerHandle(
+          ActuatorHandle(act_state_interface_.getHandle(jnt_names[i]), &jnt_curr_limit_cmd_[i]));
+  }
+
+  // Register hardware interfaces according to transmission definitions
+  std::set<std::string> mode_joints;
+  for(size_t i=0; i<transmissions.size(); ++i)
+  {
+    for(size_t j=0; j<transmissions[i].joints_.size(); ++j)
     {
-      //TODO: now if there's a mode interface, we default to position mode
-      // this could be a policy represented somehow or
-      // the first non-mode joint interface could be loaded
-      if(transmissions[i].joints_[0].hardware_interfaces_[j]
-         == "hardware_interface/JointModeInterface")
+      // get the name and index of this joint in the data vectors
+      const std::string curr_joint = transmissions[i].joints_[j].name_;
+      const size_t curr_idx = joint_index_lut_[curr_joint];
+
+      for(size_t k=0; k<transmissions[i].joints_[j].hardware_interfaces_.size(); ++k)
       {
-        joint_modes_[transmissions[i].joints_[0].name_] = hardware_interface::MODE_POSITION;
-        jnt_mode_cmd_[i] = hardware_interface::MODE_POSITION; // initialize mode cmd to prevent jumps
-        ROS_CYAN_STREAM(transmissions[i].joints_[0].name_ << " has joint mode interface.");
-        break;
+        const std::string interface = transmissions[i].joints_[j].hardware_interfaces_[k];
+        if(interface == "hardware_interface/PositionJointInterface")
+        {
+          jnt_pos_cmd_interface_.registerHandle(
+                JointHandle(jnt_state_interface_.getHandle(curr_joint), &jnt_pos_cmd_[curr_idx]));
+          ROS_PINK_STREAM("Registered joint '" << curr_joint << "' in PositionJointInterface.");
+        }
+//      else if(interface == "hardware_interface/VelocityJointInterface")
+//      {
+//        jnt_vel_cmd_interface_.registerHandle(
+//             JointHandle(jnt_state_interface_.getHandle(jnt_names[i]), &jnt_vel_cmd_[i]));
+//      }
+        else if(interface == "hardware_interface/EffortJointInterface")
+        {
+          jnt_eff_cmd_interface_.registerHandle(
+                JointHandle(jnt_state_interface_.getHandle(curr_joint), &jnt_eff_cmd_[curr_idx]));
+          ROS_CYAN_STREAM("Registered joint '" << curr_joint << "' in EffortJointInterface.");
+        }
+        else if(interface == "hardware_interface/JointModeInterface")
+        {
+          jnt_mode_cmd_interface_.registerHandle(
+                JointModeHandle(curr_joint, &jnt_mode_cmd_[curr_idx]));
+          joint_modes_[curr_joint] = hardware_interface::MODE_POSITION;
+          jnt_mode_cmd_[curr_idx] = hardware_interface::MODE_POSITION; // initialize mode cmd to prevent jumps
+          ROS_GREEN_STREAM("Registered joint '" << curr_joint << "' in JointModeInterface.");
+          mode_joints.insert(curr_joint);
+        }
+        else if(interface == "hardware_interface/JointStateInterface")
+        {
+          //noop
+        }
+        else
+        {
+          ROS_WARN_STREAM("Unknown hardware interface " << interface
+                          << " for " << curr_joint );
+        }
       }
     }
   }
 
-  // Hardware interfaces: joints
-  for (size_t i = 0; i < n_dof_; ++i)
-  {
-    jnt_state_interface_.registerHandle(JointStateHandle(jnt_names[i], &jnt_pos_[i], &jnt_vel_[i], &jnt_eff_[i]));
-    jnt_pos_cmd_interface_.registerHandle(JointHandle(jnt_state_interface_.getHandle(jnt_names[i]), &jnt_pos_cmd_[i]));
-    ROS_DEBUG_STREAM("Registered joint '" << jnt_names[i] << "' in the PositionJointInterface.");
+  // Parse transmissions of mode joints again and register available modes
+  mode_mgr_.init(transmissions,
+                 mode_joints);
 
-    act_state_interface_.registerHandle(ActuatorStateHandle(jnt_names[i], &jnt_pos_[i], &jnt_vel_[i], &jnt_eff_[i]));
-    jnt_curr_limit_cmd_interface_.registerHandle(ActuatorHandle(act_state_interface_.getHandle(jnt_names[i]), &jnt_curr_limit_cmd_[i]));
-    if(joint_modes_.count(jnt_names[i]) > 0)
-    {
-      //TODO: make registration of interface depend on urdf
-      jnt_eff_cmd_interface_.registerHandle(JointHandle(jnt_state_interface_.getHandle(jnt_names[i]), &jnt_eff_cmd_[i]));
-      jnt_mode_cmd_interface_.registerHandle(JointModeHandle(jnt_names[i], &jnt_mode_cmd_[i]));
-      ROS_GREEN_STREAM("Registered joint '" << jnt_names[i] << "' in JointModeInterface.");
-    }
-  }
   registerInterface(&jnt_state_interface_);
   registerInterface(&jnt_pos_cmd_interface_);
   registerInterface(&jnt_eff_cmd_interface_);
@@ -158,7 +191,7 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
 
   // Joint limits interface
   vector<string> cmd_handle_names = jnt_pos_cmd_interface_.getNames();
-  for (unsigned int i = 0; i < cmd_handle_names.size(); ++i)
+  for (size_t i = 0; i < cmd_handle_names.size(); ++i)
   {
     JointHandle cmd_handle = jnt_pos_cmd_interface_.getHandle(cmd_handle_names[i]);
     const string name = cmd_handle.getName();
@@ -289,24 +322,31 @@ void ReemcHardwareGazebo::writeSim(ros::Time time, ros::Duration period)
 //   jnt_limits_interface_.enforceLimits(period); // TODO: Tune controllers to make this work?
 
   // Compute and send effort command
-  for(unsigned int j = 0; j < n_dof_; ++j)
+  for(size_t j = 0; j < n_dof_; ++j)
   {
     // if the mode is switchable, we handle it here
     //TODO: this should be more dynamic depending on the available modes for the joint
-    if(joint_modes_.count(sim_joints_[j]->GetName()) > 0)
+    const std::string& curr = sim_joints_[j]->GetName();
+    if(mode_mgr_.has(curr))
     {
       // if the mode needs to be switched, we switch but skip a control iteration
-      if(joint_modes_[sim_joints_[j]->GetName()] != jnt_mode_cmd_[j])
+      if(mode_mgr_.getMode(curr) != jnt_mode_cmd_[j])
       {
-        ROS_GREEN_STREAM("Switch mode of " << sim_joints_[j]->GetName()
-                         << " from " << joint_modes_[sim_joints_[j]->GetName()]
+        // what to do when switching mode
+        mode_mgr_.setMode(curr, jnt_mode_cmd_[j]);
+
+        //Set command to current state to prevent jumps
+        jnt_pos_cmd_[j] = jnt_pos_[j];
+        //jnt_vel_cmd_[j] = jnt_vel_[j]; //TODO: sure?
+        jnt_eff_cmd_[j] = jnt_eff_[j];
+
+        ROS_GREEN_STREAM("Switch mode of " << curr
+                         << " from " << joint_modes_[curr]
                          << " to " << jnt_mode_cmd_[j]);
-        joint_modes_[sim_joints_[j]->GetName()] = static_cast<JointCommandModes>(jnt_mode_cmd_[j]);
-        //TODO: set command to current state to prevent jumps
       }
       else
       {
-        switch(joint_modes_[sim_joints_[j]->GetName()])
+        switch(mode_mgr_.getMode(curr))
         {
           case MODE_POSITION:
             sendPosition(j, period);
@@ -328,7 +368,7 @@ void ReemcHardwareGazebo::writeSim(ros::Time time, ros::Duration period)
   }
 }
 
-void ReemcHardwareGazebo::sendPosition(unsigned int j, ros::Duration period)
+void ReemcHardwareGazebo::sendPosition(size_t j, ros::Duration period)
 {
   const double error = jnt_pos_cmd_[j] - jnt_pos_[j]; // NOTE: Assumes jnt_pos_ contains most recent value
   const double effort = pids_[j].computeCommand(error, period);

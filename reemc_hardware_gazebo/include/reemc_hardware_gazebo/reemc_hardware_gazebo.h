@@ -42,6 +42,7 @@
 #include <joint_limits_interface/joint_limits_interface.h>
 #include <pal_ros_control/pal_actuator_command_interface.h>
 #include <gazebo_ros_control/robot_hw_sim.h>
+#include <reemc_hardware_gazebo/mode_manager.h>
 
 #include <gazebo/physics/physics.hh>
 #include <gazebo/sensors/ImuSensor.hh>
@@ -65,6 +66,7 @@ public:
   void writeSim(ros::Time time, ros::Duration period);
 
 private:
+  typedef hardware_interface::JointCommandModes JntMode;
 
   // Raw data
   unsigned int n_dof_;
@@ -75,7 +77,7 @@ private:
 
   std::vector<double> jnt_pos_cmd_;
   std::vector<double> jnt_eff_cmd_;
-  std::vector<int>    jnt_mode_cmd_;
+  std::vector<JntMode> jnt_mode_cmd_;
   std::vector<double> jnt_curr_limit_cmd_;
   std::vector<double> jnt_max_effort_;
 
@@ -115,7 +117,10 @@ private:
   // PID controllers
   std::vector<control_toolbox::Pid> pids_;
 
-  void sendPosition(unsigned int j, ros::Duration period);
+  ModeManager mode_mgr_;
+  std::map<std::string, size_t> joint_index_lut_;
+
+  void sendPosition(size_t j, ros::Duration period);
 };
 
 }

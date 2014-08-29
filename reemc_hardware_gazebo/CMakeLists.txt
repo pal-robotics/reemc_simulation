@@ -27,7 +27,7 @@ catkin_package(
 include_directories(include ${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 
-add_library(${PROJECT_NAME} src/reemc_hardware_gazebo.cpp)
+add_library(${PROJECT_NAME} src/reemc_hardware_gazebo.cpp src/mode_manager.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 install(TARGETS ${PROJECT_NAME}
