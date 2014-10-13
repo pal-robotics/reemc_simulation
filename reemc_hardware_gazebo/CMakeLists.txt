@@ -7,7 +7,6 @@ find_package(catkin REQUIRED
       hardware_interface
       joint_limits_interface
       gazebo_ros_control
-      pal_ros_control
       control_toolbox
     )
 
@@ -18,7 +17,6 @@ catkin_package(
     CATKIN_DEPENDS
       control_toolbox
       gazebo_ros_control
-      pal_ros_control
       joint_limits_interface
       hardware_interface
     LIBRARIES ${PROJECT_NAME}

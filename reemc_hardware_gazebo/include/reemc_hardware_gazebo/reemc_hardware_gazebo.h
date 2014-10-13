@@ -39,11 +39,20 @@
 #include <hardware_interface/force_torque_sensor_interface.h>
 #include <hardware_interface/imu_sensor_interface.h>
 #include <joint_limits_interface/joint_limits_interface.h>
-#include <pal_ros_control/pal_actuator_command_interface.h>
 #include <gazebo_ros_control/robot_hw_sim.h>
 
 #include <gazebo/physics/physics.hh>
 #include <gazebo/sensors/ImuSensor.hh>
+
+// Borrowed from pal_ros_control/pal_actuator_command_interface.h
+#include <hardware_interface/actuator_command_interface.h>
+
+namespace hardware_interface
+{
+/// \ref ActuatorCurrentLimitInterface for commanding actuators' max current value
+class CurrentLimitActuatorInterface : public HardwareResourceManager<ActuatorHandle,DontClaimResources> {};
+}
+
 
 namespace reemc_hardware_gazebo
 {
