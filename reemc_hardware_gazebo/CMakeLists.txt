@@ -21,6 +21,7 @@ catkin_package(
       pal_ros_control
       joint_limits_interface
       hardware_interface
+    DEPENDS gazebo
     LIBRARIES ${PROJECT_NAME}
 )
 
