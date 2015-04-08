@@ -2,8 +2,8 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.9.1 (2015-04-08)
+------------------
 * Add pal_gazebo_plugins dependency
 * refs #8519 : syncs with 4.1_REEMC_SDE4 branch
   svn merge svn+ssh://server/srv/svn/repos/branches/4.1_REEMC_SDE4/pal-ros-pkg/catkin_pkgs/reemc_simulation/reemc_gazebo -c 53361

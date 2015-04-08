@@ -2,8 +2,8 @@
 Changelog for package reemc_hardware_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.9.1 (2015-04-08)
+------------------
 * Fixing gazebo headers for release
 * Reverting joint mode experimental stuff
 * Add mode manager class to factor some code out

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>reemc_simulation</name>
-  <version>0.9.0</version>
+  <version>0.9.1</version>
   <description>REEM-C-specific simulation components. These include plugins
                and launch scripts necessary for running REEM-C in simulation.</description>
   <maintainer email="luca.marchionni@pal-robotics.com">Luca Marchionni</maintainer>

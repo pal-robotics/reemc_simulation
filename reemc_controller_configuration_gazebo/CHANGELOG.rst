@@ -2,8 +2,8 @@
 Changelog for package reemc_controller_configuration_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.9.1 (2015-04-08)
+------------------
 * adds enabled param to odometry and moves odometry related params to 'odometry' ns
 * removes trailing spaces
 * merged hand description from rockin branch and fixed pids for underactuated joints.
