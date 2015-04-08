@@ -1,0 +1,34 @@
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package reemc_hardware_gazebo
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Forthcoming
+-----------
+* Fixing gazebo headers for release
+* Reverting joint mode experimental stuff
+* Add mode manager class to factor some code out
+  Now parsing URDF for available joint interfaces
+  Refs #9845
+* Fix behaviour of switching mechanism.
+  Refs #9845
+* Adding first prototype of joint mode implementation
+  Refs #9845
+* Implemented ros_control inferface for actuators max limit current.
+  Added spcefic code for reemc_hardware (real robot) and reemc_hardware_gazebo (simulation).
+* reemc_hardware_gazebo: forgot package.xml
+* Catkinize reemc_hardware_gazebo
+* reemc_hardware_gazebo: fix robot namespacing
+* Update manifests with maintainer information
+* reemc_hardware_gazebo: removed unneeded dependency
+  gazebo_ros_control is (should be) exporting it
+* reemc_hardware_gazebo: cut dependency on overlay
+* Merge from OROCOS_2.X
+* reemc_simulation: fix dependencies
+* Adjusted signs of ft sensor in gazebo to be the same as on Reem-B.
+* changed sign of torque in y derection
+* fixed force torque sensor for gazebo simulation
+* Add joint limits enforcing. Remove Eigen dependency.
+  - Test with newer inertia and controller gains. Needs better tracking to work well.
+* Propagate changes in ros_control. Add force-torque sensors+IMU.
+* Initial migration of REEM-C simulation model to ros_control. Refs #5961.
+* Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Luca Marchionni, Paul Mathieu, Sammy Pfeiffer
