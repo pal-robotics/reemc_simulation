@@ -76,10 +76,15 @@ private:
   std::vector<double> jnt_curr_limit_cmd_;
   std::vector<double> jnt_max_effort_;
 
-  double left_force_[3];
-  double left_torque_[3];
-  double right_force_[3];
-  double right_torque_[3];
+  double l_ankle_force_[3];
+  double l_ankle_torque_[3];
+  double r_ankle_force_[3];
+  double r_ankle_torque_[3];
+
+  double l_wrist_force_[3];
+  double l_wrist_torque_[3];
+  double r_wrist_force_[3];
+  double r_wrist_torque_[3];
 
   double base_orientation_[4];
   double base_ang_vel_[3];
@@ -89,6 +94,8 @@ private:
   std::vector<gazebo::physics::JointPtr> sim_joints_;
   gazebo::physics::JointPtr left_ankle_;
   gazebo::physics::JointPtr right_ankle_;
+  gazebo::physics::JointPtr left_wrist_;
+  gazebo::physics::JointPtr right_wrist_;
   boost::shared_ptr<gazebo::sensors::ImuSensor> imu_sensor_;
 
   // Hardware interface: joints

@@ -141,9 +141,13 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   // Hardware interfaces: Ankle force-torque sensors
   const string left_ankle_name  = "leg_left_6_joint";  // TODO: Make not hardcoded
   const string right_ankle_name = "leg_right_6_joint";
+  const string left_wrist_name  = "arm_left_7_joint";  // TODO: TUM check
+  const string right_wrist_name = "arm_right_7_joint"; // TODO: TUM check
 
   left_ankle_  = model->GetJoint(left_ankle_name);
   right_ankle_ = model->GetJoint(right_ankle_name);
+  left_wrist_  = model->GetJoint(left_wrist_name);
+  right_wrist_ = model->GetJoint(right_wrist_name);
 
   if (!left_ankle_)
   {
@@ -155,16 +159,36 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
     ROS_ERROR_STREAM("Could not find joint '" << left_ankle_name << "' to which a force-torque sensor is attached.");
     return false;
   }
+  if (!left_wrist_)
+  {
+    ROS_ERROR_STREAM("Could not find joint '" << left_wrist_name << "' to which a force-torque sensor is attached.");
+    return false;
+  }
+  if (!right_wrist_)
+  {
+    ROS_ERROR_STREAM("Could not find joint '" << left_wrist_name << "' to which a force-torque sensor is attached.");
+    return false;
+  }
 
-  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("left_ft",         // TODO: Fetch from elsewhere?
+  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("left_ankle_ft",         // TODO: Fetch from elsewhere?
                                                               "leg_left_6_link", // TODO: Fetch from URDF?
-                                                              &left_force_[0],
-                                                              &left_torque_[0]));
+                                                              &l_ankle_force_[0],
+                                                              &l_ankle_torque_[0]));
 
-  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("right_ft",         // TODO: Fetch from elsewhere?
+  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("right_ankle_ft",         // TODO: Fetch from elsewhere?
                                                               "leg_right_6_link", // TODO: Fetch from URDF?
-                                                              &right_force_[0],
-                                                              &right_torque_[0]));
+                                                              &r_ankle_force_[0],
+                                                              &r_ankle_torque_[0]));
+
+  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("left_wrist_ft",         // TODO: Fetch from elsewhere?
+                                                              "arm_left_7_link", // TODO: Fetch from URDF?
+                                                              &l_wrist_force_[0],
+                                                              &l_wrist_torque_[0]));
+
+  ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("right_wrist_ft",         // TODO: Fetch from elsewhere?
+                                                              "arm_right_7_link", // TODO: Fetch from URDF?
+                                                              &r_wrist_force_[0],
+                                                              &r_wrist_torque_[0]));
   registerInterface(&ft_sensor_interface_);
   ROS_DEBUG_STREAM("Registered ankle force-torque sensors.");
 
@@ -210,21 +234,38 @@ void ReemcHardwareGazebo::readSim(ros::Time time, ros::Duration period)
 
   // Read force-torque sensors
   // Signs are coherent with FT sensor readings got from REEM-B
-  gazebo::physics::JointWrench left_ft = left_ankle_->GetForceTorque(0u);
-  left_force_[0]  = -left_ft.body1Force.y;
-  left_force_[1]  = -left_ft.body1Force.z;
-  left_force_[2]  =  left_ft.body1Force.x;
-  left_torque_[0] = -left_ft.body1Torque.x;
-  left_torque_[1] = -left_ft.body1Torque.z;
-  left_torque_[2] =  left_ft.body1Torque.y;
+  gazebo::physics::JointWrench left_ankle_ft = left_ankle_->GetForceTorque(0u);
+  l_ankle_force_[0]  = -left_ankle_ft.body1Force.y;
+  l_ankle_force_[1]  = -left_ankle_ft.body1Force.z;
+  l_ankle_force_[2]  =  left_ankle_ft.body1Force.x;
+  l_ankle_torque_[0] = -left_ankle_ft.body1Torque.x;
+  l_ankle_torque_[1] = -left_ankle_ft.body1Torque.z;
+  l_ankle_torque_[2] =  left_ankle_ft.body1Torque.y;
 
-  gazebo::physics::JointWrench right_ft = right_ankle_->GetForceTorque(0u);
-  right_force_[0]  = -right_ft.body1Force.y;
-  right_force_[1]  = -right_ft.body1Force.z;
-  right_force_[2]  =  right_ft.body1Force.x;
-  right_torque_[0] = -right_ft.body1Torque.x;
-  right_torque_[1] = -right_ft.body1Torque.z;
-  right_torque_[2] =  right_ft.body1Torque.y;
+  gazebo::physics::JointWrench right_ankle_ft = right_ankle_->GetForceTorque(0u);
+  r_ankle_force_[0]  = -right_ankle_ft.body1Force.y;
+  r_ankle_force_[1]  = -right_ankle_ft.body1Force.z;
+  r_ankle_force_[2]  =  right_ankle_ft.body1Force.x;
+  r_ankle_torque_[0] = -right_ankle_ft.body1Torque.x;
+  r_ankle_torque_[1] = -right_ankle_ft.body1Torque.z;
+  r_ankle_torque_[2] =  right_ankle_ft.body1Torque.y;
+
+  // TODO: TUM, check directions and signs
+  gazebo::physics::JointWrench left_wrist_ft = left_wrist_->GetForceTorque(0u);
+  l_ankle_force_[0]  = -left_wrist_ft.body1Force.y;
+  l_ankle_force_[1]  = -left_wrist_ft.body1Force.z;
+  l_ankle_force_[2]  =  left_wrist_ft.body1Force.x;
+  l_ankle_torque_[0] = -left_wrist_ft.body1Torque.x;
+  l_ankle_torque_[1] = -left_wrist_ft.body1Torque.z;
+  l_ankle_torque_[2] =  left_wrist_ft.body1Torque.y;
+
+  gazebo::physics::JointWrench right_wrist_ft = right_wrist_->GetForceTorque(0u);
+  r_ankle_force_[0]  = -right_wrist_ft.body1Force.y;
+  r_ankle_force_[1]  = -right_wrist_ft.body1Force.z;
+  r_ankle_force_[2]  =  right_wrist_ft.body1Force.x;
+  r_ankle_torque_[0] = -right_wrist_ft.body1Torque.x;
+  r_ankle_torque_[1] = -right_wrist_ft.body1Torque.z;
+  r_ankle_torque_[2] =  right_wrist_ft.body1Torque.y;
 
   // Read IMU sensor
   gazebo::math::Quaternion imu_quat = imu_sensor_->GetOrientation();
