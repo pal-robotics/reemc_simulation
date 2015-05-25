@@ -110,3 +110,24 @@ gains:
   hand_left_thumb_flex_3_joint: *finger_gains
   hand_left_thumb_joint: *finger_gains
   hand_left_mrl_joint: *finger_gains
+
+ #3finger hand
+  hand_right_index_1_joint: &finger_1_gains {p: 0, d: 0, i: 0, i_clamp: 0}
+  hand_right_index_2_joint: *finger_1_gains
+  hand_right_index_3_joint: *finger_1_gains
+  hand_right_middle_1_joint: *finger_1_gains
+  hand_right_middle_2_joint: *finger_1_gains
+  hand_right_middle_3_joint: *finger_1_gains
+  hand_left_index_1_joint: *finger_1_gains
+  hand_left_index_2_joint: *finger_1_gains
+  hand_left_index_3_joint: *finger_1_gains
+  hand_left_middle_1_joint: *finger_1_gains
+  hand_left_middle_2_joint: *finger_1_gains
+  hand_left_middle_3_joint: *finger_1_gains
+
+  hand_right_thumb_joint: *finger_gains
+  hand_left_thumb_joint: *finger_gains
+  hand_right_index_joint: *finger_gains
+  hand_right_middle_joint: *finger_gains
+  hand_left_index_joint: *finger_gains
+  hand_left_middle_joint: *finger_gains
