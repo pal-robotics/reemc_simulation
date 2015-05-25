@@ -23,5 +23,7 @@
   </include>
 
   <!-- bring up robot -->
-  <include file="$(find reemc_bringup)/launch/reemc_bringup.launch"/>
+  <include file="$(find reemc_bringup)/launch/reemc_bringup.launch">
+    <arg name="robot"  value="$(arg robot)"/>
+  </include>
 </launch>
