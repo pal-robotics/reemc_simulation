@@ -33,23 +33,101 @@ gains:
   arm_left_6_joint:  *arm_6_gains
   arm_left_7_joint:  *arm_7_gains
 
-  hand_right_thumb_joint:    &thumb_gains    {p: 50, d: 0.1, i: 0.1, i_clamp: 1}
-  hand_right_index_1_joint:  &finger_1_gains {p:  0, d: 0,   i: 0,   i_clamp: 0}
-  hand_right_index_2_joint:  *finger_1_gains
-  hand_right_index_3_joint:  *finger_1_gains
+  hand_right_index_abd_joint: &finger_gains {p: 50, d: 0.1, i: 0.1, i_clamp: 1}
+  hand_right_index_virtual_1_joint: *finger_gains
+  hand_right_index_virtual_2_joint: *finger_gains
+  hand_right_index_virtual_3_joint: *finger_gains
+  hand_right_index_flex_1_joint: *finger_gains
+  hand_right_index_flex_2_joint: *finger_gains
+  hand_right_index_flex_3_joint: *finger_gains
+  hand_right_index_joint: *finger_gains
+  hand_right_little_abd_joint: *finger_gains
+  hand_right_little_virtual_1_joint: *finger_gains
+  hand_right_little_virtual_2_joint: *finger_gains
+  hand_right_little_virtual_3_joint: *finger_gains
+  hand_right_little_flex_1_joint: *finger_gains
+  hand_right_little_flex_2_joint: *finger_gains
+  hand_right_little_flex_3_joint: *finger_gains
+  hand_right_middle_abd_joint: *finger_gains
+  hand_right_middle_virtual_1_joint: *finger_gains
+  hand_right_middle_virtual_2_joint: *finger_gains
+  hand_right_middle_virtual_3_joint: *finger_gains
+  hand_right_middle_flex_1_joint: *finger_gains
+  hand_right_middle_flex_2_joint: *finger_gains
+  hand_right_middle_flex_3_joint: *finger_gains
+  hand_right_ring_abd_joint: *finger_gains
+  hand_right_ring_virtual_1_joint: *finger_gains
+  hand_right_ring_virtual_2_joint: *finger_gains
+  hand_right_ring_virtual_3_joint: *finger_gains
+  hand_right_ring_flex_1_joint: *finger_gains
+  hand_right_ring_flex_2_joint: *finger_gains
+  hand_right_ring_flex_3_joint: *finger_gains
+  hand_right_thumb_abd_joint: *finger_gains
+  hand_right_thumb_virtual_1_joint: *finger_gains
+  hand_right_thumb_virtual_2_joint: *finger_gains
+  hand_right_thumb_virtual_3_joint: *finger_gains
+  hand_right_thumb_flex_1_joint: *finger_gains
+  hand_right_thumb_flex_2_joint: *finger_gains
+  hand_right_thumb_flex_3_joint: *finger_gains
+  hand_right_thumb_joint: *finger_gains
+  hand_right_mrl_joint: *finger_gains
+
+  hand_left_index_abd_joint: *finger_gains
+  hand_left_index_virtual_1_joint: *finger_gains
+  hand_left_index_virtual_2_joint: *finger_gains
+  hand_left_index_virtual_3_joint: *finger_gains
+  hand_left_index_flex_1_joint: *finger_gains
+  hand_left_index_flex_2_joint: *finger_gains
+  hand_left_index_flex_3_joint: *finger_gains
+  hand_left_index_joint: *finger_gains
+  hand_left_little_abd_joint: *finger_gains
+  hand_left_little_virtual_1_joint: *finger_gains
+  hand_left_little_virtual_2_joint: *finger_gains
+  hand_left_little_virtual_3_joint: *finger_gains
+  hand_left_little_flex_1_joint: *finger_gains
+  hand_left_little_flex_2_joint: *finger_gains
+  hand_left_little_flex_3_joint: *finger_gains
+  hand_left_middle_abd_joint: *finger_gains
+  hand_left_middle_virtual_1_joint: *finger_gains
+  hand_left_middle_virtual_2_joint: *finger_gains
+  hand_left_middle_virtual_3_joint: *finger_gains
+  hand_left_middle_flex_1_joint: *finger_gains
+  hand_left_middle_flex_2_joint: *finger_gains
+  hand_left_middle_flex_3_joint: *finger_gains
+  hand_left_ring_abd_joint: *finger_gains
+  hand_left_ring_virtual_1_joint: *finger_gains
+  hand_left_ring_virtual_2_joint: *finger_gains
+  hand_left_ring_virtual_3_joint: *finger_gains
+  hand_left_ring_flex_1_joint: *finger_gains
+  hand_left_ring_flex_2_joint: *finger_gains
+  hand_left_ring_flex_3_joint: *finger_gains
+  hand_left_thumb_abd_joint: *finger_gains
+  hand_left_thumb_virtual_1_joint: *finger_gains
+  hand_left_thumb_virtual_2_joint: *finger_gains
+  hand_left_thumb_virtual_3_joint: *finger_gains
+  hand_left_thumb_flex_1_joint: *finger_gains
+  hand_left_thumb_flex_2_joint: *finger_gains
+  hand_left_thumb_flex_3_joint: *finger_gains
+  hand_left_thumb_joint: *finger_gains
+  hand_left_mrl_joint: *finger_gains
+
+ #3finger hand
+  hand_right_index_1_joint: &finger_1_gains {p: 0, d: 0, i: 0, i_clamp: 0}
+  hand_right_index_2_joint: *finger_1_gains
+  hand_right_index_3_joint: *finger_1_gains
   hand_right_middle_1_joint: *finger_1_gains
   hand_right_middle_2_joint: *finger_1_gains
   hand_right_middle_3_joint: *finger_1_gains
-  hand_left_thumb_joint:     *thumb_gains
-  hand_left_index_1_joint:   *finger_1_gains
-  hand_left_index_2_joint:   *finger_1_gains
-  hand_left_index_3_joint:   *finger_1_gains
-  hand_left_middle_1_joint:  *finger_1_gains
-  hand_left_middle_2_joint:  *finger_1_gains
-  hand_left_middle_3_joint:  *finger_1_gains
+  hand_left_index_1_joint: *finger_1_gains
+  hand_left_index_2_joint: *finger_1_gains
+  hand_left_index_3_joint: *finger_1_gains
+  hand_left_middle_1_joint: *finger_1_gains
+  hand_left_middle_2_joint: *finger_1_gains
+  hand_left_middle_3_joint: *finger_1_gains
 
-  
-  hand_right_index_joint:  &finger_gains {p: 50, d: 0.1, i: 0.1, i_clamp: 1}
+  hand_right_thumb_joint: *finger_gains
+  hand_left_thumb_joint: *finger_gains
+  hand_right_index_joint: *finger_gains
   hand_right_middle_joint: *finger_gains
-  hand_left_index_joint:   *finger_gains
-  hand_left_middle_joint:  *finger_gains
+  hand_left_index_joint: *finger_gains
+  hand_left_middle_joint: *finger_gains
