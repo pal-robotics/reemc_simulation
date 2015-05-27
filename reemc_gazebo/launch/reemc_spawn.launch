@@ -10,6 +10,8 @@
 
   <!-- Joint trajectory controllers -->
   <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/joint_trajectory_controllers.yaml"/>
+  <rosparam command="load"
+            file="$(find reemc_controller_configuration_gazebo)/config/hand_$(arg robot)_controllers.yaml" />
 
   <!-- Joystick controller parameters -->
   <rosparam file="$(find reemc_gazebo)/config/joy_teleop_sim.yaml" command="load"/>
