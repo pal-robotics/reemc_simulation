@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <launch>
+  <arg name="robot"  default="full"/>
+
   <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
     <arg name="world" value="empty" />
+    <arg name="robot" value="$(arg robot)"/>
   </include>
 </launch>
