@@ -2,8 +2,8 @@
 Changelog for package reemc_hardware_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.9.2 (2015-06-05)
+------------------
 * Fix wrist ft sensor read in hardware_gazebo.
   Set new frame_id for wrist ft measures.
   Default robot launched in gazebo set to full_ft_hey5.

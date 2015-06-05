@@ -2,8 +2,8 @@
 Changelog for package reemc_controller_configuration_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.9.2 (2015-06-05)
+------------------
 * Make sim bringup fully aware of REEM-C variants
   - Separate ROS param configuration of hand controllers from the main
   joint_trajectory_controller.yaml file. Correct hand controller configuration
