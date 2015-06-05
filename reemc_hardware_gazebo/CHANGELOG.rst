@@ -2,6 +2,16 @@
 Changelog for package reemc_hardware_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix wrist ft sensor read in hardware_gazebo.
+  Set new frame_id for wrist ft measures.
+  Default robot launched in gazebo set to full_ft_hey5.
+  Modify names of sensors used by walking to new ankle ft names.
+  Add pid values for hey5 and remove the pids value of 3 finger hand.
+* Add wrist F/T sensors to simulated robot.
+* Contributors: Adolfo Rodriguez Tsouroukdissian, Luca Marchionni
+
 0.9.1 (2015-04-08)
 ------------------
 * Fixing gazebo headers for release

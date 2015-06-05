@@ -2,6 +2,23 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Roslaunch 'robot' arg: default to 'full_ft_hey5'
+  Previous default was 'full'.
+* Make sim bringup fully aware of REEM-C variants
+  - Separate ROS param configuration of hand controllers from the main
+  joint_trajectory_controller.yaml file. Correct hand controller configuration
+  is loaded based on the robot launch argument.
+  - Make reemc_empty_world.launch aware of the 'robot' argument.
+* Pass robot name param
+* Fix wrist ft sensor read in hardware_gazebo.
+  Set new frame_id for wrist ft measures.
+  Default robot launched in gazebo set to full_ft_hey5.
+  Modify names of sensors used by walking to new ankle ft names.
+  Add pid values for hey5 and remove the pids value of 3 finger hand.
+* Contributors: Adolfo Rodriguez Tsouroukdissian, Bence Magyar, Luca Marchionni
+
 0.9.1 (2015-04-08)
 ------------------
 * Add pal_gazebo_plugins dependency
