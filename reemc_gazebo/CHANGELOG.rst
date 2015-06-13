@@ -2,6 +2,9 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.9.2 (2015-06-05)
 ------------------
 * Roslaunch 'robot' arg: default to 'full_ft_hey5'

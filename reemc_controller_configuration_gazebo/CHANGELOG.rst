@@ -2,6 +2,11 @@
 Changelog for package reemc_controller_configuration_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update jtc simulation tolerances
+* Contributors: Adolfo Rodriguez Tsouroukdissian
+
 0.9.2 (2015-06-05)
 ------------------
 * Make sim bringup fully aware of REEM-C variants
