@@ -2,8 +2,8 @@
 Changelog for package reemc_controller_configuration_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.9.3 (2015-06-13)
+------------------
 * Update jtc simulation tolerances
 * Contributors: Adolfo Rodriguez Tsouroukdissian
 
