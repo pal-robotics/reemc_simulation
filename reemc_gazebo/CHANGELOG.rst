@@ -2,8 +2,8 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.9.4 (2015-06-15)
+------------------
 * Add ground plane and sun SDF models
 * Fix REEM-C look to point world
 * Contributors: Adolfo Rodriguez Tsouroukdissian, Jordi Pages
