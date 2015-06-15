@@ -73,12 +73,9 @@
           </geometry>
           <material>
             <script>
-              <!--
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Wood</name> -->
-              <uri>file://Media/materials/scripts/wallWithREEMphoto.material</uri>
+              <uri>model://wall_with_reem_photo/material/scripts</uri>
+              <uri>model://wall_with_reem_photo/material/textures</uri>
               <name>Custom/REEM_photo0</name>
-              <!-- Custom/REEM_photo0 -->
             </script>
           </material>
         </visual>
