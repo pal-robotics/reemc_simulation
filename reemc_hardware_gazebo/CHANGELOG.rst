@@ -2,8 +2,8 @@
 Changelog for package reemc_hardware_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.9.5 (2016-03-04)
+------------------
 * Fix wrist ft tranformations and ankle ft tf frames
 * Contributors: Luca Marchionni
 
