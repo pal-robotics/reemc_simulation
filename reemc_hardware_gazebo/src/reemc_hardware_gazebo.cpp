@@ -171,12 +171,12 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   }
 
   ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("left_ankle_ft",         // TODO: Fetch from elsewhere?
-                                                              "leg_left_6_link", // TODO: Fetch from URDF?
+                                                              "left_sole_link", // TODO: Fetch from URDF?
                                                               &l_ankle_force_[0],
                                                               &l_ankle_torque_[0]));
 
   ft_sensor_interface_.registerHandle(ForceTorqueSensorHandle("right_ankle_ft",         // TODO: Fetch from elsewhere?
-                                                              "leg_right_6_link", // TODO: Fetch from URDF?
+                                                              "right_sole_link", // TODO: Fetch from URDF?
                                                               &r_ankle_force_[0],
                                                               &r_ankle_torque_[0]));
 
@@ -252,20 +252,20 @@ void ReemcHardwareGazebo::readSim(ros::Time time, ros::Duration period)
 
   // TODO: TUM, check directions and signs
   gazebo::physics::JointWrench left_wrist_ft = left_wrist_->GetForceTorque(0u);
-  l_wrist_force_[0]  = left_wrist_ft.body1Force.x;
-  l_wrist_force_[1]  = -left_wrist_ft.body1Force.y;
-  l_wrist_force_[2]  = -left_wrist_ft.body1Force.z;
-  l_wrist_torque_[0] = left_wrist_ft.body1Torque.x;
-  l_wrist_torque_[1] =  -left_wrist_ft.body1Torque.y;
-  l_wrist_torque_[2] = -left_wrist_ft.body1Torque.z;
+  l_wrist_force_[0]  = left_wrist_ft.body2Force.x;
+  l_wrist_force_[1]  = -left_wrist_ft.body2Force.y;
+  l_wrist_force_[2]  = -left_wrist_ft.body2Force.z;
+  l_wrist_torque_[0] = left_wrist_ft.body2Torque.x;
+  l_wrist_torque_[1] = left_wrist_ft.body2Torque.y;
+  l_wrist_torque_[2] = left_wrist_ft.body2Torque.z;
 
   gazebo::physics::JointWrench right_wrist_ft = right_wrist_->GetForceTorque(0u);
-  r_wrist_force_[0]  = -right_wrist_ft.body1Force.x;
-  r_wrist_force_[1]  = right_wrist_ft.body1Force.z;
-  r_wrist_force_[2]  =  right_wrist_ft.body1Force.y;
-  r_wrist_torque_[0] = -right_wrist_ft.body1Torque.x;
-  r_wrist_torque_[1] = -right_wrist_ft.body1Torque.y;
-  r_wrist_torque_[2] =  right_wrist_ft.body1Torque.z;
+  r_wrist_force_[0]  = -right_wrist_ft.body2Force.x;
+  r_wrist_force_[1]  = -right_wrist_ft.body2Force.y;
+  r_wrist_force_[2]  =  right_wrist_ft.body2Force.z;
+  r_wrist_torque_[0] =  right_wrist_ft.body2Torque.x;
+  r_wrist_torque_[1] =  right_wrist_ft.body2Torque.y;
+  r_wrist_torque_[2] =  right_wrist_ft.body2Torque.z;
 
   // Read IMU sensor
   gazebo::math::Quaternion imu_quat = imu_sensor_->GetOrientation();
