@@ -193,7 +193,7 @@ bool ReemcHardwareGazebo::initSim(const std::string& robot_ns,
   ROS_DEBUG_STREAM("Registered ankle force-torque sensors.");
 
   // Hardware interfaces: Base IMU sensors
-  imu_sensor_ =  boost::shared_dynamic_cast<gazebo::sensors::ImuSensor>
+  imu_sensor_ =  boost::dynamic_pointer_cast<gazebo::sensors::ImuSensor>
       (gazebo::sensors::SensorManager::Instance()->GetSensor("imu_sensor")); // TODO: Fetch from URDF? /*reemc::reemc::base_link::imu_sensor*/
   if (!this->imu_sensor_)
   {
