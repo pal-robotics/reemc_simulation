@@ -9,6 +9,7 @@ find_package(catkin REQUIRED
       gazebo_ros_control
       pal_ros_control
       control_toolbox
+      pal_hardware_gazebo
     )
 
 find_package(gazebo REQUIRED)

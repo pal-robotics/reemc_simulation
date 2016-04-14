@@ -2,6 +2,9 @@
   <arg name="robot"  default="full_ft_hey5"/>
   <arg name="gzpose" default="-x 0 -y 0 -z 0.85 -R 0.0 -P 0.0 -Y 0.0"/>
 
+  <!-- Pal hardware gazebo parameters -->
+  <rosparam command="load" file="$(find reemc_hardware_gazebo)/config/reemc_pal_hardware_gazebo.yaml"/>
+
   <!-- PID gains -->
   <rosparam command="load" file="$(find reemc_controller_configuration_gazebo)/config/pids.yaml"/>
 
