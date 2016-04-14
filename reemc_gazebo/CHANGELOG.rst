@@ -2,6 +2,9 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.10.1 (2016-04-14)
 -------------------
 * Added pal hardware gazebo to REEM-C simulation

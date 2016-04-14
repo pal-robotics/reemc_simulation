@@ -2,6 +2,11 @@
 Changelog for package reemc_hardware_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fixed missing install rule for config folder of reemc_hardware_gazebo
+* Contributors: Hilario Tome
+
 0.10.1 (2016-04-14)
 -------------------
 * Added pal hardware gazebo to REEM-C simulation
