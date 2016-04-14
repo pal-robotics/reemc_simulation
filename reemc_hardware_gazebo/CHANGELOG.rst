@@ -2,6 +2,11 @@
 Changelog for package reemc_hardware_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added pal hardware gazebo to REEM-C simulation
+* Contributors: Hilario Tome
+
 0.10.0 (2016-04-04)
 -------------------
 * Dubnium compilation fixes

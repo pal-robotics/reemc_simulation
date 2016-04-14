@@ -2,6 +2,9 @@
 Changelog for package reemc_simulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.10.0 (2016-04-04)
 -------------------
 
