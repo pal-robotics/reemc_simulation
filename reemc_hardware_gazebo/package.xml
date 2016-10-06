@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>reemc_hardware_gazebo</name>
-  <version>0.10.2</version>
+  <version>0.10.3</version>
   <description>Gazebo plugin to control a REEM-C robot in simulation.</description>
 
   <maintainer email="adolfo.rodriguez@pal-robotics.com">Adolfo Rodriguez Tsouroukdissian</maintainer>
