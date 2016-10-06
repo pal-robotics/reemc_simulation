@@ -2,6 +2,12 @@
 Changelog for package reemc_controller_configuration_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added reem-c specifics to walking params
+* Moving the config file for pal_hardware_gazebo to reemc_controller_configuration_gazebo as we are deprecating reemc_hardware_gazebo
+* Contributors: Hilario Tome, Sam Pfeiffer
+
 0.10.2 (2016-04-14)
 -------------------
 
