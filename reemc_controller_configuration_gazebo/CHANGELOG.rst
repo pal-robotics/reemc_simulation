@@ -2,8 +2,8 @@
 Changelog for package reemc_controller_configuration_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.10.4 (2016-10-13)
+-------------------
 * Updated reemc hardware gazebo config
 * Contributors: Hilario Tome
 
