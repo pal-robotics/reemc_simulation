@@ -2,6 +2,9 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.10.3 (2016-10-06)
 -------------------
 * Moving the config file for pal_hardware_gazebo to reemc_controller_configuration_gazebo as we are deprecating reemc_hardware_gazebo

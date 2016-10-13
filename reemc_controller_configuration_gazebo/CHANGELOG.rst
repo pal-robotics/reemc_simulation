@@ -2,6 +2,11 @@
 Changelog for package reemc_controller_configuration_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Updated reemc hardware gazebo config
+* Contributors: Hilario Tome
+
 0.10.3 (2016-10-06)
 -------------------
 * Added reem-c specifics to walking params

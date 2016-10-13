@@ -2,6 +2,11 @@
 Changelog for package reemc_hardware_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Removed specific reemc hardware gazebo for generic pal hardware gazebo
+* Contributors: Hilario Tome
+
 0.10.3 (2016-10-06)
 -------------------
 
