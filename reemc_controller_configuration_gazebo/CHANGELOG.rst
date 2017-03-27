@@ -2,6 +2,11 @@
 Changelog for package reemc_controller_configuration_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* reenabled odom in walking controller
+* Contributors: Hilario Tome
+
 0.10.5 (2016-12-13)
 -------------------
 * Fixed simulation walking params
