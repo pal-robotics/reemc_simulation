@@ -234,7 +234,7 @@
       <pose>0.55 -1.2 0 0 0 1.57</pose>
     </include>
     <include>
-      <uri>model://dock1</uri>
+      <uri>model://test2</uri>
       <pose>0.55 0.4 0 0 0 1.57</pose>
     </include>
   </world>
