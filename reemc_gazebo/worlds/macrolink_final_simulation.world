@@ -181,7 +181,7 @@
           <geometry>
             <cylinder>
               <length>0.1</length>
-              <radius>0.025</radius>
+              <radius>0.0125</radius>
             </cylinder>
           </geometry>
         </collision>
@@ -203,14 +203,14 @@
     </model>
     <include>
       <uri>model://ikea_stefan_chair</uri>
-      <pose>-2.7 0 0 0 0 0</pose>
+      <pose>-2.7 0.0 0 0 0 0</pose>
     </include>
     <include>
       <uri>model://test2</uri>
       <pose>-1.5 0 0 0 0 0</pose>
     </include>
     <model name="puff_1">
-      <pose>-0.3 -1.1 0.25 0 0 0</pose>
+      <pose>-0.25 -1.15 0.25 0 0 0</pose>
         <static>true</static>
         <link name='puff_1_body'>
           <collision name="collision">
@@ -238,7 +238,7 @@
       </link>
     </model>
     <model name="puff_2">
-      <pose>-0.3 1.1 0.25 0 0 0</pose>
+      <pose>-0.25 1.15 0.25 0 0 0</pose>
         <static>true</static>
         <link name='puff_2_body'>
           <collision name="collision">
