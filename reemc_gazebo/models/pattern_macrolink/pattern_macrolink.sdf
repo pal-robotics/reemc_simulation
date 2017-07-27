@@ -19,14 +19,14 @@
       <collision name="collision">
         <geometry>
             <mesh>
-                <uri>model://test2/meshes/test2.dae</uri>
+                <uri>model://pattern_macrolink/meshes/test2.dae</uri>
             </mesh>
         </geometry>
       </collision>
       <visual name="visual">
         <geometry>
             <mesh>
-                <uri>model://test2/meshes/test2.dae</uri>
+                <uri>model://pattern_macrolink/meshes/test2.dae</uri>
             </mesh>
         </geometry>
       </visual>

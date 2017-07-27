@@ -48,14 +48,14 @@
         <collision name="collision">
           <geometry>
             <box>
-              <size>5.25 0.10 0.5</size>
+              <size>6.0 0.1 0.5</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>5.25 0.10 0.5</size>
+              <size>6.0 0.1 0.5</size>
             </box>
           </geometry>
         </visual>
@@ -79,21 +79,21 @@
         <collision name="collision">
           <geometry>
             <box>
-              <size>5.25 0.1 0.5</size>
+              <size>6.0 0.1 0.5</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>5.25 0.1 0.5</size>
+              <size>6.0 0.1 0.5</size>
             </box>
           </geometry>
         </visual>
       </link>
     </model>
     <model name="wall_3_model">
-      <pose> 2.6 0 0.25 0 0 1.57</pose>
+      <pose> 3.0 0 0.25 0 0 1.57</pose>
       <static>true</static>
       <link name="wall_3_body">
         <inertial>
@@ -110,21 +110,21 @@
         <collision name="collision">
           <geometry>
             <box>
-              <size>3.0 0.2 0.5</size>
+              <size>3.0 0.1 0.5</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>3.0 0.2 0.5</size>
+              <size>3.0 0.1 0.5</size>
             </box>
           </geometry>
         </visual>
       </link>
     </model>
     <model name="wall_4_model">
-      <pose>-2.6 0 0.25 0 0 1.57</pose>
+      <pose>-3.0 0 0.25 0 0 1.57</pose>
       <static>true</static>
       <link name="wall_4_body">
         <inertial>
@@ -141,101 +141,207 @@
         <collision name="collision">
           <geometry>
             <box>
-              <size>3.0 0.2 0.5</size>
+              <size>3.0 0.1 0.5</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>3.0 0.2 0.5</size>
+              <size>3.0 0.1 0.5</size>
             </box>
           </geometry>
         </visual>
       </link>
     </model>
-    <model name="cylinder_1">
-      <pose>0.65 0.83 0.25 0 0 0</pose>
-        <static>true</static>
-        <link name='cylinder_1_body'>
+    <include>
+      <uri>model://macrolink_table</uri>
+      <pose>1.2 0 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://aruco_marker_original_238</uri>
+      <pose>1.4 0.2 0.73 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://aruco_marker_original_582</uri>
+      <pose>1.4 -0.2 0.73 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://aruco_marker_original_26</uri>
+      <pose>1.0  0.2 0.73 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://aruco_marker_original_63</uri>
+      <pose>1.0 -0.2 0.73 0 0 0</pose>
+    </include>
+    <model name="grasp_object">
+      <pose>1.2 0.0 1.0 1.57 0 0</pose>
+        <link name='grasp_object'>
           <collision name="collision">
           <geometry>
             <cylinder>
-              <length>0.5</length>
-              <radius>0.22</radius>
+              <length>0.1</length>
+              <radius>0.0125</radius>
             </cylinder>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <cylinder>
-              <length>0.5</length>
-              <radius>0.22</radius>
+              <length>0.1</length>
+              <radius>0.025</radius>
             </cylinder>
           </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
         </visual>
       </link>
     </model>
-    <model name="cylinder_2">
-      <pose>1.580 -0.5 0.25 0 0 0</pose>
-        <static>true</static>
-        <link name='cylinder_2_body'>
+    <model name="object_1">
+      <pose>1.2 -0.2 1.0 0 0 0</pose>
+        <link name='grasp_object'>
           <collision name="collision">
           <geometry>
             <cylinder>
-              <length>0.5</length>
-              <radius>0.22</radius>
+              <length>0.05</length>
+              <radius>0.0125</radius>
             </cylinder>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <cylinder>
-              <length>0.5</length>
-              <radius>0.22</radius>
+              <length>0.1</length>
+              <radius>0.025</radius>
             </cylinder>
           </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
         </visual>
       </link>
     </model>
-    <model name="stairs_model">
-      <pose>-1.0 0 0.25 0 0 0</pose>
-      <static>true</static>
-      <link name="stairs_body">
-        <inertial>
-          <mass>1.0</mass>
-          <inertia>
-            <ixx>1.0</ixx>
-            <ixy>0.0</ixy>
-            <ixz>0.0</ixz>
-            <iyy>1.0</iyy>
-            <iyz>0.0</iyz>
-            <izz>1.0</izz>
-          </inertia>
-        </inertial>
-        <collision name="collision">
+    <model name="object_2">
+      <pose>1.2 0.2 1.0 0 0 0</pose>
+        <link name='grasp_object'>
+          <collision name="collision">
           <geometry>
             <box>
-              <size>1.45 0.68 0.5</size>
+              <size>0.1 0.1 0.1</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>1.5 0.8 0.5</size>
+              <size>0.15 0.15 0.15</size>
             </box>
           </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Blue</name>
+            </script>
+          </material>
         </visual>
       </link>
     </model>
     <include>
       <uri>model://ikea_stefan_chair</uri>
-      <pose>0.55 -1.2 0 0 0 1.57</pose>
+      <pose>-2.7 0.0 0 0 0 0</pose>
     </include>
     <include>
-      <uri>model://test2</uri>
-      <pose>0.55 0.4 0 0 0 1.57</pose>
+      <uri>model://pattern_macrolink</uri>
+      <pose>-1.5 0 0 0 0 0</pose>
     </include>
+    <model name="puff_1">
+      <pose>-0.25 -1.15 0.25 0 0 0</pose>
+        <static>true</static>
+        <link name='puff_1_body'>
+          <collision name="collision">
+          <geometry>
+            <cylinder>
+              <length>0.5</length>
+              <radius>0.25</radius>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <length>0.5</length>
+              <radius>0.25</radius>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Blue</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="puff_2">
+      <pose>-0.25 1.15 0.25 0 0 0</pose>
+        <static>true</static>
+        <link name='puff_2_body'>
+          <collision name="collision">
+          <geometry>
+            <cylinder>
+              <length>0.5</length>
+              <radius>0.25</radius>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <length>0.5</length>
+              <radius>0.25</radius>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Green</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="puff_square">
+      <pose>-1.2 0 0.25 0 0 0</pose>
+        <static>true</static>
+        <link name='cylinder_2_body'>
+          <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size> 
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size> 
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Black</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
   </world>
 </sdf>
