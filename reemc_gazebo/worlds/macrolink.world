@@ -160,19 +160,23 @@
     </include>
     <include>
       <uri>model://aruco_marker_original_238</uri>
-      <pose>1.4 0.2 0.73 0 0 0</pose>
+      <pose>1.4 0.2 0.755 0 0 0</pose>
+      <static>1</static>
     </include>
     <include>
       <uri>model://aruco_marker_original_582</uri>
-      <pose>1.4 -0.2 0.73 0 0 0</pose>
+      <pose>1.4 -0.2 0.755 0 0 0</pose>
+      <static>1</static>
     </include>
     <include>
       <uri>model://aruco_marker_original_26</uri>
-      <pose>1.0  0.2 0.73 0 0 0</pose>
+      <pose>1.0  0.2 0.755 0 0 0</pose>
+      <static>1</static>
     </include>
     <include>
       <uri>model://aruco_marker_original_63</uri>
-      <pose>1.0 -0.2 0.73 0 0 0</pose>
+      <pose>1.0 -0.2 0.755 0 0 0</pose>
+      <static>1</static>
     </include>
     <model name="grasp_object">
       <pose>1.2 0.0 1.0 1.57 0 0</pose>
@@ -181,7 +185,7 @@
           <geometry>
             <cylinder>
               <length>0.1</length>
-              <radius>0.0125</radius>
+              <radius>0.025</radius>
             </cylinder>
           </geometry>
         </collision>
@@ -208,15 +212,15 @@
           <geometry>
             <cylinder>
               <length>0.05</length>
-              <radius>0.0125</radius>
+              <radius>0.015</radius>
             </cylinder>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <cylinder>
-              <length>0.1</length>
-              <radius>0.025</radius>
+              <length>0.05</length>
+              <radius>0.015</radius>
             </cylinder>
           </geometry>
           <material>
@@ -241,7 +245,7 @@
         <visual name="visual">
           <geometry>
             <box>
-              <size>0.15 0.15 0.15</size>
+              <size>0.1 0.1 0.1</size>
             </box>
           </geometry>
           <material>

@@ -17,7 +17,7 @@
       <visual name="visual">
         <geometry>
           <box>
-            <size>0.16 0.16 0.001</size>
+            <size>0.105 0.105 0.001</size>
             <!-- SIZE OF THE MARKER + MARGIN -->
           </box>
         </geometry>
@@ -32,7 +32,7 @@
       <collision name="collision">
         <geometry>
           <box>
-            <size>0.16 0.16 0.001</size>
+            <size>0.105 0.105 0.001</size>
             <!-- SIZE OF THE MARKER + MARGIN -->
           </box>
         </geometry>
