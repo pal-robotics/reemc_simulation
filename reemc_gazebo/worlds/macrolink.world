@@ -321,6 +321,11 @@
         </visual>
       </link>
     </model>
+    <include>
+      <uri>model://aruco_marker_original_582</uri>
+      <pose>-1.2 0 0.50 0 0 0</pose>
+      <static>1</static>
+    </include>
     <model name="puff_square">
       <pose>-1.2 0 0.25 0 0 0</pose>
         <static>true</static>
@@ -341,7 +346,7 @@
           <material>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Black</name>
+              <name>Gazebo/Orange</name>
             </script>
           </material>
         </visual>
