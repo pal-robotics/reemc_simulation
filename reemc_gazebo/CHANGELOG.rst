@@ -2,8 +2,8 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.10.7 (2018-02-01)
+-------------------
 * Fix model name
 * Added socmcs_demo world
 * Modified macrolink world
