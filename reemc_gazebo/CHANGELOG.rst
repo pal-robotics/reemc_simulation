@@ -2,6 +2,21 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix model name
+* Added socmcs_demo world
+* Modified macrolink world
+* Modified aruco sizes
+* Removed models and unnecessary world
+* Modified macrolink final world
+* Modified macrolink world
+* Added aurco markers models and macrolink world
+* Modified docker_chair world using test2 dock instead of dock1
+* Modified docker_chair world
+* Added 2 new worlds and 1 model
+* Contributors: Adrià Roig, sergi.garcia
+
 0.10.6 (2017-03-27)
 -------------------
 

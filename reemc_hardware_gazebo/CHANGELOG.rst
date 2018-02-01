@@ -2,6 +2,9 @@
 Changelog for package reemc_hardware_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.10.6 (2017-03-27)
 -------------------
 
