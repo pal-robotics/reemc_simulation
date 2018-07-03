@@ -6,15 +6,20 @@
   <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.85 -R 0.0 -P 0.0 -Y 0.0"/>
   <arg name="gui" default="true"/>
   <arg name="debug" default="false"/>
+  <arg name="recording" default="false"/>
+  <arg name="extra_gazebo_args" default=""/>
 
   <env name="GAZEBO_MODEL_PATH" value="$(find reemc_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/>
 
   <!-- start up world -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find reemc_gazebo)/worlds/$(arg world).world"/>
+  <include file="$(find pal_gazebo_worlds)/launch/pal_gazebo.launch">
+    <arg name="world" value="$(arg world)"/>
     <arg name="gui" value="$(arg gui)"/>
     <arg name="debug" value="$(arg debug)"/>
+    <arg name="recording" value="$(arg recording)"/>
+    <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)"/>
   </include>
+
 
   <!-- spawn robot in simulation -->
   <include file="$(find reemc_gazebo)/launch/reemc_spawn.launch">
