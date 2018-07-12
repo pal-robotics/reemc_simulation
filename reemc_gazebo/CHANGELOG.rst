@@ -2,6 +2,14 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'reemc_demos' into 'dubnium-devel'
+  Migrate to pal_gazebo_worlds!
+  See merge request robots/reemc_simulation!8
+* Migrate to pal_gazebo_worlds!
+* Contributors: Adrià Roig, Victor Lopez
+
 0.10.7 (2018-02-01)
 -------------------
 * Fix model name
