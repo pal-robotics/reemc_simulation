@@ -2,9 +2,18 @@
 
 <launch>
   <arg name="robot"  default="full_ft_hey5"/>
+  <arg name="recording"  default="false"/>
+  <arg name="debug"  default="false"/>
+  <arg name="gui"  default="true"/>
+  <arg name="extra_gazebo_args" default=""/>
 
   <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
     <arg name="world" value="empty" />
     <arg name="robot" value="$(arg robot)"/>
+    <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.85 -R 0.0 -P 0.0 -Y 0.0"/>
+    <arg name="gui" default="$(arg gui)"/>
+  	<arg name="debug" default="$(arg debug)"/>
+  	<arg name="recording" value="$(arg recording)"/>
+  	<arg name="extra_gazebo_args" default="$(arg extra_gazebo_args)"/>
   </include>
 </launch>
