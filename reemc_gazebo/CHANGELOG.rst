@@ -2,6 +2,14 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'public_simulation' into 'dubnium-devel'
+  modified empty world launch for public simulation
+  See merge request robots/reemc_simulation!9
+* modified empty world launch for public simulation
+* Contributors: Adrià Roig, Victor Lopez
+
 0.10.8 (2018-07-12)
 -------------------
 * Merge branch 'reemc_demos' into 'dubnium-devel'
