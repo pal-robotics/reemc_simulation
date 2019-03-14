@@ -2,6 +2,15 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'realsense' into 'dubnium-devel'
+  Add realsense
+  See merge request robots/reemc_simulation!10
+* Modified gazebo launch files for REEM-C new version
+* Add realsense
+* Contributors: Adria Roig, Victor Lopez
+
 0.10.9 (2018-12-12)
 -------------------
 * Merge branch 'public_simulation' into 'dubnium-devel'
