@@ -2,8 +2,8 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.10.10 (2019-03-14)
+--------------------
 * Merge branch 'realsense' into 'dubnium-devel'
   Add realsense
   See merge request robots/reemc_simulation!10
