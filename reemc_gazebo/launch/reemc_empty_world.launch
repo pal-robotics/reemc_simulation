@@ -6,6 +6,7 @@
   <arg name="debug"  default="false"/>
   <arg name="gui"  default="true"/>
   <arg name="extra_gazebo_args" default=""/>
+  <arg name="head_version"  default="v1"/>
 
   <include file="$(find reemc_gazebo)/launch/reemc_gazebo.launch">
     <arg name="world" value="empty" />
@@ -15,5 +16,6 @@
   	<arg name="debug" default="$(arg debug)"/>
   	<arg name="recording" value="$(arg recording)"/>
   	<arg name="extra_gazebo_args" default="$(arg extra_gazebo_args)"/>
+    <arg name="head_version"   value="$(arg head_version)"/>
   </include>
 </launch>
