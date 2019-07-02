@@ -2,8 +2,8 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.10.11 (2019-07-02)
+--------------------
 * Merge branch 'reemc_head_leg_v0_and_v1' into 'dubnium-devel'
   Add parameters for simulating REEMC with leg versions v0 or v1. Default...
   See merge request robots/reemc_simulation!11
