@@ -9,6 +9,7 @@
   <arg name="recording" default="false"/>
   <arg name="extra_gazebo_args" default=""/>
   <arg name="head_version"  default="v1"/>
+  <arg name="leg_version"   default="v1"/>
 
   <env name="GAZEBO_MODEL_PATH" value="$(find reemc_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/>
 
@@ -27,6 +28,7 @@
     <arg name="robot"  value="$(arg robot)"/>
     <arg name="gzpose" value="$(arg gzpose)"/>
     <arg name="head_version"   value="$(arg head_version)"/>
+    <arg name="leg_version"    value="$(arg leg_version)"/>
   </include>
 
   <!-- bring up robot -->
