@@ -2,8 +2,8 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.10.12 (2019-12-10)
+--------------------
 * Merge branch 'realsense_plugin' into 'dubnium-devel'
   added realsense gazebo plugin dependency
   See merge request robots/reemc_simulation!12
