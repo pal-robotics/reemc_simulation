@@ -2,6 +2,9 @@
 Changelog for package reemc_controller_configuration_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.10.12 (2019-12-10)
 --------------------
 

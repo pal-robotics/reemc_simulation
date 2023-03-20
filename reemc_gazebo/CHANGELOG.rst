@@ -2,6 +2,15 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'fix_worlds' into 'dubnium-devel'
+  Remove models and worlds folders to move them to pal_gazebo_worlds
+  See merge request robots/reemc_simulation!13
+* Remove models and worlds from the install rules
+* Remove models and worlds folders to move them to pal_gazebo_worlds
+* Contributors: saikishor, thomaspeyrucain
+
 0.10.12 (2019-12-10)
 --------------------
 * Merge branch 'realsense_plugin' into 'dubnium-devel'
