@@ -27,7 +27,7 @@
     <arg name="robot" value="$(arg robot)"/>
     <arg name="head_version" value="$(arg head_version)"/>
     <arg name="leg_version"  value="$(arg leg_version)"/>
-    <arg name="simulation" default="$(arg simulation)"/>
+    <arg name="simulation" value="$(arg simulation)"/>
   </include>
 
   <!-- Spawn robot in Gazebo -->
