@@ -2,6 +2,16 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'smd/feat/cameras' into 'dubnium-devel'
+  Added argument for simulation
+  See merge request robots/reemc_simulation!14
+* Fix default in params
+* Propagate simulation to reemc_spawn
+* Added argument for simulation
+* Contributors: Sergi Garcia, sergiomoyano
+
 0.10.13 (2023-03-20)
 --------------------
 * Merge branch 'fix_worlds' into 'dubnium-devel'
