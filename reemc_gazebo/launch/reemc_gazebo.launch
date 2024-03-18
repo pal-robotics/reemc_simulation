@@ -29,6 +29,7 @@
     <arg name="gzpose" value="$(arg gzpose)"/>
     <arg name="head_version"   value="$(arg head_version)"/>
     <arg name="leg_version"    value="$(arg leg_version)"/>
+    <arg name="simulation"    value="true"/>
   </include>
 
   <!-- bring up robot -->
