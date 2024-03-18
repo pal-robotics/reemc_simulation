@@ -2,8 +2,8 @@
 Changelog for package reemc_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.10.14 (2024-03-18)
+--------------------
 * Merge branch 'smd/feat/cameras' into 'dubnium-devel'
   Added argument for simulation
   See merge request robots/reemc_simulation!14
